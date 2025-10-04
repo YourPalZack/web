@@ -1,0 +1,35 @@
+openapi: 3.1.0
+info: { title: AquaBuilder API, version: 0.1.0 }
+servers: [{ url: /api }]
+paths:
+  /parts/{category}:
+    get:
+      parameters:
+        - in: path
+          name: category
+          schema: { type: string, enum: [tanks, filters, heaters, lights, substrate, fish, invertebrates, plants, corals, equipment] }
+        - in: query
+          name: q
+          schema: { type: string }
+      responses:
+        '200': { description: OK }
+  /builds:
+    post:
+      requestBody: { required: true, content: { application/json: { schema: { $ref: '#/components/schemas/CreateBuild' } } } }
+      responses: { '201': { description: Created } }
+  /builds/{id}:
+    get: { responses: { '200': { description: OK } } }
+  /prices/{productType}/{productId}:
+    get: { responses: { '200': { description: OK } } }
+  /alerts:
+    post: { responses: { '201': { description: Created } } }
+components:
+  schemas:
+    CreateBuild:
+      type: object
+      required: [name, buildType, components]
+      properties:
+        name: { type: string }
+        buildType: { type: string }
+        components: { type: object }
+

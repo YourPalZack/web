@@ -1,0 +1,121 @@
+
+> web@0.1.0 dev /Users/zackhayes/webdev/aqua-builder-codex/apps/web
+> next dev --turbopack
+
+ [33m[1m⚠[22m[39m Port 3000 is in use by process 18488, using available port 3001 instead.
+   [1m[38;2;173;127;168m▲ Next.js 15.5.4[39m[22m (Turbopack)
+   - Local:        http://localhost:3001
+   - Network:      http://192.168.68.53:3001
+
+ [32m[1m✓[22m[39m Starting...
+ [32m[1m✓[22m[39m Ready in 743ms
+ [37m[1m○[22m[39m Compiling / ...
+ [32m[1m✓[22m[39m Compiled / in 1330ms
+ GET / [32m200[39m in 1575ms
+ [32m[1m✓[22m[39m Compiled /favicon.ico in 93ms
+ GET /favicon.ico?favicon.0b3bf435.ico [32m200[39m in 341ms
+ [32m[1m✓[22m[39m Compiled /build/new in 144ms
+ GET /build/new [32m200[39m in 172ms
+ [32m[1m✓[22m[39m Compiled /api/parts/[category] in 65ms
+TypeError: Cannot read properties of null (reading 'fish')
+    at GET (src/app/api/parts/[category]/route.ts:87:30)
+[0m [90m 85 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
+ [90m 86 |[39m     [36mif[39m (category [33m===[39m [32m'fish'[39m) {
+[31m[1m>[22m[39m[90m 87 |[39m       items [33m=[39m [36mawait[39m fallback[33m.[39mfish[33m.[39mfindMany({})[33m;[39m
+ [90m    |[39m                              [31m[1m^[22m[39m
+ [90m 88 |[39m     } [36melse[39m {
+ [90m 89 |[39m       items [33m=[39m [][33m;[39m
+ [90m 90 |[39m     }[0m
+TypeError: Cannot read properties of null (reading 'fish')
+    at GET (src/app/api/parts/[category]/route.ts:87:30)
+[0m [90m 85 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
+ [90m 86 |[39m     [36mif[39m (category [33m===[39m [32m'fish'[39m) {
+[31m[1m>[22m[39m[90m 87 |[39m       items [33m=[39m [36mawait[39m fallback[33m.[39mfish[33m.[39mfindMany({})[33m;[39m
+ [90m    |[39m                              [31m[1m^[22m[39m
+ [90m 88 |[39m     } [36melse[39m {
+ [90m 89 |[39m       items [33m=[39m [][33m;[39m
+ [90m 90 |[39m     }[0m
+ GET /api/parts/tanks [32m200[39m in 838ms
+ GET /api/parts/tanks [32m200[39m in 838ms
+ GET /api/parts/fish [31m500[39m in 838ms
+ GET /api/parts/fish [31m500[39m in 836ms
+ GET /api/parts/filters [32m200[39m in 262ms
+ GET /api/parts/heaters [32m200[39m in 262ms
+ GET /api/parts/filters [32m200[39m in 262ms
+ GET /api/parts/heaters [32m200[39m in 261ms
+ GET /api/parts/lights [32m200[39m in 261ms
+ GET /api/parts/lights [32m200[39m in 262ms
+ [32m[1m✓[22m[39m Compiled /browse in 126ms
+ GET /browse [32m200[39m in 150ms
+TypeError: Cannot read properties of null (reading 'fish')
+    at GET (src/app/api/parts/[category]/route.ts:87:30)
+[0m [90m 85 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
+ [90m 86 |[39m     [36mif[39m (category [33m===[39m [32m'fish'[39m) {
+[31m[1m>[22m[39m[90m 87 |[39m       items [33m=[39m [36mawait[39m fallback[33m.[39mfish[33m.[39mfindMany({})[33m;[39m
+ [90m    |[39m                              [31m[1m^[22m[39m
+ [90m 88 |[39m     } [36melse[39m {
+ [90m 89 |[39m       items [33m=[39m [][33m;[39m
+ [90m 90 |[39m     }[0m
+TypeError: Cannot read properties of null (reading 'fish')
+    at GET (src/app/api/parts/[category]/route.ts:87:30)
+[0m [90m 85 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
+ [90m 86 |[39m     [36mif[39m (category [33m===[39m [32m'fish'[39m) {
+[31m[1m>[22m[39m[90m 87 |[39m       items [33m=[39m [36mawait[39m fallback[33m.[39mfish[33m.[39mfindMany({})[33m;[39m
+ [90m    |[39m                              [31m[1m^[22m[39m
+ [90m 88 |[39m     } [36melse[39m {
+ [90m 89 |[39m       items [33m=[39m [][33m;[39m
+ [90m 90 |[39m     }[0m
+ GET /api/parts/fish [31m500[39m in 292ms
+ GET /api/parts/fish [31m500[39m in 293ms
+ [32m[1m✓[22m[39m Compiled /community in 114ms
+ GET /community [32m200[39m in 136ms
+ GET /browse [32m200[39m in 45ms
+TypeError: Cannot read properties of null (reading 'fish')
+    at GET (src/app/api/parts/[category]/route.ts:87:30)
+[0m [90m 85 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
+ [90m 86 |[39m     [36mif[39m (category [33m===[39m [32m'fish'[39m) {
+[31m[1m>[22m[39m[90m 87 |[39m       items [33m=[39m [36mawait[39m fallback[33m.[39mfish[33m.[39mfindMany({})[33m;[39m
+ [90m    |[39m                              [31m[1m^[22m[39m
+ [90m 88 |[39m     } [36melse[39m {
+ [90m 89 |[39m       items [33m=[39m [][33m;[39m
+ [90m 90 |[39m     }[0m
+TypeError: Cannot read properties of null (reading 'fish')
+    at GET (src/app/api/parts/[category]/route.ts:87:30)
+[0m [90m 85 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
+ [90m 86 |[39m     [36mif[39m (category [33m===[39m [32m'fish'[39m) {
+[31m[1m>[22m[39m[90m 87 |[39m       items [33m=[39m [36mawait[39m fallback[33m.[39mfish[33m.[39mfindMany({})[33m;[39m
+ [90m    |[39m                              [31m[1m^[22m[39m
+ [90m 88 |[39m     } [36melse[39m {
+ [90m 89 |[39m       items [33m=[39m [][33m;[39m
+ [90m 90 |[39m     }[0m
+ GET /api/parts/fish [31m500[39m in 344ms
+ GET /api/parts/fish [31m500[39m in 343ms
+ GET /api/parts/plants [32m200[39m in 254ms
+ GET /api/parts/plants [32m200[39m in 253ms
+ GET /api/parts/filters [32m200[39m in 227ms
+ GET /api/parts/filters [32m200[39m in 227ms
+ GET /api/parts/heaters [32m200[39m in 225ms
+ GET /api/parts/heaters [32m200[39m in 224ms
+ GET /api/parts/lights [32m200[39m in 229ms
+ GET /api/parts/lights [32m200[39m in 229ms
+ [32m[1m✓[22m[39m Compiled /api/builds in 116ms
+TypeError: Cannot read properties of null (reading 'userBuild')
+    at POST (src/app/api/builds/route.ts:20:28)
+[0m [90m 18 |[39m   } [36mcatch[39m (_e) {
+ [90m 19 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
+[31m[1m>[22m[39m[90m 20 |[39m     build [33m=[39m [36mawait[39m fallback[33m.[39muserBuild[33m.[39mcreate({ data[33m:[39m { name[33m:[39m parsed[33m.[39mdata[33m.[39mname[33m,[39m buildType[33m:[39m parsed[33m.[39mdata[33m.[39mbuildType[33m,[39m components[33m:[39m parsed[33m.[39mdata[33m.[39mcomponents[33m,[39m userId[33m:[39m [32m'anon'[39m } })[33m;[39m
+ [90m    |[39m                            [31m[1m^[22m[39m
+ [90m 21 |[39m   }
+ [90m 22 |[39m   [36mreturn[39m [33mNextResponse[39m[33m.[39mjson(build[33m,[39m { status[33m:[39m [35m201[39m })[33m;[39m
+ [90m 23 |[39m }[0m
+ POST /api/builds [31m500[39m in 408ms
+TypeError: Cannot read properties of null (reading 'userBuild')
+    at POST (src/app/api/builds/route.ts:20:28)
+[0m [90m 18 |[39m   } [36mcatch[39m (_e) {
+ [90m 19 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
+[31m[1m>[22m[39m[90m 20 |[39m     build [33m=[39m [36mawait[39m fallback[33m.[39muserBuild[33m.[39mcreate({ data[33m:[39m { name[33m:[39m parsed[33m.[39mdata[33m.[39mname[33m,[39m buildType[33m:[39m parsed[33m.[39mdata[33m.[39mbuildType[33m,[39m components[33m:[39m parsed[33m.[39mdata[33m.[39mcomponents[33m,[39m userId[33m:[39m [32m'anon'[39m } })[33m;[39m
+ [90m    |[39m                            [31m[1m^[22m[39m
+ [90m 21 |[39m   }
+ [90m 22 |[39m   [36mreturn[39m [33mNextResponse[39m[33m.[39mjson(build[33m,[39m { status[33m:[39m [35m201[39m })[33m;[39m
+ [90m 23 |[39m }[0m
+ POST /api/builds [31m500[39m in 268ms

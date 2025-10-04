@@ -27,8 +27,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <header className="border-b">
+          <div className="mx-auto max-w-6xl p-4 flex items-center gap-6">
+            <Link href="/" className="font-semibold">AquaBuilder</Link>
+            <nav className="text-sm text-gray-600 flex gap-4">
+              <Link href="/build/new">Build</Link>
+              <Link href="/browse">Browse</Link>
+              <Link href="/community">Community</Link>
+            </nav>
+          </div>
+        </header>
+        <main>{children}</main>
       </body>
     </html>
   );
 }
+import Link from 'next/link';

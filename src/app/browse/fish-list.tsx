@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from 'react';
-import { Button, Card, CardHeader, CardTitle, CardContent, Input, QuantityStepper } from '@aquabuilder/ui';
+import { Button, Card, CardHeader, CardTitle, CardContent, Input, QuantityStepper, Chip } from '@aquabuilder/ui';
 import { calcBioloadPct } from '@aquabuilder/core';
 import { useBuildStore, type WarningItem } from '../../lib/store';
 
@@ -23,6 +23,9 @@ export function FishList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { tank, livestock, set, setWarnings } = useBuildStore();
+  const [minTank, setMinTank] = useState<number | null>(null);
+  const [page, setPage] = useState(1);
+  const pageSize = 6;
 
   useEffect(() => {
     (async () => {
@@ -68,16 +71,29 @@ export function FishList() {
     );
   }
 
-  const filtered = useMemo(
-    () => fish.filter((f) => f.commonName.toLowerCase().includes(q.trim().toLowerCase())),
-    [fish, q]
-  );
+  const filtered = useMemo(() => {
+    let list = fish.filter((f) => f.commonName.toLowerCase().includes(q.trim().toLowerCase()));
+    if (minTank) list = list.filter((f) => f.minTankGal >= minTank);
+    return list;
+  }, [fish, q, minTank]);
+  const paged = useMemo(() => {
+    const start = (page - 1) * pageSize;
+    return filtered.slice(start, start + pageSize);
+  }, [filtered, page]);
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between gap-2">
+      <CardHeader className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <CardTitle>Fish</CardTitle>
-        <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search fish..." className="w-48" />
+        <div className="flex gap-2 items-center">
+          <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search fish..." className="w-48" />
+          <div className="hidden sm:flex items-center gap-2">
+            <Chip active={minTank===10} onClick={() => { setMinTank(minTank===10?null:10); setPage(1); }}>10g+</Chip>
+            <Chip active={minTank===20} onClick={() => { setMinTank(minTank===20?null:20); setPage(1); }}>20g+</Chip>
+            <Chip active={minTank===40} onClick={() => { setMinTank(minTank===40?null:40); setPage(1); }}>40g+</Chip>
+            <Chip active={minTank===75} onClick={() => { setMinTank(minTank===75?null:75); setPage(1); }}>75g+</Chip>
+          </div>
+        </div>
       </CardHeader>
       <CardContent className="grid sm:grid-cols-2 gap-3">
         {loading && <div className="text-sm text-gray-600">Loading fish…</div>}
@@ -85,7 +101,7 @@ export function FishList() {
           <div className="text-sm text-gray-600">No results</div>
         )}
         {error && <div className="text-sm text-red-600">{error}</div>}
-        {filtered.map((f) => {
+        {paged.map((f) => {
           const inBuild = livestock.find((l) => l.type === 'FISH' && l.id === f.id);
           return (
             <div key={f.id} className="border rounded-md p-3 flex items-center justify-between">
@@ -104,6 +120,13 @@ export function FishList() {
             </div>
           );
         })}
+        {!loading && filtered.length > pageSize && (
+          <div className="col-span-full flex justify-end items-center gap-2 pt-2">
+            <Button variant="secondary" onClick={() => setPage(Math.max(1, page-1))}>Prev</Button>
+            <span className="text-xs text-gray-600">Page {page} of {Math.ceil(filtered.length / pageSize)}</span>
+            <Button variant="secondary" onClick={() => setPage(Math.min(Math.ceil(filtered.length/pageSize), page+1))}>Next</Button>
+          </div>
+        )}
       </CardContent>
     </Card>
   );

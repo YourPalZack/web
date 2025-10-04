@@ -2,8 +2,9 @@
 import { useBuildStore } from '../../../lib/store';
 import { Card, CardHeader, CardTitle, CardContent, Button, CompatibilityPanel, Input } from '@aquabuilder/ui';
 import { useState, useEffect } from 'react';
-import { calcBioloadPct, checkFishParams } from '@aquabuilder/core';
+import { calcBioloadPct, checkFishParams, compatibilityScore, recommendFilterGph, recommendHeaterWattage } from '@aquabuilder/core';
 import TankPicker from '../tank-picker';
+import { ScoreBadge } from '@aquabuilder/ui';
 
 export default function NewBuildPage() {
   const { buildType, set, warnings, setWarnings, tank, livestock, equipment } = useBuildStore();
@@ -111,7 +112,10 @@ export default function NewBuildPage() {
 
   return (
     <div className="max-w-5xl mx-auto p-4 space-y-4">
-      <h1 className="text-2xl font-semibold">Build Wizard</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold">Build Wizard</h1>
+        <ScoreBadge score={compatibilityScore(warnings)} />
+      </div>
       <div className="grid md:grid-cols-3 gap-4">
         <div className="md:col-span-2 space-y-4">
           <Card>
@@ -170,6 +174,27 @@ export default function NewBuildPage() {
             </CardHeader>
             <CardContent>
               <CompatibilityPanel items={warnings} />
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Equipment Guidance</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {!tank?.volumeGal ? (
+                <div className="text-sm text-gray-600">Set tank gallons to see recommendations.</div>
+              ) : (
+                <div className="space-y-2 text-sm">
+                  <div>
+                    <div className="text-gray-600">Filter turnover</div>
+                    <div>Recommended: 4–6× &middot; For {tank.volumeGal} gal, {Math.ceil(tank.volumeGal*4)}–{Math.ceil(tank.volumeGal*6)} gph</div>
+                  </div>
+                  <div>
+                    <div className="text-gray-600">Heater wattage</div>
+                    <div>Recommended: 3–5 W/gal &middot; For {tank.volumeGal} gal, {Math.ceil(tank.volumeGal*3)}–{Math.ceil(tank.volumeGal*5)} W</div>
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>

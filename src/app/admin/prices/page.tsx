@@ -4,6 +4,12 @@ import { Card, CardHeader, CardTitle, CardContent, Input, Button } from '@aquabu
 import { showToast } from '@aquabuilder/ui';
 import { signOut } from 'next-auth/react';
 
+export const metadata = {
+  title: 'Admin • Prices',
+  robots: { index: false, follow: false },
+  alternates: { canonical: '/admin/prices' },
+} as const;
+
 type Option = { id: string; label: string; productType: string };
 
 export default function AdminPricesPage() {

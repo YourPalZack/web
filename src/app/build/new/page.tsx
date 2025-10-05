@@ -290,3 +290,8 @@ export default function NewBuildPage() {
     if (loading || costCents == null) return <div className="text-xs text-gray-500">Calculating initial cost…</div>;
     return <div className="text-xs text-gray-700">Initial equipment cost: ${ (costCents/100).toFixed(2) }</div>;
   }
+export const metadata = {
+  title: 'New Build',
+  description: 'Start a new aquarium build and get recommendations.',
+  alternates: { canonical: '/build/new' },
+};

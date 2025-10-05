@@ -1,4 +1,7 @@
 import { prisma } from '@aquabuilder/db';
+import type { Metadata } from 'next';
+import { JsonLd, breadcrumbJsonLd, buildCreativeWorkJsonLd } from '../../../lib/structured';
+import { getSiteUrl } from '../../../lib/site';
 import { Card, CardHeader, CardTitle, CardContent, PriceSparkline, ScoreBadge, CompatibilityPanel } from '@aquabuilder/ui';
 import { compatibilityScore, calcBioloadPct, checkFishParams, computeMonthlyCost } from '@aquabuilder/core';
 
@@ -107,6 +110,12 @@ export default async function BuildPage({ params }: { params: { id: string } }) 
 
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-6">
+      <JsonLd data={breadcrumbJsonLd([
+        { name: 'Home', url: getSiteUrl() + '/' },
+        { name: 'Community', url: getSiteUrl() + '/community' },
+        { name: build.name, url: getSiteUrl() + `/build/${build.id}` },
+      ])} />
+      <JsonLd data={buildCreativeWorkJsonLd({ id: build.id, name: build.name, buildType: build.buildType, url: getSiteUrl() + `/build/${build.id}`, datePublished: (build as any).createdAt, dateModified: (build as any).updatedAt, parts: [] })} />
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-semibold">{build.name}</h1>
         <ScoreBadge score={score} />
@@ -177,4 +186,22 @@ export default async function BuildPage({ params }: { params: { id: string } }) 
       </div>
     </div>
   );
+}
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  try {
+    const build = await prisma.userBuild.findUnique({ where: { id: params.id } });
+    if (!build) return { title: 'Build Not Found' };
+    const title = `${build.name} (${build.buildType})`;
+    const description = `Aquarium build ${build.name} — ${build.buildType}. View parts, costs, and compatibility.`;
+    return {
+      title,
+      description,
+      alternates: { canonical: `/build/${params.id}` },
+      openGraph: { title, description, url: `/build/${params.id}` },
+      twitter: { title, description, card: 'summary_large_image' },
+    };
+  } catch {
+    return { title: 'Build' };
+  }
 }

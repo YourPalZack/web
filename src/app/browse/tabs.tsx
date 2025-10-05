@@ -1,5 +1,6 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FishList } from './fish-list';
 import PlantsList from './plants-list';
 import FiltersList from './filters-list';
@@ -19,14 +20,23 @@ const tabs = [
 ];
 
 export default function BrowseTabs() {
-  const [active, setActive] = useState('fish');
+  const search = useSearchParams();
+  const router = useRouter();
+  const tabParam = search.get('tab') ?? 'fish';
+  const [active, setActive] = useState(tabParam);
+  useEffect(()=>{ setActive(tabParam); }, [tabParam]);
+  function go(tab: string){
+    const params = new URLSearchParams(Array.from(search.entries()));
+    params.set('tab', tab);
+    router.replace(`/browse?${params.toString()}`);
+  }
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-2">
         {tabs.map((t) => (
           <button
             key={t.key}
-            onClick={() => setActive(t.key)}
+            onClick={() => go(t.key)}
             className={`px-4 py-2 rounded-full text-sm transition-all ${
               active === t.key
                 ? 'bg-gradient-to-r from-blue-500 to-cyan-400 text-white shadow-lg shadow-blue-200'

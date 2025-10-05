@@ -1,6 +1,7 @@
 type BuildRow = { id:string; name:string; buildType:string };
 
 export default async function CommunityPage({ searchParams }: { searchParams?: { type?: string; page?: string } }) {
+  // SEO metadata via headers set in layout; this server component renders canonical content
   const type = searchParams?.type;
   const page = Number(searchParams?.page ?? '1') || 1;
   const pageSize = 12;
@@ -19,6 +20,15 @@ export default async function CommunityPage({ searchParams }: { searchParams?: {
   }
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-4">
+      {/* Breadcrumbs for SEO */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: '/' },
+          { '@type': 'ListItem', position: 2, name: 'Community', item: '/community' },
+        ],
+      }) }} />
       <h1 className="text-2xl font-semibold">Community Builds</h1>
       <div className="flex gap-2 text-xs">
         {['FRESH_COMMUNITY','FRESH_PLANTED','FRESH_CICHLID','BRACKISH','FOWLR','REEF','NANO_REEF','PALUDARIUM','BIOTOPE'].map((t) => (
@@ -44,4 +54,17 @@ export default async function CommunityPage({ searchParams }: { searchParams?: {
       </div>
     </div>
   );
+}
+
+export function generateMetadata({ searchParams }: { searchParams?: { type?: string; page?: string } }) {
+  const type = searchParams?.type;
+  const page = Number(searchParams?.page ?? '1') || 1;
+  const baseTitle = 'Community Builds';
+  const title = type ? `${baseTitle} — ${type.replace('_',' ')}` : baseTitle;
+  return {
+    title,
+    description: 'Browse public aquarium builds shared by the community.',
+    alternates: { canonical: `/community${type || page>1 ? `?${new URLSearchParams({ ...(type?{type}:{}), ...(page>1?{page:String(page)}:{}) }).toString()}` : ''}` },
+    openGraph: { title, description: 'Browse public aquarium builds shared by the community.' },
+  } as const;
 }

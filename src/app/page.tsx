@@ -11,3 +11,8 @@ export default function Home() {
   );
 }
 import Link from 'next/link';
+export const metadata = {
+  title: 'Home',
+  description: 'Design your aquarium build, check compatibility, and get the latest prices.',
+  alternates: { canonical: '/' },
+};

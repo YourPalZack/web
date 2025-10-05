@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip } from '@aquabuilder/ui';
 import Pagination from './pagination';
-import AmazonPopular from './amazon-popular';
 import AmazonBuyLink from './amazon-buy-link';
 import { useBuildStore } from '../../lib/store';
 import { recommendSubstrate } from '@aquabuilder/core';
@@ -69,7 +68,7 @@ export default function SubstrateList() {
       <CardContent className="grid sm:grid-cols-2 gap-3">
         {filtered.map((s) => (
           <div key={s.id} className={`border rounded-2xl p-3 shadow-sm ${equipment.substrate === s.id ? 'ring-2 ring-blue-400' : ''}`}>
-            <div className="font-medium">{s.type}</div>
+            <a href={`/part/substrate/${s.id}`} className="font-medium hover:underline">{s.type}</a>
             <div className="text-xs text-gray-600">{s.color ?? '—'} {s.plantFriendly ? '• plant-friendly' : ''}</div>
             <div className="mt-2 flex justify-between items-center">
               <AmazonBuyLink productType="SUBSTRATE" productId={s.id} />
@@ -80,7 +79,6 @@ export default function SubstrateList() {
         {total > pageSize && (
           <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />
         )}
-        <AmazonPopular category="substrate" />
       </CardContent>
     </Card>
   );

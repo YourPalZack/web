@@ -4,7 +4,6 @@ import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip } from '@
 import Pagination from './pagination';
 import { useBuildStore } from '../../lib/store';
 import AmazonBuyLink from './amazon-buy-link';
-import AmazonPopular from './amazon-popular';
 
 type Extra = { id: string; category: string; brand?: string; model?: string };
 
@@ -60,7 +59,7 @@ export default function ExtrasList() {
       <CardContent className="grid sm:grid-cols-2 gap-3">
         {items.map((e) => (
           <div key={e.id} className={`border rounded-2xl p-3 shadow-sm ${equipment.extras.includes(e.id) ? 'ring-2 ring-blue-400' : ''}`}>
-            <div className="font-medium">{e.category}</div>
+            <a href={`/part/equipment/${e.id}`} className="font-medium hover:underline">{e.category}</a>
             <div className="text-xs text-gray-600">{e.brand ?? '—'} {e.model ?? ''}</div>
             <div className="mt-2 flex justify-between items-center">
               <AmazonBuyLink productType="EQUIPMENT" productId={e.id} />
@@ -71,7 +70,6 @@ export default function ExtrasList() {
         {total > pageSize && (
           <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />
         )}
-        <AmazonPopular category="equipment" />
       </CardContent>
     </Card>
   );

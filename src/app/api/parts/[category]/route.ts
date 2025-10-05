@@ -243,7 +243,11 @@ export async function GET(req: NextRequest, ctx: { params: Promise<{ category: s
     items = arr.slice(skip, skip + pageSize);
   }
   if (count != null) {
-    return NextResponse.json({ items, total });
+    const res = NextResponse.json({ items, total });
+    res.headers.set('Cache-Control', 's-maxage=300, stale-while-revalidate=120');
+    return res;
   }
-  return NextResponse.json(items);
+  const res = NextResponse.json(items);
+  res.headers.set('Cache-Control', 's-maxage=300, stale-while-revalidate=120');
+  return res;
 }

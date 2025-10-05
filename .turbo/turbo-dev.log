@@ -283,11 +283,12 @@ TypeError: Cannot read properties of null (reading 'fish')
  [32m[1m✓[22m[39m Compiled in 20ms
  [32m[1m✓[22m[39m Compiled in 162ms
  [32m[1m✓[22m[39m Compiled in 19ms
- or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.03a9g66tdgev'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.03a9g66tdgev'[39m
+ [32m[1m✓[22m[39m Compiled in 24ms
+ [32m[1m✓[22m[39m Compiled middleware in 1ms
+ [32m[1m✓[22m[39m Compiled middleware in 1ms
+ [32m[1m✓[22m[39m Compiled in 19ms
+ [32m[1m✓[22m[39m Compiled in 20ms
+[32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.03a9g66tdgev'[39m
 }
 [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.t8wf3tzdq0m'] {
   errno: [33m-2[39m,
@@ -324,3 +325,8 @@ TypeError: Cannot read properties of null (reading 'fish')
  [32m[1m✓[22m[39m Compiled in 22ms
  [32m[1m✓[22m[39m Compiled in 160ms
  [32m[1m✓[22m[39m Compiled in 19ms
+ [32m[1m✓[22m[39m Compiled in 25ms
+ [32m[1m✓[22m[39m Compiled middleware in 1ms
+ [32m[1m✓[22m[39m Compiled middleware in 1ms
+ [32m[1m✓[22m[39m Compiled in 19ms
+ [32m[1m✓[22m[39m Compiled in 20ms

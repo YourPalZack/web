@@ -29,6 +29,12 @@ export default async function CommunityPage({ searchParams }: { searchParams?: {
           { '@type': 'ListItem', position: 2, name: 'Community', item: '/community' },
         ],
       }) }} />
+      {/* ItemList for builds on current page */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        itemListElement: rows.map((b, idx) => ({ '@type': 'ListItem', position: idx + 1, url: `/build/${b.id}` })),
+      }) }} />
       <h1 className="text-2xl font-semibold">Community Builds</h1>
       <div className="flex gap-2 text-xs">
         {['FRESH_COMMUNITY','FRESH_PLANTED','FRESH_CICHLID','BRACKISH','FOWLR','REEF','NANO_REEF','PALUDARIUM','BIOTOPE'].map((t) => (

@@ -13,12 +13,19 @@ export function JsonLd({ data }: { data: Record<string, any> }) {
 
 export function organizationJsonLd() {
   const base = getSiteUrl();
+  const sameAs = [
+    process.env.NEXT_PUBLIC_BRAND_TWITTER,
+    process.env.NEXT_PUBLIC_BRAND_GITHUB,
+    process.env.NEXT_PUBLIC_BRAND_LINKEDIN,
+    process.env.NEXT_PUBLIC_BRAND_YOUTUBE,
+  ].filter(Boolean);
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'AquaBuilder',
     url: base,
     logo: `${base}/vercel.svg`,
+    ...(sameAs.length ? { sameAs } : {}),
   };
 }
 
@@ -63,4 +70,3 @@ export function buildCreativeWorkJsonLd(args: { id: string; name: string; buildT
     hasPart: (args.parts ?? []).map((p) => ({ '@type': 'Product', name: p.name || p.type })),
   };
 }
-

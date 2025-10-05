@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip } from '@aquabuilder/ui';
 import Pagination from './pagination';
-import AmazonPopular from './amazon-popular';
 import AmazonBuyLink from './amazon-buy-link';
 import { useBuildStore } from '../../lib/store';
 
@@ -77,7 +76,7 @@ export default function HeatersList() {
         {error && <div className="text-sm text-red-600">{error}</div>}
         {paged.map((h) => (
           <div key={h.id} className={`border rounded-2xl p-3 shadow-sm ${equipment.heater === h.id ? 'ring-2 ring-blue-400' : ''}`}>
-            <div className="font-medium">{h.brand ?? '—'} {h.model ?? ''}</div>
+            <a href={`/part/heaters/${h.id}`} className="font-medium hover:underline">{h.brand ?? '—'} {h.model ?? ''}</a>
             <div className="text-xs text-gray-600">{h.wattage} W • {h.minTankGal}–{h.maxTankGal} gal</div>
             <div className="mt-2 flex justify-between items-center">
               <AmazonBuyLink productType="HEATER" productId={h.id} />
@@ -88,7 +87,6 @@ export default function HeatersList() {
         {!loading && total > pageSize && (
           <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />
         )}
-        <AmazonPopular category="heaters" />
       </CardContent>
     </Card>
   );

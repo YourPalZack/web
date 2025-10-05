@@ -64,6 +64,7 @@ export default function RootLayout({
               <Link href="/build/new">Build</Link>
               <Link href="/browse">Browse</Link>
               <Link href="/community">Community</Link>
+              <Link href="/faq">FAQ</Link>
             </nav>
             <div className="ml-auto"><HeaderAdminChip /></div>
           </div>

@@ -9,6 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/browse`, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${base}/community`, changeFrequency: 'daily', priority: 0.7 },
     { url: `${base}/build/new`, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${base}/faq`, changeFrequency: 'monthly', priority: 0.3 },
   ];
   try {
     const builds = await prisma.userBuild.findMany({ where: { isPublic: true }, orderBy: { updatedAt: 'desc' }, take: 100 });
@@ -18,4 +19,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return staticPages;
   }
 }
-

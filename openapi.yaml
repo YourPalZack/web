@@ -23,6 +23,36 @@ paths:
     get: { responses: { '200': { description: OK } } }
   /alerts:
     post: { responses: { '201': { description: Created } } }
+  /amazon/popular:
+    get:
+      parameters:
+        - in: query
+          name: category
+          required: true
+          schema: { type: string, enum: [filters, heaters, lights, substrate, equipment] }
+        - in: query
+          name: limit
+          required: false
+          schema: { type: integer, minimum: 1, maximum: 10, default: 6 }
+      responses:
+        '200': { description: OK }
+  /admin/amazon/fetch:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [productType, productId]
+              properties:
+                productType: { type: string }
+                productId: { type: string }
+                url: { type: string, format: uri }
+                asin: { type: string, minLength: 10, maxLength: 10 }
+      responses:
+        '201': { description: Created }
+        '502': { description: Upstream error with fallback row }
 components:
   schemas:
     CreateBuild:
@@ -32,4 +62,3 @@ components:
         name: { type: string }
         buildType: { type: string }
         components: { type: object }
-

@@ -1,35 +1,52 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { Button, Card, CardHeader, CardTitle, CardContent, QuantityStepper, Input, Chip } from '@aquabuilder/ui';
+import Pagination from './pagination';
 import { useBuildStore } from '../../lib/store';
 
 type Plant = { id: string; commonName: string; lightNeeds: 'LOW' | 'MEDIUM' | 'HIGH'; co2Required: boolean; difficulty: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED' };
 
 export default function PlantsList() {
   const [plants, setPlants] = useState<Plant[]>([]);
+  const [total, setTotal] = useState<number>(0);
   const [q, setQ] = useState('');
+  const [dq, setDq] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { livestock, set } = useBuildStore();
   const [light, setLight] = useState<'LOW'|'MEDIUM'|'HIGH'|null>(null);
+  const [difficulty, setDifficulty] = useState<'BEGINNER'|'INTERMEDIATE'|'ADVANCED'|null>(null);
+  const [needCo2, setNeedCo2] = useState<boolean|null>(null);
   const [page, setPage] = useState(1);
   const pageSize = 6;
 
+  useEffect(()=>{ const t = setTimeout(()=> setDq(q), 200); return ()=> clearTimeout(t); }, [q]);
   useEffect(() => {
     (async () => {
+      setLoading(true);
       try {
-        const r = await fetch('/api/parts/plants', { cache: 'no-store' });
+        const params = new URLSearchParams();
+        params.set('page', String(page));
+        params.set('pageSize', String(pageSize));
+        params.set('count', '1');
+        if (dq) params.set('q', dq);
+        if (light) params.set('lightNeeds', light);
+        if (difficulty) params.set('difficulty', difficulty);
+        if (needCo2 != null) params.set('co2', needCo2 ? '1' : '0');
+        const r = await fetch(`/api/parts/plants?${params.toString()}`, { cache: 'no-store' });
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         const txt = await r.text();
-        setPlants(txt ? JSON.parse(txt) : []);
+        const data = txt ? JSON.parse(txt) : [];
+        if (Array.isArray(data)) { setPlants(data); setTotal(data.length); }
+        else { setPlants(data.items ?? []); setTotal(data.total ?? 0); }
       } catch (e: unknown) {
         setError(e instanceof Error ? e.message : 'Failed to load');
-        setPlants([]);
+        setPlants([]); setTotal(0);
       } finally {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [dq, page, light, difficulty, needCo2]);
 
   function add(p: Plant) {
     if (livestock.some((l) => l.type === 'PLANT' && l.id === p.id)) return;
@@ -39,12 +56,8 @@ export default function PlantsList() {
     set('livestock', livestock.map((l) => (l.type === 'PLANT' && l.id === id ? { ...l, qty } : l)));
   }
 
-  const filtered = plants.filter((p) => {
-    const text = p.commonName.toLowerCase().includes(q.trim().toLowerCase());
-    const match = light ? p.lightNeeds === light : true;
-    return text && match;
-  });
-  const paged = filtered.slice((page-1)*pageSize, (page-1)*pageSize + pageSize);
+  const filtered = plants; // server filtered
+  const paged = plants;
 
   return (
     <Card className="bg-white/80 backdrop-blur shadow-lg shadow-blue-100">
@@ -56,6 +69,11 @@ export default function PlantsList() {
             {(['LOW','MEDIUM','HIGH'] as const).map((t) => (
               <Chip key={t} active={light===t} onClick={() => { setLight(light===t?null:t); setPage(1); }}>{t}</Chip>
             ))}
+            {(['BEGINNER','INTERMEDIATE','ADVANCED'] as const).map((t) => (
+              <Chip key={t} active={difficulty===t} onClick={() => { setDifficulty(difficulty===t?null:t); setPage(1); }}>{t}</Chip>
+            ))}
+            <Chip active={needCo2===true} onClick={() => { setNeedCo2(needCo2===true?null:true); setPage(1); }}>CO2</Chip>
+            <Chip active={needCo2===false} onClick={() => { setNeedCo2(needCo2===false?null:false); setPage(1); }}>No CO2</Chip>
           </div>
         </div>
       </CardHeader>
@@ -81,12 +99,8 @@ export default function PlantsList() {
             </div>
           );
         })}
-        {!loading && filtered.length > pageSize && (
-          <div className="col-span-full flex justify-end items-center gap-2 pt-2">
-            <Button variant="secondary" onClick={() => setPage(Math.max(1, page-1))}>Prev</Button>
-            <span className="text-xs text-gray-600">Page {page} of {Math.ceil(filtered.length / pageSize)}</span>
-            <Button variant="secondary" onClick={() => setPage(Math.min(Math.ceil(filtered.length/pageSize), page+1))}>Next</Button>
-          </div>
+        {!loading && total > pageSize && (
+          <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />
         )}
       </CardContent>
     </Card>

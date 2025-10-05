@@ -2,10 +2,12 @@
 import { useBuildStore } from '../../../lib/store';
 import { Card, CardHeader, CardTitle, CardContent, Button, CompatibilityPanel, Input } from '@aquabuilder/ui';
 import { useState, useEffect } from 'react';
-import { calcBioloadPct, checkFishParams, compatibilityScore, beginnerFriendlyScore, recommendFilterGph, recommendHeaterWattage } from '@aquabuilder/core';
+import { calcBioloadPct, checkFishParams, beginnerFriendlyScore, recommendFilterGph, recommendHeaterWattage, computeMonthlyCost, computeFilterTurnoverStatus, computeHeaterStatus, computeLightCoverageStatus, computeWaterTypeConflicts, computePredationConflicts, computeAggressionTerritoryRules, computeSchoolingWarnings, recommendLightCoverage } from '@aquabuilder/core';
 import TankPicker from '../tank-picker';
 import { ScoreBadge } from '@aquabuilder/ui';
 import { showToast } from '@aquabuilder/ui';
+import { getLatestPriceCents } from '../../../lib/price';
+import { logEventClient } from '../../../lib/analytics-client';
 
 export default function NewBuildPage() {
   const { buildType, set, warnings, setWarnings, tank, livestock, equipment } = useBuildStore();
@@ -25,7 +27,7 @@ export default function NewBuildPage() {
         }
       }
 
-      const fishList = await fetchJson<Array<{ id: string; tempMinC: number; tempMaxC: number; phMin: number; phMax: number; adultSizeCm: number; bioloadFactor: number; schoolingMin?: number | null }>>(
+      const fishList = await fetchJson<Array<{ id: string; tempMinC: number; tempMaxC: number; phMin: number; phMax: number; adultSizeCm: number; bioloadFactor: number; schoolingMin?: number | null; waterType?: 'FRESH'|'BRACKISH'|'SALT'; temperament?: 'PEACEFUL'|'SEMI_AGGRESSIVE'|'AGGRESSIVE'; diet?: 'CARNIVORE'|'OMNIVORE'|'HERBIVORE' }>>(
         '/api/parts/fish',
         []
       );
@@ -52,12 +54,11 @@ export default function NewBuildPage() {
         else if (pct > 90) items.push({ level: 'WARN', code: 'BIOLOAD_NEAR_LIMIT', message: `Bioload ${pct.toFixed(0)}% near capacity.` });
       }
 
-      // Schooling
-      for (const l of livestock.filter((x) => x.type === 'FISH')) {
-        const f = fishList.find((x) => x.id === l.id);
-        if (f?.schoolingMin && l.qty < f.schoolingMin) {
-          items.push({ level: 'WARN', code: 'SCHOOLING_MIN', message: `${f.schoolingMin}+ ${f ? 'required' : ''} for groups. You have ${l.qty}.` });
-        }
+      // Schooling (core)
+      {
+        const selections = livestock.filter(l=>l.type==='FISH').map(l=>({ id:l.id, qty:l.qty }));
+        const school = computeSchoolingWarnings({ selections, catalog: fishList as Array<{ id:string; schoolingMin?:number|null; commonName?:string }> });
+        items.push(...school);
       }
 
       // Parameter overlap across fish
@@ -72,34 +73,36 @@ export default function NewBuildPage() {
         }
       }
 
+      // Water-type and behavior
+      if (buildType) {
+        type FishSel = { id:string; waterType?: 'FRESH'|'BRACKISH'|'SALT'; temperament?: 'PEACEFUL'|'SEMI_AGGRESSIVE'|'AGGRESSIVE'; diet?: 'CARNIVORE'|'OMNIVORE'|'HERBIVORE'; adultSizeCm?: number };
+        const fishSel = livestock.filter(l=>l.type==='FISH' && l.qty>0).map(l=> fishList.find(x=>x.id===l.id)).filter(Boolean) as FishSel[];
+        items.push(...computeWaterTypeConflicts({ buildType, species: fishSel }));
+        items.push(...computePredationConflicts({ fish: fishSel.map(f=>({ id: f.id, diet: f.diet, adultSizeCm: f.adultSizeCm })), inverts: [] }));
+        items.push(...computeAggressionTerritoryRules({ fish: fishSel.map(f=>({ id: f.id, temperament: f.temperament })), tankGal: tank?.volumeGal }));
+      }
+
       // Equipment compatibility
       if (tank?.volumeGal) {
         if (equipment.filter) {
           const f = filters.find((x) => x.id === equipment.filter);
           if (f?.gph) {
-            const turnover = f.gph / tank.volumeGal;
-            if (turnover < 2) items.push({ level: 'BLOCK', code: 'FILTER_TOO_WEAK', message: `Turnover ${turnover.toFixed(1)}x < 2x.` });
-            else if (turnover < 4 || turnover > 10) items.push({ level: 'WARN', code: 'FILTER_TURNOVER', message: `Turnover ${turnover.toFixed(1)}x outside 4–10x.` });
+            const issue = computeFilterTurnoverStatus({ gph: f.gph, tankGal: tank.volumeGal });
+            if (issue) items.push(issue);
           }
         }
         if (equipment.heater) {
           const h = heaters.find((x) => x.id === equipment.heater);
           if (h?.wattage) {
-            const wpg = h.wattage / tank.volumeGal;
-            const min = 3, max = 5;
-            const pctLow = (min - wpg) / min;
-            const pctHigh = (wpg - max) / max;
-            const offPct = Math.max(pctLow, pctHigh);
-            if (offPct > 0.4) items.push({ level: 'BLOCK', code: 'HEATER_MISMATCH', message: `Heater ${h.wattage}W ≈ ${wpg.toFixed(1)} W/gal outside 3–5 by >40%.` });
-            else if (offPct > 0.2) items.push({ level: 'WARN', code: 'HEATER_NEAR_LIMIT', message: `Heater ≈ ${wpg.toFixed(1)} W/gal outside 3–5 by >20%.` });
+            const issue = computeHeaterStatus({ wattage: h.wattage, tankGal: tank.volumeGal });
+            if (issue) items.push(issue);
           }
         }
         if (equipment.light && tank.lengthCm) {
           const l = lights.find((x) => x.id === equipment.light);
           if (l?.coverageCm) {
-            const deficit = tank.lengthCm - l.coverageCm;
-            if (deficit > tank.lengthCm * 0.25) items.push({ level: 'BLOCK', code: 'LIGHT_COVERAGE', message: `Light coverage too short by >25%.` });
-            else if (deficit > tank.lengthCm * 0.10) items.push({ level: 'WARN', code: 'LIGHT_COVERAGE', message: `Light coverage short by >10%.` });
+            const issue = computeLightCoverageStatus({ coverageCm: l.coverageCm, tankLengthCm: tank.lengthCm });
+            if (issue) items.push(issue);
           }
         }
       }
@@ -107,7 +110,7 @@ export default function NewBuildPage() {
       setWarnings(items);
     }
     recompute();
-  }, [tank?.volumeGal, tank?.lengthCm, livestock, equipment, setWarnings]);
+  }, [tank?.volumeGal, tank?.lengthCm, livestock, equipment, buildType, setWarnings]);
 
   // Build type currently unused in warnings; keeping for future steps
 
@@ -181,11 +184,21 @@ export default function NewBuildPage() {
                       const url = `${window.location.origin}/build/${data.id}`;
                       await navigator.clipboard.writeText(url);
                       showToast('Link copied to clipboard');
+                      logEventClient('build_share_copied', { id: data.id });
                     } else {
                       showToast('Failed to save build');
                     }
                   }catch{ showToast('Failed to save build'); }
                 }}>Save & Copy Link</Button>
+                <Button variant="secondary" onClick={async()=>{
+                  try{
+                    const { serializeBuildState } = await import('../../../lib/sharing');
+                    const state = serializeBuildState({ tank, equipment, livestock, buildType });
+                    const url = `${window.location.origin}/build/new?state=${state}`;
+                    await navigator.clipboard.writeText(url);
+                    showToast('Draft link copied');
+                  } catch { showToast('Failed to copy draft link'); }
+                }}>Copy Draft Link</Button>
               </div>
             </CardContent>
           </Card>
@@ -220,7 +233,32 @@ export default function NewBuildPage() {
                       <div>Recommended: 3–5 W/gal &middot; For {tank.volumeGal} gal, {r.minW}–{r.maxW} W</div>
                     ); })()}
                   </div>
+                  {!!tank.lengthCm && (
+                    <div>
+                      <div className="text-gray-600">Light coverage</div>
+                      {(() => { const r = recommendLightCoverage({ tankLengthCm: tank.lengthCm! }); return (
+                        <div>Recommended: cover at least {r.coverageMinCm} cm of tank length</div>
+                      ); })()}
+                    </div>
+                  )}
                 </div>
+              )}
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Cost Estimates</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {!tank?.volumeGal ? (
+                <div className="text-sm text-gray-600">Set tank gallons to estimate monthly energy cost.</div>
+              ) : (
+                (() => { const est = computeMonthlyCost({ tankGal: tank.volumeGal! }); return (
+                  <div className="space-y-1 text-sm">
+                    <div>Estimated monthly energy: ${est.cost.toFixed(2)} (≈ {est.kwh.toFixed(1)} kWh @ $0.15/kWh)</div>
+                    <InitialCost equipment={equipment} />
+                  </div>
+                ); })()
               )}
             </CardContent>
           </Card>
@@ -229,3 +267,26 @@ export default function NewBuildPage() {
     </div>
   );
 }
+
+  function InitialCost({ equipment }:{ equipment: { filter?: string; heater?: string; light?: string; substrate?: string; extras: string[] } }){
+    const [costCents, setCostCents] = useState<number | null>(null);
+    const [loading, setLoading] = useState(false);
+    const extrasKey = equipment.extras.join(',');
+    useEffect(()=>{
+      (async ()=>{
+        setLoading(true);
+        try{
+          const res = await fetch('/api/costs/initial', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ equipment }) });
+          if (!res.ok){ setCostCents(0); return; }
+          const data = await res.json();
+          setCostCents(typeof data?.priceCents === 'number' ? data.priceCents : 0);
+        } catch {
+          setCostCents(0);
+        } finally {
+          setLoading(false);
+        }
+      })();
+    }, [equipment.filter, equipment.heater, equipment.light, equipment.substrate, extrasKey]);
+    if (loading || costCents == null) return <div className="text-xs text-gray-500">Calculating initial cost…</div>;
+    return <div className="text-xs text-gray-700">Initial equipment cost: ${ (costCents/100).toFixed(2) }</div>;
+  }

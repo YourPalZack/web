@@ -11,6 +11,6 @@ export async function GET(_req: NextRequest, ctx: { params: Promise<{ id: string
     const { fallback } = getPrismaSafe();
     build = await fallback.userBuild.findUnique?.({ where: { id } });
   }
-  if (!build) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  if (!build) return NextResponse.json({ error: { message: 'Not found' } }, { status: 404 });
   return NextResponse.json(build);
 }

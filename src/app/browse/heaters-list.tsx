@@ -1,13 +1,18 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip } from '@aquabuilder/ui';
+import Pagination from './pagination';
+import AmazonPopular from './amazon-popular';
+import AmazonBuyLink from './amazon-buy-link';
 import { useBuildStore } from '../../lib/store';
 
 type Heater = { id: string; brand?: string; model?: string; wattage: number; minTankGal: number; maxTankGal: number };
 
 export default function HeatersList() {
   const [heaters, setHeaters] = useState<Heater[]>([]);
+  const [total, setTotal] = useState<number>(0);
   const [q, setQ] = useState('');
+  const [dq, setDq] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { equipment, set } = useBuildStore();
@@ -15,36 +20,41 @@ export default function HeatersList() {
   const [page, setPage] = useState(1);
   const pageSize = 6;
 
+  useEffect(()=>{ const t = setTimeout(()=> setDq(q), 200); return ()=> clearTimeout(t); }, [q]);
   useEffect(() => {
     (async () => {
+      setLoading(true);
       try {
-        const r = await fetch('/api/parts/heaters', { cache: 'no-store' });
+        const params = new URLSearchParams();
+        params.set('page', String(page));
+        params.set('pageSize', String(pageSize));
+        params.set('count', '1');
+        if (dq) params.set('q', dq);
+        if (bucket){
+          const [min, max] = bucket === '<=100' ? [0,100] : bucket==='101-200' ? [101,200] : bucket==='201-300' ? [201,300] : [301, 100000];
+          if (min) params.set('wattMin', String(min));
+          params.set('wattMax', String(max));
+        }
+        const r = await fetch(`/api/parts/heaters?${params.toString()}`, { cache: 'no-store' });
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         const txt = await r.text();
-        setHeaters(txt ? JSON.parse(txt) : []);
+        const data = txt ? JSON.parse(txt) : [];
+        if (Array.isArray(data)) { setHeaters(data); setTotal(data.length); }
+        else { setHeaters(data.items ?? []); setTotal(data.total ?? 0); }
       } catch (e: unknown) {
         setError(e instanceof Error ? e.message : 'Failed to load');
-        setHeaters([]);
+        setHeaters([]); setTotal(0);
       } finally {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [dq, bucket, page]);
 
   function choose(h: Heater) {
     set('equipment', { ...equipment, heater: h.id });
   }
 
-  const filtered = heaters.filter((h) => {
-    const text = `${h.brand ?? ''} ${h.model ?? ''}`.toLowerCase().includes(q.trim().toLowerCase());
-    let match = true;
-    if (bucket === '<=100') match = h.wattage <= 100;
-    else if (bucket === '101-200') match = h.wattage > 100 && h.wattage <= 200;
-    else if (bucket === '201-300') match = h.wattage > 200 && h.wattage <= 300;
-    else if (bucket === '>300') match = h.wattage > 300;
-    return text && match;
-  });
-  const paged = filtered.slice((page-1)*pageSize, (page-1)*pageSize + pageSize);
+  const paged = heaters;
 
   return (
     <Card className="bg-white/80 backdrop-blur shadow-lg shadow-blue-100">
@@ -61,7 +71,7 @@ export default function HeatersList() {
       </CardHeader>
       <CardContent className="grid sm:grid-cols-2 gap-3">
         {loading && <div className="text-sm text-gray-600">Loading heaters…</div>}
-        {!loading && !error && filtered.length === 0 && (
+        {!loading && !error && paged.length === 0 && (
           <div className="text-sm text-gray-600">No results</div>
         )}
         {error && <div className="text-sm text-red-600">{error}</div>}
@@ -69,16 +79,16 @@ export default function HeatersList() {
           <div key={h.id} className={`border rounded-2xl p-3 shadow-sm ${equipment.heater === h.id ? 'ring-2 ring-blue-400' : ''}`}>
             <div className="font-medium">{h.brand ?? '—'} {h.model ?? ''}</div>
             <div className="text-xs text-gray-600">{h.wattage} W • {h.minTankGal}–{h.maxTankGal} gal</div>
-            <div className="mt-2 flex justify-end"><Button onClick={() => choose(h)}>{equipment.heater === h.id ? 'Selected' : 'Select'}</Button></div>
+            <div className="mt-2 flex justify-between items-center">
+              <AmazonBuyLink productType="HEATER" productId={h.id} />
+              <Button onClick={() => choose(h)}>{equipment.heater === h.id ? 'Selected' : 'Select'}</Button>
+            </div>
           </div>
         ))}
-        {!loading && filtered.length > pageSize && (
-          <div className="col-span-full flex justify-end items-center gap-2 pt-2">
-            <Button variant="secondary" onClick={() => setPage(Math.max(1, page-1))}>Prev</Button>
-            <span className="text-xs text-gray-600">Page {page} of {Math.ceil(filtered.length / pageSize)}</span>
-            <Button variant="secondary" onClick={() => setPage(Math.min(Math.ceil(filtered.length/pageSize), page+1))}>Next</Button>
-          </div>
+        {!loading && total > pageSize && (
+          <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />
         )}
+        <AmazonPopular category="heaters" />
       </CardContent>
     </Card>
   );

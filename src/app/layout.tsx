@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from '@aquabuilder/ui';
+import AdminIndicator from './admin-indicator';
+import HeaderAdminChip from './header-admin-chip';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,9 +38,11 @@ export default function RootLayout({
               <Link href="/browse">Browse</Link>
               <Link href="/community">Community</Link>
             </nav>
+            <div className="ml-auto"><HeaderAdminChip /></div>
           </div>
         </header>
         <main>{children}</main>
+        <AdminIndicator />
         <ToastContainer />
       </body>
     </html>

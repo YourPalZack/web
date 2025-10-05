@@ -1,8 +1,10 @@
 "use client";
 import { useEffect, useMemo, useState } from 'react';
 import { Button, Card, CardHeader, CardTitle, CardContent, Input, QuantityStepper, Chip } from '@aquabuilder/ui';
+import Pagination from './pagination';
 import { calcBioloadPct } from '@aquabuilder/core';
 import { useBuildStore, type WarningItem } from '../../lib/store';
+import { useDebouncedValue } from '../../lib/hooks/use-debounce';
 
 type Fish = {
   id: string;
@@ -19,7 +21,9 @@ type Fish = {
 
 export function FishList() {
   const [fish, setFish] = useState<Fish[]>([]);
+  const [total, setTotal] = useState<number>(0);
   const [q, setQ] = useState('');
+  const dq = useDebouncedValue(q, 200);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { tank, livestock, set, setWarnings } = useBuildStore();
@@ -29,19 +33,28 @@ export function FishList() {
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
       try {
-        const r = await fetch('/api/parts/fish', { cache: 'no-store' });
+        const params = new URLSearchParams();
+        params.set('page', String(page));
+        params.set('pageSize', String(pageSize));
+        params.set('count', '1');
+        if (dq) params.set('q', dq);
+        if (minTank != null) params.set('minTankGal', String(minTank));
+        const r = await fetch(`/api/parts/fish?${params.toString()}`, { cache: 'no-store' });
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         const txt = await r.text();
-        setFish(txt ? JSON.parse(txt) : []);
+        const data = txt ? JSON.parse(txt) : [];
+        if (Array.isArray(data)) { setFish(data); setTotal(data.length); }
+        else { setFish(data.items ?? []); setTotal(data.total ?? 0); }
       } catch (e: unknown) {
         setError(e instanceof Error ? e.message : 'Failed to load');
-        setFish([]);
+        setFish([]); setTotal(0);
       } finally {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [dq, minTank, page]);
 
   useEffect(() => {
     if (!tank?.volumeGal) return;
@@ -71,15 +84,8 @@ export function FishList() {
     );
   }
 
-  const filtered = useMemo(() => {
-    let list = fish.filter((f) => f.commonName.toLowerCase().includes(q.trim().toLowerCase()));
-    if (minTank) list = list.filter((f) => f.minTankGal >= minTank);
-    return list;
-  }, [fish, q, minTank]);
-  const paged = useMemo(() => {
-    const start = (page - 1) * pageSize;
-    return filtered.slice(start, start + pageSize);
-  }, [filtered, page]);
+  const filtered = fish; // server filtered
+  const paged = fish; // server paged
 
   return (
     <Card>
@@ -120,12 +126,8 @@ export function FishList() {
             </div>
           );
         })}
-        {!loading && filtered.length > pageSize && (
-          <div className="col-span-full flex justify-end items-center gap-2 pt-2">
-            <Button variant="secondary" onClick={() => setPage(Math.max(1, page-1))}>Prev</Button>
-            <span className="text-xs text-gray-600">Page {page} of {Math.ceil(filtered.length / pageSize)}</span>
-            <Button variant="secondary" onClick={() => setPage(Math.min(Math.ceil(filtered.length/pageSize), page+1))}>Next</Button>
-          </div>
+        {!loading && total > pageSize && (
+          <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />
         )}
       </CardContent>
     </Card>

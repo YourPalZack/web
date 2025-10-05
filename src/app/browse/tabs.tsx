@@ -5,6 +5,8 @@ import PlantsList from './plants-list';
 import FiltersList from './filters-list';
 import HeatersList from './heaters-list';
 import LightsList from './lights-list';
+import SubstrateList from './substrate-list';
+import ExtrasList from './extras-list';
 
 const tabs = [
   { key: 'fish', label: 'Fish' },
@@ -12,6 +14,8 @@ const tabs = [
   { key: 'filters', label: 'Filters' },
   { key: 'heaters', label: 'Heaters' },
   { key: 'lights', label: 'Lights' },
+  { key: 'substrate', label: 'Substrate' },
+  { key: 'extras', label: 'Extras' },
 ];
 
 export default function BrowseTabs() {
@@ -38,7 +42,8 @@ export default function BrowseTabs() {
       {active === 'filters' && <FiltersList />}
       {active === 'heaters' && <HeatersList />}
       {active === 'lights' && <LightsList />}
+      {active === 'substrate' && <SubstrateList />}
+      {active === 'extras' && <ExtrasList />}
     </div>
   );
 }
-

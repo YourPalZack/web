@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
-import { z } from 'zod';
+// zod schema imported from shared lib
 import { prisma } from '@aquabuilder/db';
 import { getPrismaSafe } from '@aquabuilder/db/safeClient';
+import { CreateBuildSchema } from '../../../lib/schemas';
 import type { BuildType, Prisma } from '@prisma/client';
 
-const CreateBuild = z.object({ name: z.string().min(2), buildType: z.string(), components: z.record(z.string(), z.unknown()) });
+const CreateBuild = CreateBuildSchema;
 
 export async function POST(req: Request) {
   const body = await req.json();

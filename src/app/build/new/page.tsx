@@ -2,9 +2,10 @@
 import { useBuildStore } from '../../../lib/store';
 import { Card, CardHeader, CardTitle, CardContent, Button, CompatibilityPanel, Input } from '@aquabuilder/ui';
 import { useState, useEffect } from 'react';
-import { calcBioloadPct, checkFishParams, compatibilityScore, recommendFilterGph, recommendHeaterWattage } from '@aquabuilder/core';
+import { calcBioloadPct, checkFishParams, compatibilityScore, beginnerFriendlyScore, recommendFilterGph, recommendHeaterWattage } from '@aquabuilder/core';
 import TankPicker from '../tank-picker';
 import { ScoreBadge } from '@aquabuilder/ui';
+import { showToast } from '@aquabuilder/ui';
 
 export default function NewBuildPage() {
   const { buildType, set, warnings, setWarnings, tank, livestock, equipment } = useBuildStore();
@@ -114,7 +115,7 @@ export default function NewBuildPage() {
     <div className="max-w-5xl mx-auto p-4 space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">Build Wizard</h1>
-        <ScoreBadge score={compatibilityScore(warnings)} />
+        <ScoreBadge score={beginnerFriendlyScore(warnings)} />
       </div>
       <div className="grid md:grid-cols-3 gap-4">
         <div className="md:col-span-2 space-y-4">
@@ -166,6 +167,28 @@ export default function NewBuildPage() {
               </ul>
             </CardContent>
           </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Step 5: Review & Share</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex gap-2">
+                <Button onClick={async ()=>{
+                  try{
+                    const res = await fetch('/api/builds',{method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ name: 'My Build', buildType: buildType ?? 'FRESH_COMMUNITY', components: { tank, equipment, livestock } })});
+                    const data = await res.json();
+                    if(res.ok && data.id){
+                      const url = `${window.location.origin}/build/${data.id}`;
+                      await navigator.clipboard.writeText(url);
+                      showToast('Link copied to clipboard');
+                    } else {
+                      showToast('Failed to save build');
+                    }
+                  }catch{ showToast('Failed to save build'); }
+                }}>Save & Copy Link</Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
         <div className="space-y-4">
           <Card>
@@ -187,11 +210,15 @@ export default function NewBuildPage() {
                 <div className="space-y-2 text-sm">
                   <div>
                     <div className="text-gray-600">Filter turnover</div>
-                    <div>Recommended: 4–6× &middot; For {tank.volumeGal} gal, {Math.ceil(tank.volumeGal*4)}–{Math.ceil(tank.volumeGal*6)} gph</div>
+                    {(() => { const r = recommendFilterGph(tank.volumeGal); return (
+                      <div>Recommended: 4–6× &middot; For {tank.volumeGal} gal, {r.minGph}–{r.maxGph} gph</div>
+                    ); })()}
                   </div>
                   <div>
                     <div className="text-gray-600">Heater wattage</div>
-                    <div>Recommended: 3–5 W/gal &middot; For {tank.volumeGal} gal, {Math.ceil(tank.volumeGal*3)}–{Math.ceil(tank.volumeGal*5)} W</div>
+                    {(() => { const r = recommendHeaterWattage(tank.volumeGal); return (
+                      <div>Recommended: 3–5 W/gal &middot; For {tank.volumeGal} gal, {r.minW}–{r.maxW} W</div>
+                    ); })()}
                   </div>
                 </div>
               )}

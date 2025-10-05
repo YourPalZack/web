@@ -146,4 +146,105 @@ TypeError: Cannot read properties of null (reading 'fish')
  [90m 90 |[39m     }[0m
  GET /api/parts/fish [31m500[39m in 285ms
  [32m[1m✓[22m[39m Compiled in 26ms
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              [32m[1m✓[22m[39m Compiled in 116ms
+ [32m[1m✓[22m[39m Compiled in 101ms
+ [32m[1m✓[22m[39m Compiled in 36ms
+ [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.v38fu0wwsh9'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.v38fu0wwsh9'[39m
+}
+ [37m[1m○[22m[39m Compiling /_error ...
+ [32m[1m✓[22m[39m Compiled /_error in 517ms
+ [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.0hp0qu5kb2'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.0hp0qu5kb2'[39m
+}
+[Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.v38fu0wwsh9'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.v38fu0wwsh9'[39m
+}
+ [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.y6f6blsfju8'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.y6f6blsfju8'[39m
+}
+[Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.qvy0rfczis'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.qvy0rfczis'[39m
+}
+ [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.ez6n7q6235w'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.ez6n7q6235w'[39m
+}
+ [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/we [32m[1m✓[22m[39m Compiled in 364ms
+s.tmp.po0wbsmka2g'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.po0wbsmka2g'[39m
+}
+[Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.ez6n7q6235w'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.ez6n7q6235w'[39m
+}
+ [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.kqgrays6pbn'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.kqgrays6pbn'[39m
+}
+[Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.7wtm6isjptf'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.7wtm6isjptf'[39m
+}
+ [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.y5iztwia2ld'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.y5iztwia2ld'[39m
+}
+ [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.b3xdrflpks6'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.b3xdrflpks6'[39m
+}
+[Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.y5iztwia2ld'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.y5iztwia2ld'[39m
+}
+ [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.9ygfdjtbys4'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.9ygfdjtbys4'[39m
+}
+[Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.oq95zhu84ko'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.oq95zhu84ko'[39m
+}
+ [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.0e9t3nd6dohi'] {
+  errno: [33m-2[39m,
+  code: [32m'ENOENT'[39m,
+  syscall: [32m'open'[39m,
+  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.0e9t3nd6dohi'[39m
+}
+ [32m[1m✓[22m[39m Compiled in 371ms

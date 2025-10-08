@@ -28,12 +28,24 @@ export async function GET(req: NextRequest) {
       countRequested ? prisma.userBuild.count({ where }) : Promise.resolve(0),
       prisma.userBuild.findMany({ where, orderBy: { createdAt: 'desc' }, take: pageSize ?? limit, skip: countRequested ? skip : 0 }),
     ]);
-    if (countRequested) return NextResponse.json({ items: rows, total });
-    return NextResponse.json(rows);
+    if (countRequested) {
+      const res = NextResponse.json({ items: rows, total });
+      res.headers.set('Cache-Control', 's-maxage=300, stale-while-revalidate=120');
+      return res;
+    }
+    const res = NextResponse.json(rows);
+    res.headers.set('Cache-Control', 's-maxage=300, stale-while-revalidate=120');
+    return res;
   } catch (_e) {
     const { fallback } = getPrismaSafe();
     const rows: Array<{ id:string; name:string; buildType:string }> = await fallback.userBuild.findMany({ take: pageSize ?? limit, skip: countRequested ? skip : 0 });
-    if (countRequested) return NextResponse.json({ items: rows, total: rows.length });
-    return NextResponse.json(rows);
+    if (countRequested) {
+      const res = NextResponse.json({ items: rows, total: rows.length });
+      res.headers.set('Cache-Control', 's-maxage=120, stale-while-revalidate=60');
+      return res;
+    }
+    const res = NextResponse.json(rows);
+    res.headers.set('Cache-Control', 's-maxage=120, stale-while-revalidate=60');
+    return res;
   }
 }

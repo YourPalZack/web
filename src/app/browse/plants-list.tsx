@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button, Card, CardHeader, CardTitle, CardContent, QuantityStepper, Input, Chip } from '@aquabuilder/ui';
 import Pagination from './pagination';
 import { useBuildStore } from '../../lib/store';
+import { logEvent } from '../../lib/analytics-client';
 
 type Plant = { id: string; commonName: string; lightNeeds: 'LOW' | 'MEDIUM' | 'HIGH'; co2Required: boolean; difficulty: 'BEGINNER' | 'INTERMEDIATE' | 'ADVANCED' };
 
@@ -51,9 +52,11 @@ export default function PlantsList() {
   function add(p: Plant) {
     if (livestock.some((l) => l.type === 'PLANT' && l.id === p.id)) return;
     set('livestock', [...livestock, { type: 'PLANT', id: p.id, qty: 1 }]);
+    try { logEvent('add_to_build', { source: 'plants_list', itemType: 'PLANT', id: p.id }); } catch {}
   }
   function setQty(id: string, qty: number) {
     set('livestock', livestock.map((l) => (l.type === 'PLANT' && l.id === id ? { ...l, qty } : l)));
+    try { logEvent('update_qty', { source: 'plants_list', itemType: 'PLANT', id, qty }); } catch {}
   }
 
   const filtered = plants; // server filtered
@@ -88,7 +91,13 @@ export default function PlantsList() {
           return (
             <div key={p.id} className="border rounded-2xl p-3 flex items-center justify-between shadow-sm">
               <div>
-                <div className="font-medium">{p.commonName}</div>
+                <a
+                  href={`/species/plants/${p.id}`}
+                  className="font-medium underline-offset-2 hover:underline"
+                  onClick={() => { try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'species_detail_nav_click', props: { from: 'plants_list', id: p.id } })); } catch {} }}
+                >
+                  {p.commonName}
+                </a>
                 <div className="text-xs text-gray-600">Light {p.lightNeeds} • {p.co2Required ? 'CO2' : 'No CO2'} • {p.difficulty}</div>
               </div>
               {inBuild ? (

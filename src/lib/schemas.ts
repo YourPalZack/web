@@ -6,6 +6,11 @@ export const CreateBuildSchema = z.object({
   components: z.record(z.string(), z.unknown()),
 });
 
+export const UpdateBuildSchema = z.object({
+  name: z.string().min(2).optional(),
+  isPublic: z.boolean().optional(),
+});
+
 export const CreatePriceSchema = z.object({
   productType: z.string().min(1),
   productId: z.string().min(1),
@@ -14,6 +19,22 @@ export const CreatePriceSchema = z.object({
   currency: z.string().default('USD'),
   url: z.string().url().optional(),
   inStock: z.boolean().optional(),
+});
+
+export const DeletePriceSchema = z.object({
+  productType: z.string().min(1),
+  productId: z.string().min(1),
+  retailer: z.string().min(1),
+  timestamp: z.string().min(1), // ISO string
+});
+
+export const UpdatePriceSchema = z.object({
+  productType: z.string().min(1),
+  productId: z.string().min(1),
+  retailer: z.string().min(1),
+  timestamp: z.string().min(1), // ISO string identifying the row
+  newRetailer: z.string().min(1).optional(),
+  url: z.string().url().optional(),
 });
 
 export const InitialCostSchema = z.object({

@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent, Input, Button } from '@aquabuilder/ui';
 import { showToast } from '@aquabuilder/ui';
 import { signOut } from 'next-auth/react';
+import AdminPageView from '../page-view';
 
 export const metadata = {
   title: 'Admin • Prices',
@@ -22,6 +23,8 @@ export default function AdminPricesPage() {
   const [asin, setAsin] = useState('');
   const [rows, setRows] = useState<Array<{ retailer: string; priceCents: number; timestamp: string }>>([]);
   const [admin, setAdmin] = useState<boolean>(false);
+  const [urlNormalized, setUrlNormalized] = useState<boolean>(false);
+  const [normTimer, setNormTimer] = useState<any>(null);
 
   useEffect(() => {
     (async () => {
@@ -63,6 +66,16 @@ export default function AdminPricesPage() {
     })();
   }, [productType, productId]);
 
+  const urlInfo = useMemo(() => {
+    if (!url) return { valid: false, host: null as string | null, tag: null as string | null };
+    try {
+      const u = new URL(url);
+      return { valid: true, host: u.hostname, tag: u.searchParams.get('tag') };
+    } catch {
+      return { valid: false, host: null, tag: null };
+    }
+  }, [url]);
+
   async function save() {
     try {
       const cents = Math.round(parseFloat(price) * 100);
@@ -70,6 +83,18 @@ export default function AdminPricesPage() {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer, priceCents: cents, url })
       });
       if (res.ok) {
+        try {
+          const j = await res.json();
+          if (j?.url) {
+            const changed = j.url !== url;
+            setUrl(j.url);
+            if (changed) {
+              setUrlNormalized(true);
+              if (normTimer) clearTimeout(normTimer);
+              setNormTimer(setTimeout(()=> setUrlNormalized(false), 3000));
+            }
+          }
+        } catch {}
         showToast('Price saved');
         // refresh list
         if (productId) {
@@ -84,6 +109,7 @@ export default function AdminPricesPage() {
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-4">
+      <AdminPageView page="admin_prices" />
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">Admin • Prices</h1>
         <div className="flex gap-2">
@@ -115,6 +141,22 @@ export default function AdminPricesPage() {
           <div>
             <div className="text-gray-600">Product URL (optional)</div>
             <Input value={url} onChange={(e)=>setUrl(e.target.value)} placeholder="https://www.amazon.com/dp/..." />
+            {url && (
+              <div className="mt-1 text-[11px] text-gray-600">
+                {urlInfo.valid ? (
+                  <>
+                    <span>Host: {urlInfo.host ?? '—'}</span>
+                    <span className="ml-2">Affiliate tag: {urlInfo.tag ?? 'none'}</span>
+                    {!urlInfo.tag && <span className="ml-2 text-yellow-700">(server will append configured tag on save)</span>}
+                  </>
+                ) : (
+                  <span className="text-red-700">Invalid URL</span>
+                )}
+                {urlNormalized && (
+                  <span className="ml-2 px-1.5 py-0.5 rounded bg-green-100 text-green-800">URL normalized</span>
+                )}
+              </div>
+            )}
           </div>
           <div>
             <div className="text-gray-600">Amazon ASIN</div>
@@ -140,6 +182,18 @@ export default function AdminPricesPage() {
                 const data = txt ? JSON.parse(txt) : {};
                 if (res.ok || data?.fallbackRow) {
                   showToast('Fetched from Amazon');
+                  try {
+                    const j = res.ok ? data : data?.fallbackRow;
+                    if (j?.url) {
+                      const changed = j.url !== url;
+                      setUrl(j.url);
+                      if (changed) {
+                        setUrlNormalized(true);
+                        if (normTimer) clearTimeout(normTimer);
+                        setNormTimer(setTimeout(()=> setUrlNormalized(false), 3000));
+                      }
+                    }
+                  } catch {}
                   const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
                   const t = await r.text();
                   setRows(t ? JSON.parse(t) : []);
@@ -172,7 +226,12 @@ export default function AdminPricesPage() {
                 <tbody>
                   {rows.map((row, i) => (
                     <tr key={i} className="border-t">
-                      <td className="py-2 pr-4">{row.retailer}</td>
+                      <td className="py-2 pr-4">
+                        <span className="inline-flex items-center gap-2">
+                          <img src={retailerFavicon(row.retailer)} alt={row.retailer} className="w-4 h-4" />
+                          {row.retailer}
+                        </span>
+                      </td>
                       <td className="py-2 pr-4">
                         <input defaultValue={(row.priceCents/100).toFixed(2)} className="border rounded px-2 py-1 w-24" onBlur={async (e)=>{
                           const val = parseFloat(e.currentTarget.value);
@@ -183,13 +242,68 @@ export default function AdminPricesPage() {
                         }} />
                       </td>
                       <td className="py-2">{new Date(row.timestamp).toLocaleString()}</td>
-                      <td className="py-2">{row.retailer === 'Amazon' && (row as any).url ? (<a href={(row as any).url} target="_blank" className="text-blue-600 underline">Buy</a>) : null}</td>
-                      <td className="py-2"><Button variant="secondary" onClick={async ()=>{
-                        const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
-                        const txt = await r.text();
-                        const arr = txt ? JSON.parse(txt) : [];
-                        setRows(arr);
-                      }}>Refresh</Button></td>
+                      <td className="py-2">
+                        <div className="flex items-center gap-2">
+                          <input
+                            defaultValue={(row as any).url ?? ''}
+                            placeholder="https://..."
+                            className="border rounded px-2 py-1 w-56"
+                            onBlur={async (e)=>{
+                              const next = e.currentTarget.value;
+                              try{
+                                await fetch('/api/admin/prices', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: row.retailer, timestamp: row.timestamp, url: next }) });
+                                const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
+                                const txt = await r.text();
+                                const arr = txt ? JSON.parse(txt) : [];
+                                setRows(arr);
+                              }catch{}
+                            }}
+                          />
+                          {(row as any).url ? (<a href={(row as any).url} target="_blank" rel="nofollow sponsored noopener noreferrer" className="text-blue-600 underline">Open</a>) : null}
+                        </div>
+                      </td>
+                      <td className="py-2">
+                        <div className="flex gap-2">
+                          <Button variant="secondary" onClick={async ()=>{
+                            const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
+                            const txt = await r.text();
+                            const arr = txt ? JSON.parse(txt) : [];
+                            setRows(arr);
+                          }}>Refresh</Button>
+                          <Button variant="secondary" onClick={async ()=>{
+                            const name = window.prompt('Rename retailer to:', row.retailer) || '';
+                            if (!name || name === row.retailer) return;
+                            try{
+                              await fetch('/api/admin/prices', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: row.retailer, timestamp: row.timestamp, newRetailer: name }) });
+                              const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
+                              const txt = await r.text();
+                              const arr = txt ? JSON.parse(txt) : [];
+                              setRows(arr);
+                            }catch{}
+                          }}>Rename</Button>
+                          <Button variant="secondary" onClick={async ()=>{
+                            const current = (row as any).url || '';
+                            const next = window.prompt('Update URL:', current) || '';
+                            if (!next || next === current) return;
+                            try{
+                              await fetch('/api/admin/prices', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: row.retailer, timestamp: row.timestamp, url: next }) });
+                              const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
+                              const txt = await r.text();
+                              const arr = txt ? JSON.parse(txt) : [];
+                              setRows(arr);
+                            }catch{}
+                          }}>Edit URL</Button>
+                          <Button variant="secondary" onClick={async ()=>{
+                            try{
+                              await fetch('/api/admin/prices', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: row.retailer, timestamp: row.timestamp }) });
+                              const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
+                              const txt = await r.text();
+                              const arr = txt ? JSON.parse(txt) : [];
+                              setRows(arr);
+                            }catch{}
+                          }}>Delete</Button>
+                        </div>
+                      </td>
                     </tr>
                   ))}
                   {rows.length === 0 && (
@@ -203,4 +317,13 @@ export default function AdminPricesPage() {
       </Card>
     </div>
   );
+}
+
+function retailerFavicon(name: string): string {
+  const lower = name.toLowerCase();
+  if (lower.includes('amazon')) return 'https://www.amazon.com/favicon.ico';
+  if (lower.includes('chewy')) return 'https://www.chewy.com/favicon.ico';
+  if (lower.includes('petco')) return 'https://www.petco.com/favicon.ico';
+  if (lower.includes('bulk reef') || lower.includes('brs') || lower.includes('bulkreefsupply')) return 'https://www.bulkreefsupply.com/favicon.ico';
+  return '/globe.svg';
 }

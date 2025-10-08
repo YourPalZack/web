@@ -5,6 +5,7 @@ import { getSiteUrl } from '../../lib/site';
 import AmazonPopularSSR from './amazon-popular-ssr';
 import { prisma } from '@aquabuilder/db';
 import type { Metadata } from 'next';
+import BrowsePageView from './page-view';
 
 export function generateMetadata({ searchParams }: { searchParams?: { tab?: string } }): Metadata {
   const tab = (searchParams?.tab ?? 'fish').toLowerCase();
@@ -18,31 +19,53 @@ export function generateMetadata({ searchParams }: { searchParams?: { tab?: stri
     extras: 'Browse Extras',
   };
   const title = titles[tab] ?? 'Browse Parts';
+  const descriptions: Record<string, string> = {
+    fish: 'Discover compatible freshwater fish with size, tank, and parameter guidance.',
+    plants: 'Find aquarium plants by light, CO₂, and difficulty with build fit.',
+    filters: 'Compare aquarium filters and specs to match your tank and bioload.',
+    heaters: 'Pick the right aquarium heater wattage for your tank size.',
+    lights: 'Explore aquarium LED lights by intensity and coverage.',
+    substrate: 'Browse aquarium substrate types and plant-friendly options.',
+    extras: 'Shop extras like CO₂ kits and skimmers for your setup.',
+  };
+  const description = descriptions[tab] ?? `${title} for your aquarium build with compatibility and pricing info.`;
   return {
     title,
-    description: `${title} for your aquarium build with compatibility and pricing info.`,
+    description,
     alternates: { canonical: `/browse?tab=${tab}` },
-    openGraph: { title, description: `${title} for your aquarium build.` },
+    openGraph: { title, description },
   };
 }
 
 export default async function BrowsePage({ searchParams }: { searchParams?: { tab?: string } }) {
   const tab = (searchParams?.tab ?? 'fish').toLowerCase();
   const popularCategory = (['filters','heaters','lights','substrate','equipment'] as const).includes(tab as any) ? (tab as any) : null;
-  // Generate ItemList JSON-LD for equipment tabs (first page SSR)
+  // Generate ItemList JSON-LD (SSR) for the active tab's first page
   let itemListJson: any | null = null;
-  if (popularCategory) {
-    try {
+  try {
+    if (popularCategory) {
       const items = await fetch(`${process.env.NEXTAUTH_URL ?? ''}/api/parts/${popularCategory}?page=1&pageSize=6`, { cache: 'no-store' }).then(r=>r.json());
       const arr = Array.isArray(items) ? items : (items.items ?? []);
       itemListJson = {
-        '@context': 'https://schema.org', '@type': 'ItemList',
+        '@context': 'https://schema.org', '@type': 'ItemList', url: `/browse?tab=${popularCategory}`,
+        itemListOrder: 'https://schema.org/ItemListOrderAscending',
+        numberOfItems: arr.length,
         itemListElement: arr.map((it: any, idx: number) => ({ '@type':'ListItem', position: idx+1, url: `/part/${popularCategory}/${it.id}` }))
       };
-    } catch {}
-  }
+    } else if (tab === 'fish' || tab === 'plants') {
+      const items = await fetch(`${process.env.NEXTAUTH_URL ?? ''}/api/parts/${tab}?page=1&pageSize=6`, { cache: 'no-store' }).then(r=>r.json());
+      const arr = Array.isArray(items) ? items : (items.items ?? []);
+      itemListJson = {
+        '@context': 'https://schema.org', '@type': 'ItemList', url: `/browse?tab=${tab}`,
+        itemListOrder: 'https://schema.org/ItemListOrderAscending',
+        numberOfItems: arr.length,
+        itemListElement: arr.map((it: any, idx: number) => ({ '@type':'ListItem', position: idx+1, url: `/species/${tab}/${it.id}` }))
+      };
+    }
+  } catch {}
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-4">
+      <BrowsePageView tab={tab} />
       <JsonLd data={breadcrumbJsonLd([{ name: 'Home', url: getSiteUrl() + '/' }, { name: 'Browse', url: getSiteUrl() + '/browse' }])} />
       {itemListJson && <JsonLd data={itemListJson} />}
       <h1 className="text-2xl font-semibold">Browse Parts</h1>

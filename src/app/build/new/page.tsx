@@ -177,15 +177,18 @@ export default function NewBuildPage() {
             <CardContent>
               <div className="flex gap-2">
                 <Button onClick={async ()=>{
+                  try { logEventClient('build_create_click', { fish: livestock.filter(l=>l.type==='FISH').length, plants: livestock.filter(l=>l.type==='PLANT').length, hasFilter: !!equipment.filter, hasHeater: !!equipment.heater, hasLight: !!equipment.light, hasSubstrate: !!equipment.substrate }); } catch {}
                   try{
                     const res = await fetch('/api/builds',{method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ name: 'My Build', buildType: buildType ?? 'FRESH_COMMUNITY', components: { tank, equipment, livestock } })});
                     const data = await res.json();
                     if(res.ok && data.id){
+                      try { logEventClient('build_save_success', { id: data.id }); } catch {}
                       const url = `${window.location.origin}/build/${data.id}`;
                       await navigator.clipboard.writeText(url);
                       showToast('Link copied to clipboard');
                       logEventClient('build_share_copied', { id: data.id });
                     } else {
+                      try { logEventClient('build_save_fail', { status: res.status }); } catch {}
                       showToast('Failed to save build');
                     }
                   }catch{ showToast('Failed to save build'); }

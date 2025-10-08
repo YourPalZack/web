@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip } from '@aquabuilder/ui';
 import Pagination from './pagination';
 import { useBuildStore } from '../../lib/store';
+import { logEvent } from '../../lib/analytics-client';
 import AmazonBuyLink from './amazon-buy-link';
 
 type Extra = { id: string; category: string; brand?: string; model?: string };
@@ -41,6 +42,7 @@ export default function ExtrasList() {
     const exists = equipment.extras.includes(id);
     const extras = exists ? equipment.extras.filter((x) => x !== id) : [...equipment.extras, id];
     set('equipment', { ...equipment, extras });
+    try { logEvent('add_to_build', { source: 'extras_list', itemType: 'EQUIPMENT', id, action: exists ? 'remove' : 'add' }); } catch {}
   }
 
   return (
@@ -59,7 +61,9 @@ export default function ExtrasList() {
       <CardContent className="grid sm:grid-cols-2 gap-3">
         {items.map((e) => (
           <div key={e.id} className={`border rounded-2xl p-3 shadow-sm ${equipment.extras.includes(e.id) ? 'ring-2 ring-blue-400' : ''}`}>
-            <a href={`/part/equipment/${e.id}`} className="font-medium hover:underline">{e.category}</a>
+            <a href={`/part/equipment/${e.id}`} className="font-medium hover:underline" onClick={() => {
+              try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'equipment_list', productType: 'EQUIPMENT', productId: e.id } })); } catch {}
+            }}>{e.category}</a>
             <div className="text-xs text-gray-600">{e.brand ?? '—'} {e.model ?? ''}</div>
             <div className="mt-2 flex justify-between items-center">
               <AmazonBuyLink productType="EQUIPMENT" productId={e.id} />

@@ -29,6 +29,9 @@ export default function BrowseTabs() {
     const params = new URLSearchParams(Array.from(search.entries()));
     params.set('tab', tab);
     router.replace(`/browse?${params.toString()}`);
+    try {
+      (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'browse_tab_click', props: { tab } }));
+    } catch {}
   }
   return (
     <div className="space-y-4">

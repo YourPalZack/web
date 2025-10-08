@@ -1,6 +1,9 @@
+import HomePageView from './page-view';
+
 export default function Home() {
   return (
     <div className="mx-auto max-w-5xl p-6">
+      <HomePageView />
       <h1 className="text-3xl font-semibold">Welcome to AquaBuilder</h1>
       <p className="text-gray-600 mt-2">Start a build or browse parts to get recommendations and compatibility guidance.</p>
       <div className="mt-6 flex gap-3">

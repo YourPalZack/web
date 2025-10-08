@@ -20,5 +20,7 @@ export async function GET(_req: NextRequest, ctx: { params: Promise<{ productTyp
     const { fallback } = getPrismaSafe();
     rows = await fallback.productPrice.findMany();
   }
-  return NextResponse.json(rows);
+  const res = NextResponse.json(rows);
+  res.headers.set('Cache-Control', 's-maxage=300, stale-while-revalidate=120');
+  return res;
 }

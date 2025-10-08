@@ -1,4 +1,5 @@
 "use client";
+export const metadata = { title: 'Sign In', robots: { index: false, follow: false }, alternates: { canonical: '/signin' } } as const;
 import { useState } from 'react';
 import { signIn, signOut } from 'next-auth/react';
 import { Card, CardHeader, CardTitle, CardContent, Input, Button } from '@aquabuilder/ui';
@@ -46,4 +47,3 @@ export default function SignInPage() {
     </div>
   );
 }
-

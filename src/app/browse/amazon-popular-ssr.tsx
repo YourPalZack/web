@@ -1,5 +1,6 @@
 import { searchItemsViaPaapi } from '../../lib/amazon';
 import { JsonLd } from '../../lib/structured';
+import AmazonTrackLink from './amazon-track-link';
 
 export default async function AmazonPopularSSR({ category, limit=4 }:{ category: 'filters'|'heaters'|'lights'|'substrate'|'equipment'; limit?: number }) {
   try {
@@ -13,7 +14,9 @@ export default async function AmazonPopularSSR({ category, limit=4 }:{ category:
             <div key={it.asin} className="border rounded-2xl p-3 flex gap-3 items-center">
               {it.image && <img src={it.image} alt={it.title ?? it.asin} className="w-16 h-16 object-contain" />}
               <div className="min-w-0">
-                <a href={it.url} target="_blank" rel="noopener noreferrer" className="text-sm truncate block hover:underline">{it.title ?? it.asin}</a>
+                <AmazonTrackLink href={it.url ?? '#'} meta={{ asin: it.asin, category }}>
+                  <span className="text-sm truncate block hover:underline">{it.title ?? it.asin}</span>
+                </AmazonTrackLink>
                 <div className="text-xs text-gray-600">{typeof it.priceCents==='number' ? `$${(it.priceCents/100).toFixed(2)}` : 'View price'}</div>
               </div>
               {/* Product structured data */}
@@ -35,6 +38,7 @@ export default async function AmazonPopularSSR({ category, limit=4 }:{ category:
             </div>
           ))}
         </div>
+        <div className="text-[10px] text-gray-500 mt-2">As an Amazon Associate, we earn from qualifying purchases.</div>
       </div>
     );
   } catch {
@@ -51,4 +55,3 @@ function keywordsFor(category: 'filters'|'heaters'|'lights'|'substrate'|'equipme
     case 'equipment': return 'aquarium air pump';
   }
 }
-

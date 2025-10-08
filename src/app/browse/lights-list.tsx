@@ -4,6 +4,7 @@ import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip } from '@
 import Pagination from './pagination';
 import AmazonBuyLink from './amazon-buy-link';
 import { useBuildStore } from '../../lib/store';
+import { logEvent } from '../../lib/analytics-client';
 
 type Light = { id: string; brand?: string; model?: string; type: string; intensity: 'LOW'|'MEDIUM'|'HIGH'; coverageCm?: number };
 
@@ -47,6 +48,7 @@ export default function LightsList() {
 
   function choose(l: Light) {
     set('equipment', { ...equipment, light: l.id });
+    try { logEvent('add_to_build', { source: 'lights_list', itemType: 'LIGHT', id: l.id }); } catch {}
   }
 
   const paged = lights;
@@ -72,7 +74,9 @@ export default function LightsList() {
         {error && <div className="text-sm text-red-600">{error}</div>}
         {paged.map((l) => (
           <div key={l.id} className={`border rounded-2xl p-3 shadow-sm ${equipment.light === l.id ? 'ring-2 ring-blue-400' : ''}`}>
-            <a href={`/part/lights/${l.id}`} className="font-medium hover:underline">{l.brand ?? '—'} {l.model ?? ''}</a>
+            <a href={`/part/lights/${l.id}`} className="font-medium hover:underline" onClick={() => {
+              try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'lights_list', productType: 'LIGHT', productId: l.id } })); } catch {}
+            }}>{l.brand ?? '—'} {l.model ?? ''}</a>
             <div className="text-xs text-gray-600">{l.type} • {l.intensity} • {l.coverageCm ? `${l.coverageCm} cm` : '—'} coverage</div>
             <div className="mt-2 flex justify-between items-center">
               <AmazonBuyLink productType="LIGHT" productId={l.id} />

@@ -4,6 +4,7 @@ import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip } from '@
 import Pagination from './pagination';
 import AmazonBuyLink from './amazon-buy-link';
 import { useBuildStore } from '../../lib/store';
+import { logEvent } from '../../lib/analytics-client';
 
 type Filter = { id: string; brand?: string; model?: string; type: string; gph: number; maxTankGal: number };
 
@@ -47,6 +48,7 @@ export default function FiltersList() {
 
   function choose(f: Filter) {
     set('equipment', { ...equipment, filter: f.id });
+    try { logEvent('add_to_build', { source: 'filters_list', itemType: 'FILTER', id: f.id }); } catch {}
   }
 
   const paged = filters;
@@ -72,7 +74,9 @@ export default function FiltersList() {
         {error && <div className="text-sm text-red-600">{error}</div>}
         {paged.map((f) => (
           <div key={f.id} className={`border rounded-2xl p-3 shadow-sm ${equipment.filter === f.id ? 'ring-2 ring-blue-400' : ''}`}>
-            <a href={`/part/filters/${f.id}`} className="font-medium hover:underline">{f.brand ?? '—'} {f.model ?? ''}</a>
+            <a href={`/part/filters/${f.id}`} className="font-medium hover:underline" onClick={() => {
+              try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'filters_list', productType: 'FILTER', productId: f.id } })); } catch {}
+            }}>{f.brand ?? '—'} {f.model ?? ''}</a>
             <div className="text-xs text-gray-600">{f.type} • {f.gph} gph • up to {f.maxTankGal} gal</div>
             <div className="mt-2 flex justify-between items-center">
               <AmazonBuyLink productType="FILTER" productId={f.id} />

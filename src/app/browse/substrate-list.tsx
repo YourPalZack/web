@@ -4,6 +4,7 @@ import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip } from '@
 import Pagination from './pagination';
 import AmazonBuyLink from './amazon-buy-link';
 import { useBuildStore } from '../../lib/store';
+import { logEvent } from '../../lib/analytics-client';
 import { recommendSubstrate } from '@aquabuilder/core';
 
 type Substrate = { id: string; type: 'SAND'|'GRAVEL'|'SOIL'|'BARE_BOTTOM'; plantFriendly?: boolean; color?: string };
@@ -45,6 +46,7 @@ export default function SubstrateList() {
 
   function choose(s: Substrate) {
     set('equipment', { ...equipment, substrate: s.id });
+    try { logEvent('add_to_build', { source: 'substrate_list', itemType: 'SUBSTRATE', id: s.id }); } catch {}
   }
 
   return (
@@ -68,7 +70,9 @@ export default function SubstrateList() {
       <CardContent className="grid sm:grid-cols-2 gap-3">
         {filtered.map((s) => (
           <div key={s.id} className={`border rounded-2xl p-3 shadow-sm ${equipment.substrate === s.id ? 'ring-2 ring-blue-400' : ''}`}>
-            <a href={`/part/substrate/${s.id}`} className="font-medium hover:underline">{s.type}</a>
+            <a href={`/part/substrate/${s.id}`} className="font-medium hover:underline" onClick={() => {
+              try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'substrate_list', productType: 'SUBSTRATE', productId: s.id } })); } catch {}
+            }}>{s.type}</a>
             <div className="text-xs text-gray-600">{s.color ?? '—'} {s.plantFriendly ? '• plant-friendly' : ''}</div>
             <div className="mt-2 flex justify-between items-center">
               <AmazonBuyLink productType="SUBSTRATE" productId={s.id} />

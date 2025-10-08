@@ -4,6 +4,9 @@ import { JsonLd, breadcrumbJsonLd, buildCreativeWorkJsonLd } from '../../../lib/
 import { getSiteUrl } from '../../../lib/site';
 import { Card, CardHeader, CardTitle, CardContent, PriceSparkline, ScoreBadge, CompatibilityPanel } from '@aquabuilder/ui';
 import { compatibilityScore, calcBioloadPct, checkFishParams, computeMonthlyCost } from '@aquabuilder/core';
+import BuildAdminControls from '../admin-controls';
+import BuildPageView from '../page-view';
+import CopyLink from '../copy-link';
 
 export default async function BuildPage({ params }: { params: { id: string } }) {
   const build = await prisma.userBuild.findUnique({ where: { id: params.id } });
@@ -110,15 +113,19 @@ export default async function BuildPage({ params }: { params: { id: string } }) 
 
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-6">
+      <BuildPageView id={build.id} />
       <JsonLd data={breadcrumbJsonLd([
         { name: 'Home', url: getSiteUrl() + '/' },
         { name: 'Community', url: getSiteUrl() + '/community' },
         { name: build.name, url: getSiteUrl() + `/build/${build.id}` },
       ])} />
       <JsonLd data={buildCreativeWorkJsonLd({ id: build.id, name: build.name, buildType: build.buildType, url: getSiteUrl() + `/build/${build.id}`, datePublished: (build as any).createdAt, dateModified: (build as any).updatedAt, parts: [] })} />
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-3">
         <h1 className="text-3xl font-semibold">{build.name}</h1>
-        <ScoreBadge score={score} />
+        <div className="flex items-center gap-2">
+          <ScoreBadge score={score} />
+          <CopyLink href={`${getSiteUrl()}/build/${build.id}`} id={build.id} />
+        </div>
       </div>
       <div className="grid lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-4">
@@ -182,6 +189,7 @@ export default async function BuildPage({ params }: { params: { id: string } }) 
               <CompatibilityPanel items={warnings} />
             </CardContent>
           </Card>
+          <BuildAdminControls id={build.id} initialName={build.name} initialPublic={(build as any).isPublic} />
         </div>
       </div>
     </div>

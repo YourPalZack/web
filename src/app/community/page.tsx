@@ -1,4 +1,7 @@
 type BuildRow = { id:string; name:string; buildType:string };
+import CommunityTrackLink from './track-link';
+import CommunityFilterLink from './filter-link';
+import CommunityPageView from './page-view';
 
 export default async function CommunityPage({ searchParams }: { searchParams?: { type?: string; page?: string } }) {
   // SEO metadata via headers set in layout; this server component renders canonical content
@@ -20,6 +23,7 @@ export default async function CommunityPage({ searchParams }: { searchParams?: {
   }
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-4">
+      <CommunityPageView type={type} page={page} />
       {/* Breadcrumbs for SEO */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         '@context': 'https://schema.org',
@@ -33,22 +37,27 @@ export default async function CommunityPage({ searchParams }: { searchParams?: {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'ItemList',
+        url: `/community${type || page>1 ? `?${new URLSearchParams({ ...(type?{type}:{}), ...(page>1?{page:String(page)}:{}) }).toString()}` : ''}`,
+        itemListOrder: 'https://schema.org/ItemListOrderDescending',
+        numberOfItems: rows.length,
         itemListElement: rows.map((b, idx) => ({ '@type': 'ListItem', position: idx + 1, url: `/build/${b.id}` })),
       }) }} />
       <h1 className="text-2xl font-semibold">Community Builds</h1>
       <div className="flex gap-2 text-xs">
         {['FRESH_COMMUNITY','FRESH_PLANTED','FRESH_CICHLID','BRACKISH','FOWLR','REEF','NANO_REEF','PALUDARIUM','BIOTOPE'].map((t) => (
-          <a key={t} href={`/community?type=${t}`} className={`px-3 py-1 rounded-full border ${type===t? 'bg-blue-600 text-white border-transparent':'bg-white'}`}>{t.replace('_',' ')}</a>
+          <CommunityFilterLink key={t} href={`/community?type=${t}`} active={type===t} label={t.replace('_',' ')} meta={{ type: t }} />
         ))}
-        {type && <a href={`/community`} className="px-3 py-1 rounded-full border">Clear</a>}
+        {type && (
+          <CommunityFilterLink href={`/community`} active={false} label="Clear" meta={{ action: 'clear', prevType: type }} />
+        )}
       </div>
       <div className="grid sm:grid-cols-2 gap-3">
         {rows.length === 0 && <div className="text-sm text-gray-600">No builds yet.</div>}
         {rows.map((b) => (
-          <a key={b.id} href={`/build/${b.id}`} className="border rounded-2xl p-3 hover:shadow">
+          <CommunityTrackLink key={b.id} href={`/build/${b.id}`} buildId={b.id}>
             <div className="font-medium">{b.name}</div>
             <div className="text-xs text-gray-600">{b.buildType}</div>
-          </a>
+          </CommunityTrackLink>
         ))}
         {total > pageSize && (
           <div className="col-span-full flex justify-end items-center gap-2 pt-2 text-xs">

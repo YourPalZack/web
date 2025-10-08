@@ -4,6 +4,7 @@ import { Button, Card, CardHeader, CardTitle, CardContent, Input, QuantitySteppe
 import Pagination from './pagination';
 import { calcBioloadPct } from '@aquabuilder/core';
 import { useBuildStore, type WarningItem } from '../../lib/store';
+import { logEvent } from '../../lib/analytics-client';
 import { useDebouncedValue } from '../../lib/hooks/use-debounce';
 
 type Fish = {
@@ -75,6 +76,7 @@ export function FishList() {
   function add(f: Fish) {
     if (livestock.some((l) => l.type === 'FISH' && l.id === f.id)) return;
     set('livestock', [...livestock, { type: 'FISH', id: f.id, qty: 1 }]);
+    try { logEvent('add_to_build', { source: 'fish_list', itemType: 'FISH', id: f.id }); } catch {}
   }
 
   function setQty(id: string, qty: number) {
@@ -82,6 +84,7 @@ export function FishList() {
       'livestock',
       livestock.map((l) => (l.type === 'FISH' && l.id === id ? { ...l, qty } : l))
     );
+    try { logEvent('update_qty', { source: 'fish_list', itemType: 'FISH', id, qty }); } catch {}
   }
 
   const filtered = fish; // server filtered
@@ -112,7 +115,13 @@ export function FishList() {
           return (
             <div key={f.id} className="border rounded-md p-3 flex items-center justify-between">
               <div>
-                <div className="font-medium">{f.commonName}</div>
+                <a
+                  href={`/species/fish/${f.id}`}
+                  className="font-medium underline-offset-2 hover:underline"
+                  onClick={() => { try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'species_detail_nav_click', props: { from: 'fish_list', id: f.id } })); } catch {} }}
+                >
+                  {f.commonName}
+                </a>
                 <div className="text-xs text-gray-600">
                   Size {f.adultSizeCm} cm • Min {f.minTankGal} gal • {f.temperament}
                 </div>

@@ -29,11 +29,14 @@ export function generateMetadata({ searchParams }: { searchParams?: { tab?: stri
     extras: 'Shop extras like CO₂ kits and skimmers for your setup.',
   };
   const description = descriptions[tab] ?? `${title} for your aquarium build with compatibility and pricing info.`;
+  const og = `/api/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(`Browse • ${tab}`)}`;
+  const canonical = tab === 'fish' ? '/browse' : `/browse?tab=${tab}`;
   return {
     title,
     description,
-    alternates: { canonical: `/browse?tab=${tab}` },
-    openGraph: { title, description },
+    alternates: { canonical },
+    openGraph: { title, description, url: canonical, images: [{ url: og }] },
+    twitter: { card: 'summary_large_image', title, description, images: [og] },
   };
 }
 

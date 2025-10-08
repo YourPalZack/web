@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip } from '@aquabuilder/ui';
+import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip, Skeleton } from '@aquabuilder/ui';
 import Pagination from './pagination';
 import AmazonBuyLink from './amazon-buy-link';
+import RetailerBadge from './retailer-badge';
 import { useBuildStore } from '../../lib/store';
 import { logEvent } from '../../lib/analytics-client';
 
@@ -67,7 +68,18 @@ export default function LightsList() {
         </div>
       </CardHeader>
       <CardContent className="grid sm:grid-cols-2 gap-3">
-        {loading && <div className="text-sm text-gray-600">Loading lights…</div>}
+        {loading && (
+          Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="border rounded-2xl p-3 shadow-sm">
+              <Skeleton className="h-4 w-40 mb-2" />
+              <Skeleton className="h-3 w-56 mb-3" />
+              <div className="flex justify-between items-center">
+                <Skeleton className="h-8 w-28" />
+                <Skeleton className="h-8 w-20" />
+              </div>
+            </div>
+          ))
+        )}
         {!loading && !error && paged.length === 0 && (
           <div className="text-sm text-gray-600">No results</div>
         )}
@@ -78,6 +90,7 @@ export default function LightsList() {
               try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'lights_list', productType: 'LIGHT', productId: l.id } })); } catch {}
             }}>{l.brand ?? '—'} {l.model ?? ''}</a>
             <div className="text-xs text-gray-600">{l.type} • {l.intensity} • {l.coverageCm ? `${l.coverageCm} cm` : '—'} coverage</div>
+            <RetailerBadge productType="LIGHT" productId={l.id} />
             <div className="mt-2 flex justify-between items-center">
               <AmazonBuyLink productType="LIGHT" productId={l.id} />
               <Button onClick={() => choose(l)}>{equipment.light === l.id ? 'Selected' : 'Select'}</Button>

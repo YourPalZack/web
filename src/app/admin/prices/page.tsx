@@ -229,7 +229,21 @@ export default function AdminPricesPage() {
                       <td className="py-2 pr-4">
                         <span className="inline-flex items-center gap-2">
                           <img src={retailerFavicon(row.retailer)} alt={row.retailer} className="w-4 h-4" />
-                          {row.retailer}
+                          <input
+                            defaultValue={row.retailer}
+                            className="border rounded px-2 py-1 w-40"
+                            onBlur={async (e)=>{
+                              const next = e.currentTarget.value.trim();
+                              if (!next || next === row.retailer) return;
+                              try{
+                                await fetch('/api/admin/prices', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: row.retailer, timestamp: row.timestamp, newRetailer: next }) });
+                                const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
+                                const txt = await r.text();
+                                const arr = txt ? JSON.parse(txt) : [];
+                                setRows(arr);
+                              }catch{}
+                            }}
+                          />
                         </span>
                       </td>
                       <td className="py-2 pr-4">
@@ -270,17 +284,7 @@ export default function AdminPricesPage() {
                             const arr = txt ? JSON.parse(txt) : [];
                             setRows(arr);
                           }}>Refresh</Button>
-                          <Button variant="secondary" onClick={async ()=>{
-                            const name = window.prompt('Rename retailer to:', row.retailer) || '';
-                            if (!name || name === row.retailer) return;
-                            try{
-                              await fetch('/api/admin/prices', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: row.retailer, timestamp: row.timestamp, newRetailer: name }) });
-                              const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
-                              const txt = await r.text();
-                              const arr = txt ? JSON.parse(txt) : [];
-                              setRows(arr);
-                            }catch{}
-                          }}>Rename</Button>
+                          {/* Inline rename handled by input in the Retailer column */}
                           <Button variant="secondary" onClick={async ()=>{
                             const current = (row as any).url || '';
                             const next = window.prompt('Update URL:', current) || '';
@@ -295,6 +299,20 @@ export default function AdminPricesPage() {
                           }}>Edit URL</Button>
                           <Button variant="secondary" onClick={async ()=>{
                             try{
+                              const current = (row as any).url || '';
+                              if (!current) return;
+                              await fetch('/api/admin/prices', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: row.retailer, timestamp: row.timestamp, url: current }) });
+                              const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
+                              const txt = await r.text();
+                              const arr = txt ? JSON.parse(txt) : [];
+                              setRows(arr);
+                              showToast('URL normalized');
+                            }catch{ showToast('Normalize failed'); }
+                          }}>Normalize URL</Button>
+                          <Button variant="secondary" onClick={async ()=>{
+                            try{
+                              const ok = window.confirm(`Delete price from ${row.retailer} at ${new Date(row.timestamp).toLocaleString()}?`);
+                              if (!ok) return;
                               await fetch('/api/admin/prices', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: row.retailer, timestamp: row.timestamp }) });
                               const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
                               const txt = await r.text();

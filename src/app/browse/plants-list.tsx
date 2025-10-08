@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { Button, Card, CardHeader, CardTitle, CardContent, QuantityStepper, Input, Chip } from '@aquabuilder/ui';
+import { Button, Card, CardHeader, CardTitle, CardContent, QuantityStepper, Input, Chip, Skeleton } from '@aquabuilder/ui';
 import Pagination from './pagination';
 import { useBuildStore } from '../../lib/store';
 import { logEvent } from '../../lib/analytics-client';
@@ -81,7 +81,17 @@ export default function PlantsList() {
         </div>
       </CardHeader>
       <CardContent className="grid sm:grid-cols-2 gap-3">
-        {loading && <div className="text-sm text-gray-600">Loading plants…</div>}
+        {loading && (
+          Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="border rounded-2xl p-3 shadow-sm">
+              <Skeleton className="h-4 w-40 mb-2" />
+              <Skeleton className="h-3 w-56 mb-3" />
+              <div className="flex justify-end">
+                <Skeleton className="h-8 w-20" />
+              </div>
+            </div>
+          ))
+        )}
         {!loading && !error && filtered.length === 0 && (
           <div className="text-sm text-gray-600">No results</div>
         )}

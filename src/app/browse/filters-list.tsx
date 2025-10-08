@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip } from '@aquabuilder/ui';
+import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip, Skeleton } from '@aquabuilder/ui';
 import Pagination from './pagination';
 import AmazonBuyLink from './amazon-buy-link';
+import RetailerBadge from './retailer-badge';
 import { useBuildStore } from '../../lib/store';
 import { logEvent } from '../../lib/analytics-client';
 
@@ -67,7 +68,18 @@ export default function FiltersList() {
         </div>
       </CardHeader>
       <CardContent className="grid sm:grid-cols-2 gap-3">
-        {loading && <div className="text-sm text-gray-600">Loading filters…</div>}
+        {loading && (
+          Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="border rounded-2xl p-3 shadow-sm">
+              <Skeleton className="h-4 w-40 mb-2" />
+              <Skeleton className="h-3 w-56 mb-3" />
+              <div className="flex justify-between items-center">
+                <Skeleton className="h-8 w-28" />
+                <Skeleton className="h-8 w-20" />
+              </div>
+            </div>
+          ))
+        )}
         {!loading && !error && paged.length === 0 && (
           <div className="text-sm text-gray-600">No results</div>
         )}
@@ -78,6 +90,7 @@ export default function FiltersList() {
               try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'filters_list', productType: 'FILTER', productId: f.id } })); } catch {}
             }}>{f.brand ?? '—'} {f.model ?? ''}</a>
             <div className="text-xs text-gray-600">{f.type} • {f.gph} gph • up to {f.maxTankGal} gal</div>
+            <RetailerBadge productType="FILTER" productId={f.id} />
             <div className="mt-2 flex justify-between items-center">
               <AmazonBuyLink productType="FILTER" productId={f.id} />
               <Button onClick={() => choose(f)}>{equipment.filter === f.id ? 'Selected' : 'Select'}</Button>

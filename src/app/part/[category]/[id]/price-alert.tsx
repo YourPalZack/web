@@ -14,8 +14,8 @@ export default function PriceAlert({ productType, productId }:{ productType: str
     try{
       const res = await fetch('/api/alerts', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ userId: 'anon', productType, productId, targetCents: Math.round(n*100) }) });
       if (res.ok) { showToast('Alert created'); try{ logEvent('price_alert_created', { productType, productId, target: n }); }catch{} }
-      else showToast('Failed to create alert');
-    }catch{ showToast('Failed to create alert'); }
+      else { showToast('Failed to create alert'); try{ logEvent('price_alert_failed', { productType, productId, reason: 'server' }); }catch{} }
+    }catch{ showToast('Failed to create alert'); try{ logEvent('price_alert_failed', { productType, productId, reason: 'network' }); }catch{} }
     finally{ setLoading(false); }
   }
   return (
@@ -29,4 +29,3 @@ export default function PriceAlert({ productType, productId }:{ productType: str
     </div>
   );
 }
-

@@ -7,10 +7,11 @@ import { compatibilityScore, calcBioloadPct, checkFishParams, computeMonthlyCost
 import BuildAdminControls from '../admin-controls';
 import BuildPageView from '../page-view';
 import CopyLink from '../copy-link';
+import { notFound } from 'next/navigation';
 
 export default async function BuildPage({ params }: { params: { id: string } }) {
   const build = await prisma.userBuild.findUnique({ where: { id: params.id } });
-  if (!build) return <div className="p-6">Not found</div>;
+  if (!build) return notFound();
 
   type BuildComponents = {
     tank?: { volumeGal?: number };
@@ -206,7 +207,12 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
       title,
       description,
       alternates: { canonical: `/build/${params.id}` },
-      openGraph: { title, description, url: `/build/${params.id}` },
+      openGraph: {
+        title,
+        description,
+        url: `/build/${params.id}`,
+        images: [{ url: `/api/og?title=${encodeURIComponent(build.name)}&subtitle=${encodeURIComponent(String(build.buildType))}` }],
+      },
       twitter: { title, description, card: 'summary_large_image' },
     };
   } catch {

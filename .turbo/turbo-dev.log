@@ -289,13 +289,15 @@ TypeError: Cannot read properties of null (reading 'fish')
  [32m[1m✓[22m[39m Compiled in 19ms
  [32m[1m✓[22m[39m Compiled in 20ms
  [32m[1m✓[22m[39m Compiled middleware in 3ms
-/web/.next/static/development/_buildManifest.js.tmp.03a9g66tdgev'[39m
-}
-[Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.t8wf3tzdq0m'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.t8wf3tzdq0m'[39m
+ [33m[1m⚠[22m[39m Found a change in next.config.ts. Restarting the server to apply the changes...
+   [1m[38;2;173;127;168m▲ Next.js 15.5.4[39m[22m (Turbopack)
+   - Local:        http://localhost:3001
+   - Network:      http://192.168.68.53:3001
+
+ [32m[1m✓[22m[39m Starting...
+ [32m[1m✓[22m[39m Compiled middleware in 176ms
+ [32m[1m✓[22m[39m Ready in 1771ms
+static/development/_buildManifest.js.tmp.t8wf3tzdq0m'[39m
 }
  [32m[1m✓[22m[39m Compiled middleware in 1ms
  [32m[1m✓[22m[39m Compiled middleware in 1ms
@@ -332,3 +334,11 @@ TypeError: Cannot read properties of null (reading 'fish')
  [32m[1m✓[22m[39m Compiled in 19ms
  [32m[1m✓[22m[39m Compiled in 20ms
  [32m[1m✓[22m[39m Compiled middleware in 3ms
+ [33m[1m⚠[22m[39m Found a change in next.config.ts. Restarting the server to apply the changes...
+   [1m[38;2;173;127;168m▲ Next.js 15.5.4[39m[22m (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.68.53:3000
+
+ [32m[1m✓[22m[39m Starting...
+ [32m[1m✓[22m[39m Compiled middleware in 176ms
+ [32m[1m✓[22m[39m Ready in 1771ms

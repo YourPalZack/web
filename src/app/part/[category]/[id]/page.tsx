@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { PriceSparkline } from '@aquabuilder/ui';
+import { PriceSparkline, Tooltip } from '@aquabuilder/ui';
 import dynamic from 'next/dynamic';
 const AmazonBuyLink = dynamic(() => import('../../../browse/amazon-buy-link'), { ssr: false });
 import { prisma } from '@aquabuilder/db';
@@ -165,7 +165,12 @@ export default async function PartPage({ params }: { params: { category: Categor
             <PriceSparkline data={spark} />
           </div>
         ) : null}
-        <div className="text-xs text-gray-500">Some links may be affiliate links; purchases may support the project at no extra cost.</div>
+        <div className="text-xs text-gray-500 inline-flex items-center gap-1">
+          Some links may be affiliate links; purchases may support the project at no extra cost.
+          <Tooltip content="We may earn a commission from qualifying purchases.">
+            <span aria-hidden className="inline-block w-4 h-4 rounded-full bg-gray-200 text-gray-700 text-center leading-4 cursor-default">i</span>
+          </Tooltip>
+        </div>
         <PriceAlert productType={productType} productId={id} />
         {priceRows.length ? (
           <div className="mt-2">
@@ -214,7 +219,12 @@ export async function generateMetadata({ params }: { params: { category: Categor
     title,
     description,
     alternates: { canonical: `/part/${params.category}/${params.id}` },
-    openGraph: { title, description, url: `/part/${params.category}/${params.id}` },
+    openGraph: {
+      title,
+      description,
+      url: `/part/${params.category}/${params.id}`,
+      images: [{ url: `/api/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(params.category)}` }],
+    },
   };
 }
 

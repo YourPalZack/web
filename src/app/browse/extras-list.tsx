@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip } from '@aquabuilder/ui';
+import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip, Skeleton } from '@aquabuilder/ui';
 import Pagination from './pagination';
 import { useBuildStore } from '../../lib/store';
 import { logEvent } from '../../lib/analytics-client';
 import AmazonBuyLink from './amazon-buy-link';
+import RetailerBadge from './retailer-badge';
 
 type Extra = { id: string; category: string; brand?: string; model?: string };
 
@@ -59,12 +60,25 @@ export default function ExtrasList() {
         </div>
       </CardHeader>
       <CardContent className="grid sm:grid-cols-2 gap-3">
+        {items.length === 0 && (
+          Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="border rounded-2xl p-3 shadow-sm">
+              <Skeleton className="h-4 w-28 mb-2" />
+              <Skeleton className="h-3 w-40 mb-3" />
+              <div className="flex justify-between items-center">
+                <Skeleton className="h-8 w-28" />
+                <Skeleton className="h-8 w-20" />
+              </div>
+            </div>
+          ))
+        )}
         {items.map((e) => (
           <div key={e.id} className={`border rounded-2xl p-3 shadow-sm ${equipment.extras.includes(e.id) ? 'ring-2 ring-blue-400' : ''}`}>
             <a href={`/part/equipment/${e.id}`} className="font-medium hover:underline" onClick={() => {
               try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'equipment_list', productType: 'EQUIPMENT', productId: e.id } })); } catch {}
             }}>{e.category}</a>
             <div className="text-xs text-gray-600">{e.brand ?? '—'} {e.model ?? ''}</div>
+            <RetailerBadge productType="EQUIPMENT" productId={e.id} />
             <div className="mt-2 flex justify-between items-center">
               <AmazonBuyLink productType="EQUIPMENT" productId={e.id} />
               <Button onClick={() => toggle(e.id)}>{equipment.extras.includes(e.id) ? 'Remove' : 'Add'}</Button>

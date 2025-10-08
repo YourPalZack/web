@@ -32,12 +32,16 @@ export const metadata: Metadata = {
     siteName: 'AquaBuilder',
     locale: 'en_US',
     type: 'website',
+    images: [
+      { url: `/api/og?title=${encodeURIComponent('AquaBuilder')}&subtitle=${encodeURIComponent('Build smart, compatible aquariums')}` },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     site: '@aquabuilder',
     title: 'AquaBuilder',
     description: 'Configure compatible aquarium builds and track prices.',
+    images: [`/api/og?title=${encodeURIComponent('AquaBuilder')}&subtitle=${encodeURIComponent('Build smart, compatible aquariums')}`],
   },
   robots: {
     index: true,
@@ -70,6 +74,16 @@ export default function RootLayout({
           </div>
         </header>
         <main>{children}</main>
+        <footer className="mt-12 border-t">
+          <div className="mx-auto max-w-6xl p-6 text-xs text-gray-600 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+            <div>
+              © {new Date().getFullYear()} AquaBuilder · <Link href="/faq" className="underline">FAQ</Link>
+            </div>
+            <div className="text-[11px] text-gray-500">
+              Some links are affiliate links. Purchases may support the project at no extra cost.
+            </div>
+          </div>
+        </footer>
         <AdminIndicator />
         <ToastContainer />
       </body>

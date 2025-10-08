@@ -2,6 +2,7 @@ type BuildRow = { id:string; name:string; buildType:string };
 import CommunityTrackLink from './track-link';
 import CommunityFilterLink from './filter-link';
 import CommunityPageView from './page-view';
+import PaginationHead from './pagination-head';
 
 export default async function CommunityPage({ searchParams }: { searchParams?: { type?: string; page?: string } }) {
   // SEO metadata via headers set in layout; this server component renders canonical content
@@ -23,6 +24,7 @@ export default async function CommunityPage({ searchParams }: { searchParams?: {
   }
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-4">
+      <PaginationHead page={page} pageSize={pageSize} total={total} type={type} />
       <CommunityPageView type={type} page={page} />
       {/* Breadcrumbs for SEO */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
@@ -76,10 +78,12 @@ export function generateMetadata({ searchParams }: { searchParams?: { type?: str
   const page = Number(searchParams?.page ?? '1') || 1;
   const baseTitle = 'Community Builds';
   const title = type ? `${baseTitle} — ${type.replace('_',' ')}` : baseTitle;
+  const og = `/api/og?title=${encodeURIComponent(baseTitle)}&subtitle=${encodeURIComponent(type ? type.replace('_',' ') : `Page ${page}`)}`;
   return {
     title,
     description: 'Browse public aquarium builds shared by the community.',
     alternates: { canonical: `/community${type || page>1 ? `?${new URLSearchParams({ ...(type?{type}:{}), ...(page>1?{page:String(page)}:{}) }).toString()}` : ''}` },
-    openGraph: { title, description: 'Browse public aquarium builds shared by the community.' },
+    openGraph: { title, description: 'Browse public aquarium builds shared by the community.', images: [{ url: og }] },
+    twitter: { card: 'summary_large_image', title, description: 'Browse public aquarium builds shared by the community.', images: [og] },
   } as const;
 }

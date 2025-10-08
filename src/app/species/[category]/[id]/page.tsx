@@ -4,6 +4,7 @@ import { prisma } from '@aquabuilder/db';
 import { JsonLd, breadcrumbJsonLd } from '../../../../lib/structured';
 import { getSiteUrl } from '../../../../lib/site';
 import SpeciesPageView from './page-view';
+import { Breadcrumb } from '@aquabuilder/ui';
 import { notFound } from 'next/navigation';
 
 type Category = 'fish'|'plants'|'invertebrates'|'corals';
@@ -40,7 +41,12 @@ export default async function SpeciesPage({ params }: { params: { category: Cate
         { name: title, url: base + `/species/${category}/${id}` },
       ])} />
       <JsonLd data={buildSpeciesJsonLd(category, data, base + `/species/${category}/${id}`)} />
-      <div className="text-xs text-gray-500"><Link href="/browse">Browse</Link> / <Link href={`/browse?tab=${category}`}>{humanCat(category)}</Link></div>
+      <Breadcrumb items={[
+        { href: '/', label: 'Home' },
+        { href: '/browse', label: 'Browse' },
+        { href: `/browse?tab=${category}`, label: humanCat(category) },
+        { href: `/species/${category}/${id}`, label: title },
+      ]} />
       <h1 className="text-2xl font-semibold">{title}</h1>
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-2 text-sm text-gray-700">
@@ -76,11 +82,14 @@ export async function generateMetadata({ params }: { params: { category: Categor
   const data = await fetchSpecies(params.category, params.id);
   const title = data ? formatTitle(params.category, data) : 'Species';
   const desc = data ? `${title} care info and parameters.` : 'Species details.';
+  const subtitle = `${params.category.charAt(0).toUpperCase() + params.category.slice(1)} • Species Detail`;
+  const og = `/api/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(subtitle)}`;
   return {
     title,
     description: desc,
     alternates: { canonical: `/species/${params.category}/${params.id}` },
-    openGraph: { title, description: desc, url: `/species/${params.category}/${params.id}` },
+    openGraph: { title, description: desc, url: `/species/${params.category}/${params.id}` , images: [{ url: og }]},
+    twitter: { card: 'summary_large_image', title, description: desc, images: [og] },
   };
 }
 

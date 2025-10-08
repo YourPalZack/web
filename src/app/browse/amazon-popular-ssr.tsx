@@ -1,4 +1,5 @@
 import { searchItemsViaPaapi } from '../../lib/amazon';
+import Image from 'next/image';
 import { JsonLd } from '../../lib/structured';
 import AmazonTrackLink from './amazon-track-link';
 
@@ -12,7 +13,9 @@ export default async function AmazonPopularSSR({ category, limit=4 }:{ category:
         <div className="grid sm:grid-cols-2 gap-3">
           {items.map((it)=> (
             <div key={it.asin} className="border rounded-2xl p-3 flex gap-3 items-center">
-              {it.image && <img src={it.image} alt={it.title ?? it.asin} className="w-16 h-16 object-contain" />}
+              {it.image && (
+                <Image src={it.image} alt={it.title ?? it.asin} width={64} height={64} className="object-contain" />
+              )}
               <div className="min-w-0">
                 <AmazonTrackLink href={it.url ?? '#'} meta={{ asin: it.asin, category }}>
                   <span className="text-sm truncate block hover:underline">{it.title ?? it.asin}</span>

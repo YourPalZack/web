@@ -83,14 +83,19 @@ export default function SubstrateList() {
         )}
         {filtered.map((s) => (
           <div key={s.id} className={`border rounded-2xl p-3 shadow-sm ${equipment.substrate === s.id ? 'ring-2 ring-blue-400' : ''}`}>
-            <a href={`/part/substrate/${s.id}`} className="font-medium hover:underline" onClick={() => {
-              try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'substrate_list', productType: 'SUBSTRATE', productId: s.id } })); } catch {}
-            }}>{s.type}</a>
-            <div className="text-xs text-gray-600">{s.color ?? '—'} {s.plantFriendly ? '• plant-friendly' : ''}</div>
-            <RetailerBadge productType="SUBSTRATE" productId={s.id} />
-            <div className="mt-2 flex justify-between items-center">
-              <AmazonBuyLink productType="SUBSTRATE" productId={s.id} />
-              <Button onClick={() => choose(s)}>{equipment.substrate === s.id ? 'Selected' : 'Select'}</Button>
+            <div className="flex items-start gap-3">
+              <div className="w-12 h-12 rounded bg-sky-100" aria-hidden />
+              <div className="flex-1 min-w-0">
+                <a href={`/part/substrate/${s.id}`} className="font-medium hover:underline" onClick={() => {
+                  try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'substrate_list', productType: 'SUBSTRATE', productId: s.id } })); } catch {}
+                }}>{s.type}</a>
+                <div className="text-xs text-gray-600">{s.color ?? '—'} {s.plantFriendly ? '• plant-friendly' : ''}</div>
+                <RetailerBadge productType="SUBSTRATE" productId={s.id} />
+                <div className="mt-2 flex justify-between items-center">
+                  <AmazonBuyLink productType="SUBSTRATE" productId={s.id} />
+                  <Button onClick={() => choose(s)}>{equipment.substrate === s.id ? 'Selected' : 'Select'}</Button>
+                </div>
+              </div>
             </div>
           </div>
         ))}

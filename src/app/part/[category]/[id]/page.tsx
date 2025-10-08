@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { PriceSparkline, Tooltip } from '@aquabuilder/ui';
+import { Tooltip } from '@aquabuilder/ui';
+import dynamic from 'next/dynamic';
+const SparklinePanel = dynamic(()=> import('./sparkline-panel'), { ssr: false });
+import { Chip } from '@aquabuilder/ui';
 import dynamic from 'next/dynamic';
 const AmazonBuyLink = dynamic(() => import('../../../browse/amazon-buy-link'), { ssr: false });
 import { prisma } from '@aquabuilder/db';
@@ -104,6 +107,38 @@ export default async function PartPage({ params }: { params: { category: Categor
       })} />
       <div className="text-xs text-gray-500"><Link href="/browse">Browse</Link> / <Link href={`/browse?tab=${category}`}>{humanCat(category)}</Link></div>
       <h1 className="text-2xl font-semibold">{title}</h1>
+      <div className="flex flex-wrap gap-2 text-xs">
+        {category==='filters' && (
+          <>
+            <Chip active={false}>Type: {part.type}</Chip>
+            <Chip active={false}>{part.gph} gph</Chip>
+            <Chip active={false}>max {part.maxTankGal} gal</Chip>
+          </>
+        )}
+        {category==='heaters' && (
+          <>
+            <Chip active={false}>{part.wattage} W</Chip>
+            <Chip active={false}>{part.minTankGal}–{part.maxTankGal} gal</Chip>
+          </>
+        )}
+        {category==='lights' && (
+          <>
+            <Chip active={false}>{part.type}</Chip>
+            <Chip active={false}>{part.intensity}</Chip>
+            {part.coverageCm ? <Chip active={false}>{part.coverageCm} cm</Chip> : null}
+          </>
+        )}
+        {category==='substrate' && (
+          <>
+            <Chip active={false}>{part.type}</Chip>
+            {part.color ? <Chip active={false}>{part.color}</Chip> : null}
+            {part.plantFriendly ? <Chip active={false}>plant-friendly</Chip> : null}
+          </>
+        )}
+        {category==='equipment' && (
+          <Chip active={false}>{part.category}</Chip>
+        )}
+      </div>
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <div className="text-sm text-gray-600">ID</div>
@@ -162,7 +197,7 @@ export default async function PartPage({ params }: { params: { category: Categor
         )}
         {spark.length ? (
           <div className="mt-2">
-            <PriceSparkline data={spark} />
+            <SparklinePanel data={spark} />
           </div>
         ) : null}
         <div className="text-xs text-gray-500 inline-flex items-center gap-1">

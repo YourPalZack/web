@@ -4,6 +4,7 @@ import { prisma } from '@aquabuilder/db';
 import { JsonLd, breadcrumbJsonLd } from '../../../../lib/structured';
 import { getSiteUrl } from '../../../../lib/site';
 import SpeciesPageView from './page-view';
+import { Chip } from '@aquabuilder/ui';
 import { Breadcrumb } from '@aquabuilder/ui';
 import { notFound } from 'next/navigation';
 
@@ -48,6 +49,23 @@ export default async function SpeciesPage({ params }: { params: { category: Cate
         { href: `/species/${category}/${id}`, label: title },
       ]} />
       <h1 className="text-2xl font-semibold">{title}</h1>
+      <div className="flex flex-wrap gap-2 text-xs">
+        {category==='fish' && (
+          <>
+            {data.minTankGal != null && <Chip active={false}>min {data.minTankGal} gal</Chip>}
+            <Chip active={false}>{data.tempMinC}–{data.tempMaxC} °C</Chip>
+            <Chip active={false}>pH {data.phMin}–{data.phMax}</Chip>
+            <Chip active={false}>{data.temperament}</Chip>
+          </>
+        )}
+        {category==='plants' && (
+          <>
+            <Chip active={false}>{data.lightNeeds} light</Chip>
+            <Chip active={false}>{data.co2Required ? 'CO2' : 'No CO2'}</Chip>
+            <Chip active={false}>{data.difficulty}</Chip>
+          </>
+        )}
+      </div>
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-2 text-sm text-gray-700">
           {category==='fish' && (

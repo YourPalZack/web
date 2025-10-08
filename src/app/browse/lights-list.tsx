@@ -86,14 +86,19 @@ export default function LightsList() {
         {error && <div className="text-sm text-red-600">{error}</div>}
         {paged.map((l) => (
           <div key={l.id} className={`border rounded-2xl p-3 shadow-sm ${equipment.light === l.id ? 'ring-2 ring-blue-400' : ''}`}>
-            <a href={`/part/lights/${l.id}`} className="font-medium hover:underline" onClick={() => {
-              try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'lights_list', productType: 'LIGHT', productId: l.id } })); } catch {}
-            }}>{l.brand ?? '—'} {l.model ?? ''}</a>
-            <div className="text-xs text-gray-600">{l.type} • {l.intensity} • {l.coverageCm ? `${l.coverageCm} cm` : '—'} coverage</div>
-            <RetailerBadge productType="LIGHT" productId={l.id} />
-            <div className="mt-2 flex justify-between items-center">
-              <AmazonBuyLink productType="LIGHT" productId={l.id} />
-              <Button onClick={() => choose(l)}>{equipment.light === l.id ? 'Selected' : 'Select'}</Button>
+            <div className="flex items-start gap-3">
+              <div className="w-12 h-12 rounded bg-sky-100" aria-hidden />
+              <div className="flex-1 min-w-0">
+                <a href={`/part/lights/${l.id}`} className="font-medium hover:underline" onClick={() => {
+                  try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'lights_list', productType: 'LIGHT', productId: l.id } })); } catch {}
+                }}>{l.brand ?? '—'} {l.model ?? ''}</a>
+                <div className="text-xs text-gray-600">{l.type} • {l.intensity} • {l.coverageCm ? `${l.coverageCm} cm` : '—'} coverage</div>
+                <RetailerBadge productType="LIGHT" productId={l.id} />
+                <div className="mt-2 flex justify-between items-center">
+                  <AmazonBuyLink productType="LIGHT" productId={l.id} />
+                  <Button onClick={() => choose(l)}>{equipment.light === l.id ? 'Selected' : 'Select'}</Button>
+                </div>
+              </div>
             </div>
           </div>
         ))}

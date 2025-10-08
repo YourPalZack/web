@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent, Input, Button } from '@aquabuilder/ui';
+import { Card, CardHeader, CardTitle, CardContent, Input, Button, Modal } from '@aquabuilder/ui';
 import { showToast } from '@aquabuilder/ui';
 import { signOut } from 'next-auth/react';
 import AdminPageView from '../page-view';
@@ -25,6 +25,27 @@ export default function AdminPricesPage() {
   const [admin, setAdmin] = useState<boolean>(false);
   const [urlNormalized, setUrlNormalized] = useState<boolean>(false);
   const [normTimer, setNormTimer] = useState<any>(null);
+  const [sortBy, setSortBy] = useState<'retailer'|'price'|'timestamp'>('timestamp');
+  const [sortDir, setSortDir] = useState<'asc'|'desc'>('desc');
+  function setSort(col: 'retailer'|'price'|'timestamp'){
+    setSortBy(prev => prev===col ? prev : col);
+    setSortDir(prev => (sortBy===col ? (prev==='asc'?'desc':'asc') : 'asc'));
+  }
+  const sortedRows = useMemo(()=>{
+    const arr = rows.filter(r => r.retailer.toLowerCase().includes(filterRetailer.toLowerCase()));
+    arr.sort((a,b)=>{
+      let va: any, vb: any;
+      if (sortBy==='retailer'){ va=a.retailer?.toLowerCase()||''; vb=b.retailer?.toLowerCase()||''; }
+      else if (sortBy==='price'){ va=a.priceCents||0; vb=b.priceCents||0; }
+      else { va=new Date(a.timestamp).getTime(); vb=new Date(b.timestamp).getTime(); }
+      const cmp = va<vb ? -1 : va>vb ? 1 : 0;
+      return sortDir==='asc' ? cmp : -cmp;
+    });
+    return arr;
+  }, [rows, sortBy, sortDir]);
+  const [deleteRow, setDeleteRow] = useState<{ retailer: string; timestamp: string } | null>(null);
+  const [editUrlRow, setEditUrlRow] = useState<{ retailer: string; timestamp: string } | null>(null);
+  const [editUrlValue, setEditUrlValue] = useState<string>('');
 
   useEffect(() => {
     (async () => {
@@ -105,6 +126,14 @@ export default function AdminPricesPage() {
         }
       } else showToast('Failed to save price');
     } catch { showToast('Failed to save price'); }
+  }
+
+  async function refreshRows() {
+    if (!productId) return;
+    const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
+    const txt = await r.text();
+    const arr = txt ? JSON.parse(txt) : [];
+    setRows(arr);
   }
 
   return (
@@ -212,19 +241,23 @@ export default function AdminPricesPage() {
           {!productId ? (
             <div className="text-sm text-gray-600">Select a product to view prices.</div>
           ) : (
-            <div className="overflow-x-auto">
+            <div className="space-y-2">
+              <div className="flex justify-end">
+                <Input value={filterRetailer} onChange={(e)=> setFilterRetailer(e.target.value)} placeholder="Filter by retailer…" className="w-56" />
+              </div>
+              <div className="overflow-auto max-h-96">
               <table className="w-full text-sm">
-                <thead>
+                <thead className="bg-white">
                   <tr className="text-left text-gray-600">
-                    <th className="py-2 pr-4">Retailer</th>
-                    <th className="py-2 pr-4">Price</th>
-                    <th className="py-2">Timestamp</th>
-                    <th className="py-2">Link</th>
-                    <th className="py-2">Actions</th>
+                    <th className="py-2 pr-4 sticky top-0 bg-white cursor-pointer select-none" onClick={()=>setSort('retailer')}>Retailer {sortBy==='retailer' ? (sortDir==='asc'?'▲':'▼') : ''}</th>
+                    <th className="py-2 pr-4 sticky top-0 bg-white cursor-pointer select-none" onClick={()=>setSort('price')}>Price {sortBy==='price' ? (sortDir==='asc'?'▲':'▼') : ''}</th>
+                    <th className="py-2 sticky top-0 bg-white cursor-pointer select-none" onClick={()=>setSort('timestamp')}>Timestamp {sortBy==='timestamp' ? (sortDir==='asc'?'▲':'▼') : ''}</th>
+                    <th className="py-2 sticky top-0 bg-white">Link</th>
+                    <th className="py-2 sticky top-0 bg-white">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {rows.map((row, i) => (
+                  {sortedRows.map((row, i) => (
                     <tr key={i} className="border-t">
                       <td className="py-2 pr-4">
                         <span className="inline-flex items-center gap-2">
@@ -247,32 +280,52 @@ export default function AdminPricesPage() {
                         </span>
                       </td>
                       <td className="py-2 pr-4">
-                        <input defaultValue={(row.priceCents/100).toFixed(2)} className="border rounded px-2 py-1 w-24" onBlur={async (e)=>{
-                          const val = parseFloat(e.currentTarget.value);
-                          if (!isNaN(val)) {
+                        <div className="flex flex-col">
+                          <input defaultValue={(row.priceCents/100).toFixed(2)} className="border rounded px-2 py-1 w-24" onBlur={async (e)=>{
+                            const key = `${row.retailer}|${row.timestamp}`;
+                            const val = parseFloat(e.currentTarget.value);
+                            if (isNaN(val) || val < 0) {
+                              setPriceErrors(prev => ({ ...prev, [key]: 'Enter a valid price' }));
+                              return;
+                            }
+                            setPriceErrors(prev => ({ ...prev, [key]: null }));
                             const cents = Math.round(val * 100);
                             await fetch('/api/admin/prices', { method: 'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ productType, productId, retailer: row.retailer, priceCents: cents }) });
-                          }
-                        }} />
+                          }} />
+                          {priceErrors[`${row.retailer}|${row.timestamp}`] && (
+                            <span className="text-[11px] text-red-600">{priceErrors[`${row.retailer}|${row.timestamp}`]}</span>
+                          )}
+                        </div>
                       </td>
                       <td className="py-2">{new Date(row.timestamp).toLocaleString()}</td>
                       <td className="py-2">
-                        <div className="flex items-center gap-2">
-                          <input
-                            defaultValue={(row as any).url ?? ''}
-                            placeholder="https://..."
-                            className="border rounded px-2 py-1 w-56"
-                            onBlur={async (e)=>{
-                              const next = e.currentTarget.value;
-                              try{
-                                await fetch('/api/admin/prices', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: row.retailer, timestamp: row.timestamp, url: next }) });
-                                const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
-                                const txt = await r.text();
-                                const arr = txt ? JSON.parse(txt) : [];
-                                setRows(arr);
-                              }catch{}
-                            }}
-                          />
+                        <div className="flex items-start gap-2">
+                          <div className="flex flex-col">
+                            <input
+                              defaultValue={(row as any).url ?? ''}
+                              placeholder="https://..."
+                              className="border rounded px-2 py-1 w-56"
+                              onBlur={async (e)=>{
+                                const key = `${row.retailer}|${row.timestamp}`;
+                                const next = e.currentTarget.value.trim();
+                                if (next) {
+                                  try { new URL(next); setUrlErrors(prev => ({ ...prev, [key]: null })); } catch { setUrlErrors(prev => ({ ...prev, [key]: 'Invalid URL' })); return; }
+                                } else {
+                                  setUrlErrors(prev => ({ ...prev, [key]: null }));
+                                }
+                                try{
+                                  await fetch('/api/admin/prices', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: row.retailer, timestamp: row.timestamp, url: next }) });
+                                  const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
+                                  const txt = await r.text();
+                                  const arr = txt ? JSON.parse(txt) : [];
+                                  setRows(arr);
+                                }catch{}
+                              }}
+                            />
+                            {urlErrors[`${row.retailer}|${row.timestamp}`] && (
+                              <span className="text-[11px] text-red-600">{urlErrors[`${row.retailer}|${row.timestamp}`]}</span>
+                            )}
+                          </div>
                           {(row as any).url ? (<a href={(row as any).url} target="_blank" rel="nofollow sponsored noopener noreferrer" className="text-blue-600 underline">Open</a>) : null}
                         </div>
                       </td>
@@ -285,17 +338,9 @@ export default function AdminPricesPage() {
                             setRows(arr);
                           }}>Refresh</Button>
                           {/* Inline rename handled by input in the Retailer column */}
-                          <Button variant="secondary" onClick={async ()=>{
-                            const current = (row as any).url || '';
-                            const next = window.prompt('Update URL:', current) || '';
-                            if (!next || next === current) return;
-                            try{
-                              await fetch('/api/admin/prices', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: row.retailer, timestamp: row.timestamp, url: next }) });
-                              const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
-                              const txt = await r.text();
-                              const arr = txt ? JSON.parse(txt) : [];
-                              setRows(arr);
-                            }catch{}
+                          <Button variant="secondary" onClick={()=>{
+                            setEditUrlRow({ retailer: row.retailer, timestamp: row.timestamp });
+                            setEditUrlValue((row as any).url || '');
                           }}>Edit URL</Button>
                           <Button variant="secondary" onClick={async ()=>{
                             try{
@@ -309,16 +354,8 @@ export default function AdminPricesPage() {
                               showToast('URL normalized');
                             }catch{ showToast('Normalize failed'); }
                           }}>Normalize URL</Button>
-                          <Button variant="secondary" onClick={async ()=>{
-                            try{
-                              const ok = window.confirm(`Delete price from ${row.retailer} at ${new Date(row.timestamp).toLocaleString()}?`);
-                              if (!ok) return;
-                              await fetch('/api/admin/prices', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: row.retailer, timestamp: row.timestamp }) });
-                              const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
-                              const txt = await r.text();
-                              const arr = txt ? JSON.parse(txt) : [];
-                              setRows(arr);
-                            }catch{}
+                          <Button variant="secondary" onClick={()=>{
+                            setDeleteRow({ retailer: row.retailer, timestamp: row.timestamp });
                           }}>Delete</Button>
                         </div>
                       </td>
@@ -333,6 +370,52 @@ export default function AdminPricesPage() {
           )}
         </CardContent>
       </Card>
+      {/* Edit URL Modal */}
+      <Modal
+        open={!!editUrlRow}
+        onClose={()=> setEditUrlRow(null)}
+        title="Edit Product URL"
+        actions={(
+          <>
+            <Button variant="secondary" onClick={()=> setEditUrlRow(null)}>Cancel</Button>
+            <Button onClick={async()=>{
+              if (!editUrlRow) return;
+              try{
+                await fetch('/api/admin/prices', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: editUrlRow.retailer, timestamp: editUrlRow.timestamp, url: editUrlValue }) });
+                await refreshRows();
+                setEditUrlRow(null);
+                showToast('URL updated');
+              }catch{ showToast('Failed to update URL'); }
+            }}>Save</Button>
+          </>
+        )}
+      >
+        <Input value={editUrlValue} onChange={(e)=> setEditUrlValue(e.target.value)} placeholder="https://..." />
+      </Modal>
+
+      {/* Delete Confirm Modal */}
+      <Modal
+        open={!!deleteRow}
+        onClose={()=> setDeleteRow(null)}
+        title="Delete Price Entry"
+        actions={(
+          <>
+            <Button variant="secondary" onClick={()=> setDeleteRow(null)}>Cancel</Button>
+            <Button onClick={async()=>{
+              if (!deleteRow) return;
+              try{
+                await fetch('/api/admin/prices', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: deleteRow.retailer, timestamp: deleteRow.timestamp }) });
+                await refreshRows();
+                setDeleteRow(null);
+                showToast('Deleted');
+              }catch{ showToast('Delete failed'); }
+            }}>Delete</Button>
+          </>
+        )}
+      >
+        Are you sure you want to delete this price row?
+      </Modal>
+
     </div>
   );
 }

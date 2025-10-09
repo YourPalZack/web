@@ -33,9 +33,20 @@ export default function BrowseTabs() {
       (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'browse_tab_click', props: { tab } }));
     } catch {}
   }
+  function clearAll(){
+    const params = new URLSearchParams();
+    if (active !== 'fish') params.set('tab', active);
+    // Reset page and known filter keys
+    const drop = ['page','q','type','bucket','intensity','substrateType','category','light','difficulty','co2','minTank'];
+    drop.forEach(k => params.delete(k));
+    const href = `/browse${params.toString() ? `?${params.toString()}` : ''}`;
+    router.replace(href);
+    try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'browse_clear_filters', props: { tab: active } })); } catch {}
+  }
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 items-center justify-between">
+        <div className="flex flex-wrap gap-2">
         {tabs.map((t) => (
           <button
             key={t.key}
@@ -49,6 +60,14 @@ export default function BrowseTabs() {
             {t.label}
           </button>
         ))}
+        </div>
+        <button
+          onClick={clearAll}
+          className="px-3 py-1.5 rounded-md border text-sm text-gray-700 hover:shadow"
+          aria-label="Clear all filters"
+        >
+          Clear Filters
+        </button>
       </div>
       {active === 'fish' && <FishList />}
       {active === 'plants' && <PlantsList />}

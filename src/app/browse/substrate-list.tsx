@@ -23,6 +23,12 @@ export default function SubstrateList() {
 
   useEffect(()=>{ const t = setTimeout(()=> setDq(q), 200); return ()=> clearTimeout(t); }, [q]);
   useEffect(() => {
+    try {
+      const sp = new URLSearchParams(window.location.search);
+      const p = Number(sp.get('page')||'1')||1; setPage(p);
+      const q0 = sp.get('q'); if (q0) setQ(q0);
+      const t0 = sp.get('substrateType') as any; if (t0 && (['SAND','GRAVEL','SOIL','BARE_BOTTOM'] as const).includes(t0)) setType(t0);
+    } catch {}
     (async () => {
       try {
         const params = new URLSearchParams();
@@ -38,6 +44,17 @@ export default function SubstrateList() {
       } catch { setSubs([]); setTotal(0); }
     })();
   }, [dq, page]);
+
+  // Reflect filter state to URL
+  useEffect(()=>{
+    try {
+      const sp = new URLSearchParams(window.location.search);
+      sp.set('tab','substrate'); sp.set('page', String(page));
+      if (dq) sp.set('q', dq); else sp.delete('q');
+      if (type) sp.set('substrateType', type); else sp.delete('substrateType');
+      window.history.replaceState({}, '', `${window.location.pathname}?${sp.toString()}`);
+    } catch {}
+  }, [dq, type, page]);
 
   const filtered = subs.filter((s) => {
     const text = `${s.type} ${s.color ?? ''}`.toLowerCase().includes(q.trim().toLowerCase());
@@ -65,6 +82,9 @@ export default function SubstrateList() {
             <span className="text-xs text-gray-500">
               Recommended for {buildType}: {recommendSubstrate({ buildType }).join(', ')}
             </span>
+          )}
+          {(dq || type || page>1) && (
+            <Button variant="secondary" onClick={()=>{ setQ(''); setType(null); setPage(1); }}>Clear</Button>
           )}
         </div>
       </CardHeader>
@@ -99,7 +119,7 @@ export default function SubstrateList() {
           />
         ))}
         {total > pageSize && (
-          <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />
+          <Pagination page={page} total={total} pageSize={pageSize} makeHref={(p)=> { const sp=new URLSearchParams(); sp.set('tab','substrate'); sp.set('page', String(p)); if(dq) sp.set('q', dq); if(type) sp.set('substrateType', type); return `/browse?${sp.toString()}`; }} />
         )}
       </CardContent>
     </Card>

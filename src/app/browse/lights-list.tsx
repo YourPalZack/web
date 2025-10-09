@@ -22,7 +22,27 @@ export default function LightsList() {
   const pageSize = 6;
 
   useEffect(()=>{ const t=setTimeout(()=> setDq(q),200); return ()=> clearTimeout(t); }, [q]);
+  // Initialize from URL
+  useEffect(()=>{
+    try{
+      const sp = new URLSearchParams(window.location.search);
+      const p = Number(sp.get('page')||'1')||1; setPage(p);
+      const q0 = sp.get('q'); if (q0) setQ(q0);
+      const i0 = sp.get('intensity'); if (i0 && (['LOW','MEDIUM','HIGH'] as const).includes(i0 as any)) setIntensity(i0 as any);
+    }catch{}
+  }, []);
+  // Reflect filters to URL
+  useEffect(()=>{
+    try{
+      const sp = new URLSearchParams(window.location.search);
+      sp.set('tab','lights'); sp.set('page', String(page));
+      if (dq) sp.set('q', dq); else sp.delete('q');
+      if (intensity) sp.set('intensity', intensity); else sp.delete('intensity');
+      window.history.replaceState({}, '', `${window.location.pathname}?${sp.toString()}`);
+    }catch{}
+  }, [dq, intensity, page]);
   useEffect(() => {
+    try { const sp = new URLSearchParams(window.location.search); const p = Number(sp.get('page')||'1')||1; setPage(p); } catch {}
     (async () => {
       setLoading(true);
       try {
@@ -65,6 +85,9 @@ export default function LightsList() {
               <Chip key={t} active={intensity===t} onClick={() => { setIntensity(intensity===t?null:t); setPage(1); }}>{t}</Chip>
             ))}
           </div>
+          {(dq || intensity || page>1) && (
+            <Button variant="secondary" onClick={()=>{ setQ(''); setIntensity(null); setPage(1); }}>Clear</Button>
+          )}
         </div>
       </CardHeader>
       <CardContent className="grid sm:grid-cols-2 gap-3">
@@ -102,7 +125,11 @@ export default function LightsList() {
           />
         ))}
         {!loading && total > pageSize && (
-          <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />
+          <Pagination page={page} total={total} pageSize={pageSize} makeHref={(p)=> {
+            const sp = new URLSearchParams(); sp.set('tab','lights'); sp.set('page', String(p));
+            if (dq) sp.set('q', dq); if (intensity) sp.set('intensity', intensity);
+            return `/browse?${sp.toString()}`;
+          }} />
         )}
       </CardContent>
     </Card>

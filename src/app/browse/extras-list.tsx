@@ -22,6 +22,7 @@ export default function ExtrasList() {
 
   useEffect(()=>{ const t = setTimeout(()=> setDq(q), 200); return ()=> clearTimeout(t); }, [q]);
   useEffect(() => {
+    try { const sp = new URLSearchParams(window.location.search); const p = Number(sp.get('page')||'1')||1; setPage(p); const q0=sp.get('q'); if(q0) setQ(q0); const c0=sp.get('category'); if(c0) setCategory(c0); } catch {}
     (async () => {
       try {
         const params = new URLSearchParams();
@@ -38,6 +39,10 @@ export default function ExtrasList() {
       } catch { setItems([]); setTotal(0); }
     })();
   }, [dq, page, category]);
+
+  useEffect(()=>{
+    try{ const sp=new URLSearchParams(window.location.search); sp.set('tab','extras'); sp.set('page', String(page)); if(dq) sp.set('q', dq); else sp.delete('q'); if(category) sp.set('category', category); else sp.delete('category'); window.history.replaceState({}, '', `${window.location.pathname}?${sp.toString()}`);}catch{}
+  }, [dq, category, page]);
 
   function toggle(id: string) {
     const exists = equipment.extras.includes(id);
@@ -57,6 +62,9 @@ export default function ExtrasList() {
               <Chip key={c} active={category===c} onClick={() => { setCategory(category===c?null:c); setPage(1); }}>{c}</Chip>
             ))}
           </div>
+          {(dq || category || page>1) && (
+            <Button variant="secondary" onClick={()=>{ setQ(''); setCategory(null); setPage(1); }}>Clear</Button>
+          )}
         </div>
       </CardHeader>
       <CardContent className="grid sm:grid-cols-2 gap-3">
@@ -93,7 +101,7 @@ export default function ExtrasList() {
           />
         ))}
         {total > pageSize && (
-          <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />
+          <Pagination page={page} total={total} pageSize={pageSize} makeHref={(p)=> { const sp=new URLSearchParams(); sp.set('tab','extras'); sp.set('page', String(p)); if(dq) sp.set('q', dq); if(category) sp.set('category', category); return `/browse?${sp.toString()}`; }} />
         )}
       </CardContent>
     </Card>

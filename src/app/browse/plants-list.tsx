@@ -23,6 +23,7 @@ export default function PlantsList() {
 
   useEffect(()=>{ const t = setTimeout(()=> setDq(q), 200); return ()=> clearTimeout(t); }, [q]);
   useEffect(() => {
+    try { const sp = new URLSearchParams(window.location.search); const p = Number(sp.get('page')||'1')||1; setPage(p); const q0=sp.get('q'); if(q0) setQ(q0); const l0=sp.get('light'); if(l0 && (['LOW','MEDIUM','HIGH'] as const).includes(l0 as any)) setLight(l0 as any); const d0=sp.get('difficulty'); if(d0 && (['BEGINNER','INTERMEDIATE','ADVANCED'] as const).includes(d0 as any)) setDifficulty(d0 as any); const c0=sp.get('co2'); if(c0==='1'||c0==='0') setNeedCo2(c0==='1'); } catch {}
     (async () => {
       setLoading(true);
       try {
@@ -48,6 +49,10 @@ export default function PlantsList() {
       }
     })();
   }, [dq, page, light, difficulty, needCo2]);
+
+  useEffect(()=>{
+    try{ const sp=new URLSearchParams(window.location.search); sp.set('tab','plants'); sp.set('page', String(page)); if(dq) sp.set('q', dq); else sp.delete('q'); if(light) sp.set('light', light); else sp.delete('light'); if(difficulty) sp.set('difficulty', difficulty); else sp.delete('difficulty'); if(needCo2!=null) sp.set('co2', needCo2 ? '1' : '0'); else sp.delete('co2'); window.history.replaceState({}, '', `${window.location.pathname}?${sp.toString()}`);}catch{}
+  }, [dq, light, difficulty, needCo2, page]);
 
   function add(p: Plant) {
     if (livestock.some((l) => l.type === 'PLANT' && l.id === p.id)) return;
@@ -78,6 +83,9 @@ export default function PlantsList() {
             <Chip active={needCo2===true} onClick={() => { setNeedCo2(needCo2===true?null:true); setPage(1); }}>CO2</Chip>
             <Chip active={needCo2===false} onClick={() => { setNeedCo2(needCo2===false?null:false); setPage(1); }}>No CO2</Chip>
           </div>
+          {(dq || light || difficulty || needCo2!=null || page>1) && (
+            <Button variant="secondary" onClick={()=>{ setQ(''); setLight(null); setDifficulty(null); setNeedCo2(null); setPage(1); }}>Clear</Button>
+          )}
         </div>
       </CardHeader>
       <CardContent className="grid sm:grid-cols-2 gap-3">
@@ -110,7 +118,7 @@ export default function PlantsList() {
           );
         })}
         {!loading && total > pageSize && (
-          <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />
+          <Pagination page={page} total={total} pageSize={pageSize} makeHref={(p)=> { const sp=new URLSearchParams(); sp.set('tab','plants'); sp.set('page', String(p)); if(dq) sp.set('q', dq); if(light) sp.set('light', light); if(difficulty) sp.set('difficulty', difficulty); if(needCo2!=null) sp.set('co2', needCo2 ? '1' : '0'); return `/browse?${sp.toString()}`; }} />
         )}
       </CardContent>
     </Card>

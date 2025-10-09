@@ -33,6 +33,7 @@ export function FishList() {
   const pageSize = 6;
 
   useEffect(() => {
+    try { const sp = new URLSearchParams(window.location.search); const p = Number(sp.get('page')||'1')||1; setPage(p); const q0=sp.get('q'); if(q0) setQ(q0); const mt=sp.get('minTank'); if(mt){ const n=Number(mt); if(!isNaN(n)) setMinTank(n); } } catch {}
     (async () => {
       setLoading(true);
       try {
@@ -55,6 +56,10 @@ export function FishList() {
         setLoading(false);
       }
     })();
+  }, [dq, minTank, page]);
+
+  useEffect(()=>{
+    try{ const sp=new URLSearchParams(window.location.search); sp.set('tab','fish'); sp.set('page', String(page)); if(dq) sp.set('q', dq); else sp.delete('q'); if(minTank!=null) sp.set('minTank', String(minTank)); else sp.delete('minTank'); window.history.replaceState({}, '', `${window.location.pathname}?${sp.toString()}`);}catch{}
   }, [dq, minTank, page]);
 
   useEffect(() => {
@@ -102,6 +107,9 @@ export function FishList() {
             <Chip active={minTank===40} onClick={() => { setMinTank(minTank===40?null:40); setPage(1); }}>40g+</Chip>
             <Chip active={minTank===75} onClick={() => { setMinTank(minTank===75?null:75); setPage(1); }}>75g+</Chip>
           </div>
+          {(dq || minTank!=null || page>1) && (
+            <Button variant="secondary" onClick={()=>{ setQ(''); setMinTank(null); setPage(1); }}>Clear</Button>
+          )}
         </div>
       </CardHeader>
       <CardContent className="grid sm:grid-cols-2 gap-3">
@@ -136,7 +144,7 @@ export function FishList() {
           );
         })}
         {!loading && total > pageSize && (
-          <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />
+          <Pagination page={page} total={total} pageSize={pageSize} makeHref={(p)=> `/browse?tab=fish&page=${p}`} />
         )}
       </CardContent>
     </Card>

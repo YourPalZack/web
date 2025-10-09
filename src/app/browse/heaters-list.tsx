@@ -22,7 +22,28 @@ export default function HeatersList() {
   const pageSize = 6;
 
   useEffect(()=>{ const t = setTimeout(()=> setDq(q), 200); return ()=> clearTimeout(t); }, [q]);
+  // Initialize from URL
+  useEffect(()=>{
+    try {
+      const sp = new URLSearchParams(window.location.search);
+      const p = Number(sp.get('page')||'1')||1; setPage(p);
+      const q0 = sp.get('q'); if (q0) setQ(q0);
+      const b0 = sp.get('bucket'); if (b0 && (['<=100','101-200','201-300','>300'] as const).includes(b0 as any)) setBucket(b0 as any);
+    } catch {}
+  }, []);
+  // Reflect filters to URL
+  useEffect(()=>{
+    try {
+      const sp = new URLSearchParams(window.location.search);
+      sp.set('tab','heaters'); sp.set('page', String(page));
+      if (dq) sp.set('q', dq); else sp.delete('q');
+      if (bucket) sp.set('bucket', bucket); else sp.delete('bucket');
+      const url = `${window.location.pathname}?${sp.toString()}`;
+      window.history.replaceState({}, '', url);
+    } catch {}
+  }, [dq, bucket, page]);
   useEffect(() => {
+    try { const sp = new URLSearchParams(window.location.search); const p = Number(sp.get('page')||'1')||1; setPage(p); } catch {}
     (async () => {
       setLoading(true);
       try {
@@ -69,6 +90,9 @@ export default function HeatersList() {
               <Chip key={t} active={bucket===t} onClick={() => { setBucket(bucket===t?null:t); setPage(1); }}>{t} W</Chip>
             ))}
           </div>
+          {(dq || bucket || page>1) && (
+            <Button variant="secondary" onClick={()=>{ setQ(''); setBucket(null); setPage(1); }}>Clear</Button>
+          )}
         </div>
       </CardHeader>
       <CardContent className="grid sm:grid-cols-2 gap-3">
@@ -106,7 +130,11 @@ export default function HeatersList() {
           />
         ))}
         {!loading && total > pageSize && (
-          <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />
+          <Pagination page={page} total={total} pageSize={pageSize} makeHref={(p)=> {
+            const sp = new URLSearchParams(); sp.set('tab','heaters'); sp.set('page', String(p));
+            if (dq) sp.set('q', dq); if (bucket) sp.set('bucket', bucket);
+            return `/browse?${sp.toString()}`;
+          }} />
         )}
       </CardContent>
     </Card>

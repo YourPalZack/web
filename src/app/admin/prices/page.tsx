@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent, Input, Button, Modal, HostBadge, HostFilter, Combobox, Spinner } from '@aquabuilder/ui';
+import { Card, CardHeader, CardTitle, CardContent, Input, Button, Modal, HostBadge, HostFilter, Combobox, Spinner, SortableHeader, ConfirmDialog, LoadingOverlay } from '@aquabuilder/ui';
 import { showToast } from '@aquabuilder/ui';
 import { signOut } from 'next-auth/react';
 import AdminPageView from '../page-view';
@@ -58,6 +58,9 @@ export default function AdminPricesPage() {
     return arr;
   }, [rows, sortBy, sortDir, filterRetailer, hostFilter]);
   const [deleteRow, setDeleteRow] = useState<{ retailer: string; timestamp: string } | null>(null);
+  const [busyKey, setBusyKey] = useState<string | null>(null);
+  const [savingUrl, setSavingUrl] = useState(false);
+  const [busyKey, setBusyKey] = useState<string | null>(null);
   const [editUrlRow, setEditUrlRow] = useState<{ retailer: string; timestamp: string } | null>(null);
   const [editUrlValue, setEditUrlValue] = useState<string>('');
 
@@ -260,14 +263,11 @@ export default function AdminPricesPage() {
             <div className="text-sm text-gray-600">Select a product to view prices.</div>
           ) : (
             <div className="space-y-2">
-              <div className="flex justify-end">
-                <Input value={filterRetailer} onChange={(e)=> setFilterRetailer(e.target.value)} placeholder="Filter by retailer…" className="w-56" />
-              </div>
-            <div className="space-y-2">
               <div className="flex justify-end gap-2 items-center">
                 <Input value={filterRetailer} onChange={(e)=> setFilterRetailer(e.target.value)} placeholder="Filter by retailer…" className="w-56" />
                 <HostFilter options={hostOptions} value={hostFilter} onChange={setHostFilter} />
               </div>
+              <LoadingOverlay show={loadingAmazon || !!busyKey}>
               <div className="overflow-auto max-h-96">
               <table className="w-full text-sm">
                 <thead className="bg-white">
@@ -370,10 +370,11 @@ export default function AdminPricesPage() {
                             setEditUrlRow({ retailer: row.retailer, timestamp: row.timestamp });
                             setEditUrlValue((row as any).url || '');
                           }}>Edit URL</Button>
-                          <Button variant="secondary" onClick={async ()=>{
+                          <Button variant="secondary" disabled={busyKey===`normalize:${row.retailer}|${row.timestamp}`} onClick={async ()=>{
                             try{
                               const current = (row as any).url || '';
                               if (!current) return;
+                              setBusyKey(`normalize:${row.retailer}|${row.timestamp}`);
                               await fetch('/api/admin/prices', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: row.retailer, timestamp: row.timestamp, url: current }) });
                               const r = await fetch(`/api/prices/${productType}/${productId}`, { cache: 'no-store' });
                               const txt = await r.text();
@@ -381,7 +382,8 @@ export default function AdminPricesPage() {
                               setRows(arr);
                               showToast('URL normalized');
                             }catch{ showToast('Normalize failed'); }
-                          }}>Normalize URL</Button>
+                            finally { setBusyKey(null); }
+                          }}>{busyKey===`normalize:${row.retailer}|${row.timestamp}` ? (<span className="inline-flex items-center gap-1"><Spinner size="sm" /> Normalizing…</span>) : 'Normalize URL'}</Button>
                           <Button variant="secondary" onClick={()=>{
                             setDeleteRow({ retailer: row.retailer, timestamp: row.timestamp });
                           }}>Delete</Button>
@@ -395,7 +397,8 @@ export default function AdminPricesPage() {
                 </tbody>
               </table>
             </div>
-          )}
+              </LoadingOverlay>
+          )
         </CardContent>
       </Card>
       {/* Edit URL Modal */}
@@ -406,43 +409,39 @@ export default function AdminPricesPage() {
         actions={(
           <>
             <Button variant="secondary" onClick={()=> setEditUrlRow(null)}>Cancel</Button>
-            <Button onClick={async()=>{
+            <Button disabled={savingUrl} onClick={async()=>{
               if (!editUrlRow) return;
               try{
+                setSavingUrl(true);
                 await fetch('/api/admin/prices', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: editUrlRow.retailer, timestamp: editUrlRow.timestamp, url: editUrlValue }) });
                 await refreshRows();
                 setEditUrlRow(null);
                 showToast('URL updated');
               }catch{ showToast('Failed to update URL'); }
-            }}>Save</Button>
+              finally { setSavingUrl(false); }
+            }}>{savingUrl ? (<span className="inline-flex items-center gap-1"><Spinner size="sm" /> Saving…</span>) : 'Save'}</Button>
           </>
         )}
       >
         <Input value={editUrlValue} onChange={(e)=> setEditUrlValue(e.target.value)} placeholder="https://..." />
       </Modal>
 
-      {/* Delete Confirm Modal */}
-      <Modal
+      {/* Delete Confirm Dialog */}
+      <ConfirmDialog
         open={!!deleteRow}
-        onClose={()=> setDeleteRow(null)}
         title="Delete Price Entry"
-        actions={(
-          <>
-            <Button variant="secondary" onClick={()=> setDeleteRow(null)}>Cancel</Button>
-            <Button onClick={async()=>{
-              if (!deleteRow) return;
-              try{
-                await fetch('/api/admin/prices', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: deleteRow.retailer, timestamp: deleteRow.timestamp }) });
-                await refreshRows();
-                setDeleteRow(null);
-                showToast('Deleted');
-              }catch{ showToast('Delete failed'); }
-            }}>Delete</Button>
-          </>
-        )}
-      >
-        Are you sure you want to delete this price row?
-      </Modal>
+        description="Are you sure you want to delete this price row?"
+        onCancel={()=> setDeleteRow(null)}
+        onConfirm={async()=>{
+          if (!deleteRow) return;
+          try{
+            await fetch('/api/admin/prices', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, retailer: deleteRow.retailer, timestamp: deleteRow.timestamp }) });
+            await refreshRows();
+            setDeleteRow(null);
+            showToast('Deleted');
+          }catch{ showToast('Delete failed'); }
+        }}
+      />
 
     </div>
   );

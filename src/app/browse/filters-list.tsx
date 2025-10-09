@@ -21,8 +21,32 @@ export default function FiltersList() {
   const [page, setPage] = useState(1);
   const pageSize = 6;
 
+  // Read initial state from URL
+  useEffect(()=>{
+    try {
+      const sp = new URLSearchParams(window.location.search);
+      const p = Number(sp.get('page')||'1')||1; setPage(p);
+      const q0 = sp.get('q'); if (q0) setQ(q0);
+      const t0 = sp.get('type'); if (t0) setType(t0);
+    } catch {}
+  }, []);
+
+  // Reflect filters in URL (without navigation)
+  useEffect(()=>{
+    try {
+      const sp = new URLSearchParams(window.location.search);
+      sp.set('tab','filters');
+      sp.set('page', String(page));
+      if (dq) sp.set('q', dq); else sp.delete('q');
+      if (type) sp.set('type', type); else sp.delete('type');
+      const url = `${window.location.pathname}?${sp.toString()}`;
+      window.history.replaceState({}, '', url);
+    } catch {}
+  }, [dq, type, page]);
+
   useEffect(()=>{ const t = setTimeout(()=> setDq(q), 200); return ()=> clearTimeout(t); }, [q]);
   useEffect(() => {
+    try { const sp = new URLSearchParams(window.location.search); const p = Number(sp.get('page')||'1')||1; setPage(p); } catch {}
     (async () => {
       setLoading(true);
       try {
@@ -65,6 +89,9 @@ export default function FiltersList() {
               <Chip key={t} active={type===t} onClick={() => { setType(type===t?null:t); setPage(1); }}>{t}</Chip>
             ))}
           </div>
+          {(dq || type || page>1) && (
+            <Button variant="secondary" onClick={()=>{ setQ(''); setType(null); setPage(1); }}>Clear</Button>
+          )}
         </div>
       </CardHeader>
       <CardContent className="grid sm:grid-cols-2 gap-3">
@@ -102,7 +129,13 @@ export default function FiltersList() {
           />
         ))}
         {!loading && total > pageSize && (
-          <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />
+          <Pagination page={page} total={total} pageSize={pageSize} makeHref={(p)=> {
+            const sp = new URLSearchParams();
+            sp.set('tab','filters'); sp.set('page', String(p));
+            if (dq) sp.set('q', dq);
+            if (type) sp.set('type', type);
+            return `/browse?${sp.toString()}`;
+          }} />
         )}
       </CardContent>
     </Card>

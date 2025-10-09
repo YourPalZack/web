@@ -7,8 +7,9 @@ import { prisma } from '@aquabuilder/db';
 import type { Metadata } from 'next';
 import BrowsePageView from './page-view';
 
-export function generateMetadata({ searchParams }: { searchParams?: { tab?: string } }): Metadata {
+export function generateMetadata({ searchParams }: { searchParams?: { tab?: string; page?: string } }): Metadata {
   const tab = (searchParams?.tab ?? 'fish').toLowerCase();
+  const page = Number(searchParams?.page ?? '1') || 1;
   const titles: Record<string, string> = {
     fish: 'Browse Fish',
     plants: 'Browse Plants',
@@ -30,7 +31,9 @@ export function generateMetadata({ searchParams }: { searchParams?: { tab?: stri
   };
   const description = descriptions[tab] ?? `${title} for your aquarium build with compatibility and pricing info.`;
   const og = `/api/og?title=${encodeURIComponent(title)}&subtitle=${encodeURIComponent(`Browse • ${tab}`)}`;
-  const canonical = tab === 'fish' ? '/browse' : `/browse?tab=${tab}`;
+  const canonical = tab === 'fish'
+    ? (page > 1 ? `/browse?page=${page}` : '/browse')
+    : `/browse?tab=${tab}${page>1?`&page=${page}`:''}`;
   return {
     title,
     description,

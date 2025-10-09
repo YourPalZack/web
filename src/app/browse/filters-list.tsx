@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip, Skeleton } from '@aquabuilder/ui';
+import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip, Skeleton, ListTile, Thumbnail } from '@aquabuilder/ui';
 import Pagination from './pagination';
 import AmazonBuyLink from './amazon-buy-link';
 import RetailerBadge from './retailer-badge';
@@ -85,22 +85,21 @@ export default function FiltersList() {
         )}
         {error && <div className="text-sm text-red-600">{error}</div>}
         {paged.map((f) => (
-          <div key={f.id} className={`border rounded-2xl p-3 shadow-sm ${equipment.filter === f.id ? 'ring-2 ring-blue-400' : ''}`}>
-            <div className="flex items-start gap-3">
-              <div className="w-12 h-12 rounded bg-sky-100" aria-hidden />
-              <div className="flex-1 min-w-0">
-                <a href={`/part/filters/${f.id}`} className="font-medium hover:underline" onClick={() => {
-                  try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'filters_list', productType: 'FILTER', productId: f.id } })); } catch {}
-                }}>{f.brand ?? '—'} {f.model ?? ''}</a>
-                <div className="text-xs text-gray-600">{f.type} • {f.gph} gph • up to {f.maxTankGal} gal</div>
-                <RetailerBadge productType="FILTER" productId={f.id} />
-                <div className="mt-2 flex justify-between items-center">
-                  <AmazonBuyLink productType="FILTER" productId={f.id} />
-                  <Button onClick={() => choose(f)}>{equipment.filter === f.id ? 'Selected' : 'Select'}</Button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ListTile
+            key={f.id}
+            active={equipment.filter === f.id}
+            title={<span onClick={() => { try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'filters_list', productType: 'FILTER', productId: f.id } })); } catch {} }}>{f.brand ?? '—'} {f.model ?? ''}</span>}
+            href={`/part/filters/${f.id}`}
+            leading={<Thumbnail src={null} alt={`${f.brand ?? ''} ${f.model ?? f.id}`} size={48} />}
+            subtitle={<span>{f.type} • {f.gph} gph • up to {f.maxTankGal} gal</span>}
+            meta={<RetailerBadge productType="FILTER" productId={f.id} />}
+            actions={
+              <>
+                <AmazonBuyLink productType="FILTER" productId={f.id} />
+                <Button onClick={() => choose(f)}>{equipment.filter === f.id ? 'Selected' : 'Select'}</Button>
+              </>
+            }
+          />
         ))}
         {!loading && total > pageSize && (
           <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />

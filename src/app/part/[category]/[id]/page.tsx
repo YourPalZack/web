@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Tooltip } from '@aquabuilder/ui';
+import { Tooltip, Breadcrumb } from '@aquabuilder/ui';
 import dynamic from 'next/dynamic';
 const SparklinePanel = dynamic(()=> import('./sparkline-panel'), { ssr: false });
-import { Chip } from '@aquabuilder/ui';
+import { SpecPills, Thumbnail } from '@aquabuilder/ui';
 import dynamic from 'next/dynamic';
 const AmazonBuyLink = dynamic(() => import('../../../browse/amazon-buy-link'), { ssr: false });
 import { prisma } from '@aquabuilder/db';
@@ -105,39 +105,28 @@ export default async function PartPage({ params }: { params: { category: Categor
         singlePrice: offerPrice,
         singleUrl: offerUrl,
       })} />
-      <div className="text-xs text-gray-500"><Link href="/browse">Browse</Link> / <Link href={`/browse?tab=${category}`}>{humanCat(category)}</Link></div>
-      <h1 className="text-2xl font-semibold">{title}</h1>
-      <div className="flex flex-wrap gap-2 text-xs">
-        {category==='filters' && (
-          <>
-            <Chip active={false}>Type: {part.type}</Chip>
-            <Chip active={false}>{part.gph} gph</Chip>
-            <Chip active={false}>max {part.maxTankGal} gal</Chip>
-          </>
-        )}
-        {category==='heaters' && (
-          <>
-            <Chip active={false}>{part.wattage} W</Chip>
-            <Chip active={false}>{part.minTankGal}–{part.maxTankGal} gal</Chip>
-          </>
-        )}
-        {category==='lights' && (
-          <>
-            <Chip active={false}>{part.type}</Chip>
-            <Chip active={false}>{part.intensity}</Chip>
-            {part.coverageCm ? <Chip active={false}>{part.coverageCm} cm</Chip> : null}
-          </>
-        )}
-        {category==='substrate' && (
-          <>
-            <Chip active={false}>{part.type}</Chip>
-            {part.color ? <Chip active={false}>{part.color}</Chip> : null}
-            {part.plantFriendly ? <Chip active={false}>plant-friendly</Chip> : null}
-          </>
-        )}
-        {category==='equipment' && (
-          <Chip active={false}>{part.category}</Chip>
-        )}
+      <Breadcrumb items={[
+        { href: '/', label: 'Home' },
+        { href: '/browse', label: 'Browse' },
+        { href: `/browse?tab=${category}`, label: humanCat(category) },
+        { href: `/part/${category}/${id}`, label: title },
+      ]} />
+      <div className="flex items-start gap-3">
+        <Thumbnail src={null} alt={title} size={56} />
+        <div className="flex-1">
+          <h1 className="text-2xl font-semibold">{title}</h1>
+          <SpecPills items={
+        category==='filters' ? [
+          `Type: ${part.type}`, `${part.gph} gph`, `max ${part.maxTankGal} gal`
+        ] : category==='heaters' ? [
+          `${part.wattage} W`, `${part.minTankGal}–${part.maxTankGal} gal`
+        ] : category==='lights' ? [
+          `${part.type}`, `${part.intensity}`, part.coverageCm ? `${part.coverageCm} cm` : null
+        ] : category==='substrate' ? [
+          `${part.type}`, part.color ?? null, part.plantFriendly ? 'plant-friendly' : null
+        ] : [part.category]
+          } />
+        </div>
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-2">

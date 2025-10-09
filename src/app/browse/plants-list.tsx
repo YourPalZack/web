@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { Button, Card, CardHeader, CardTitle, CardContent, QuantityStepper, Input, Chip, Skeleton } from '@aquabuilder/ui';
+import { Button, Card, CardHeader, CardTitle, CardContent, QuantityStepper, Input, Chip, Skeleton, ListTile, Thumbnail } from '@aquabuilder/ui';
 import Pagination from './pagination';
 import { useBuildStore } from '../../lib/store';
 import { logEvent } from '../../lib/analytics-client';
@@ -99,23 +99,14 @@ export default function PlantsList() {
         {paged.map((p) => {
           const inBuild = livestock.find((l) => l.type === 'PLANT' && l.id === p.id);
           return (
-            <div key={p.id} className="border rounded-2xl p-3 flex items-center justify-between shadow-sm">
-              <div>
-                <a
-                  href={`/species/plants/${p.id}`}
-                  className="font-medium underline-offset-2 hover:underline"
-                  onClick={() => { try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'species_detail_nav_click', props: { from: 'plants_list', id: p.id } })); } catch {} }}
-                >
-                  {p.commonName}
-                </a>
-                <div className="text-xs text-gray-600">Light {p.lightNeeds} • {p.co2Required ? 'CO2' : 'No CO2'} • {p.difficulty}</div>
-              </div>
-              {inBuild ? (
-                <QuantityStepper value={inBuild.qty} onChange={(v) => setQty(p.id, v)} min={0} />
-              ) : (
-                <Button onClick={() => add(p)}>Add</Button>
-              )}
-            </div>
+            <ListTile
+              key={p.id}
+              leading={<Thumbnail src={null} alt={p.commonName} size={48} />}
+              title={<span onClick={() => { try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'species_detail_nav_click', props: { from: 'plants_list', id: p.id } })); } catch {} }}>{p.commonName}</span>}
+              href={`/species/plants/${p.id}`}
+              subtitle={<span>Light {p.lightNeeds} • {p.co2Required ? 'CO2' : 'No CO2'} • {p.difficulty}</span>}
+              actions={inBuild ? (<QuantityStepper value={inBuild.qty} onChange={(v) => setQty(p.id, v)} min={0} />) : (<Button onClick={() => add(p)}>Add</Button>)}
+            />
           );
         })}
         {!loading && total > pageSize && (

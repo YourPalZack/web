@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip, Skeleton } from '@aquabuilder/ui';
+import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip, Skeleton, EmptyState, ListTile, Thumbnail } from '@aquabuilder/ui';
 import Pagination from './pagination';
 import { useBuildStore } from '../../lib/store';
 import { logEvent } from '../../lib/analytics-client';
@@ -72,23 +72,25 @@ export default function ExtrasList() {
             </div>
           ))
         )}
+        {items.length === 0 && !dq && (
+          <div className="sm:col-span-2"><EmptyState title="No extras yet" description="Try a different category or search term." /></div>
+        )}
         {items.map((e) => (
-          <div key={e.id} className={`border rounded-2xl p-3 shadow-sm ${equipment.extras.includes(e.id) ? 'ring-2 ring-blue-400' : ''}`}>
-            <div className="flex items-start gap-3">
-              <div className="w-12 h-12 rounded bg-sky-100" aria-hidden />
-              <div className="flex-1 min-w-0">
-                <a href={`/part/equipment/${e.id}`} className="font-medium hover:underline" onClick={() => {
-                  try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'equipment_list', productType: 'EQUIPMENT', productId: e.id } })); } catch {}
-                }}>{e.category}</a>
-                <div className="text-xs text-gray-600">{e.brand ?? '—'} {e.model ?? ''}</div>
-                <RetailerBadge productType="EQUIPMENT" productId={e.id} />
-                <div className="mt-2 flex justify-between items-center">
-                  <AmazonBuyLink productType="EQUIPMENT" productId={e.id} />
-                  <Button onClick={() => toggle(e.id)}>{equipment.extras.includes(e.id) ? 'Remove' : 'Add'}</Button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ListTile
+            key={e.id}
+            active={equipment.extras.includes(e.id)}
+            title={<span onClick={() => { try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'equipment_list', productType: 'EQUIPMENT', productId: e.id } })); } catch {} }}>{e.category}</span>}
+            href={`/part/equipment/${e.id}`}
+            leading={<Thumbnail src={null} alt={`${e.category}`} size={48} />}
+            subtitle={<span>{e.brand ?? '—'} {e.model ?? ''}</span>}
+            meta={<RetailerBadge productType="EQUIPMENT" productId={e.id} />}
+            actions={
+              <>
+                <AmazonBuyLink productType="EQUIPMENT" productId={e.id} />
+                <Button onClick={() => toggle(e.id)}>{equipment.extras.includes(e.id) ? 'Remove' : 'Add'}</Button>
+              </>
+            }
+          />
         ))}
         {total > pageSize && (
           <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />

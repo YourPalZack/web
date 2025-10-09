@@ -17,7 +17,7 @@ export default function RetailerBadge({ productType, productId }:{ productType: 
   }, [productType, productId]);
   if (!row) return null;
   return (
-    <div className="text-[11px] text-gray-600 inline-flex items-center gap-1" title={new Date(row.timestamp).toLocaleString()}>
+    <div className="text-[11px] text-gray-600 inline-flex items-center gap-1" title={new Date(row.timestamp).toLocaleString()} aria-label={`Latest $${(row.priceCents/100).toFixed(2)} via ${row.retailer}`}>
       <img src={retailerFavicon(row.retailer)} alt={row.retailer} className="w-3 h-3" />
       <span>Latest: ${ (row.priceCents/100).toFixed(2) } via {row.retailer}</span>
     </div>
@@ -32,4 +32,3 @@ function retailerFavicon(name: string): string {
   if (lower.includes('bulk reef') || lower.includes('brs') || lower.includes('bulkreefsupply')) return 'https://www.bulkreefsupply.com/favicon.ico';
   return '/globe.svg';
 }
-

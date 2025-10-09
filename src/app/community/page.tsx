@@ -1,6 +1,7 @@
 type BuildRow = { id:string; name:string; buildType:string };
 import CommunityTrackLink from './track-link';
 import CommunityFilterLink from './filter-link';
+import { PaginationNumeric } from '@aquabuilder/ui';
 import CommunityPageView from './page-view';
 import PaginationHead from './pagination-head';
 
@@ -62,24 +63,8 @@ export default async function CommunityPage({ searchParams }: { searchParams?: {
           </CommunityTrackLink>
         ))}
         {total > pageSize && (
-          <div className="col-span-full flex justify-between items-center pt-2 text-xs">
-            <a className={`px-2 py-1 border rounded ${page<=1?'pointer-events-none opacity-50':''}`} href={`/community?${new URLSearchParams({ ...(type?{type}:{}), page: String(Math.max(1,page-1)) }).toString()}`}>Prev</a>
-            <div className="flex items-center gap-1">
-              {(()=>{ const last = Math.max(1, Math.ceil(total / pageSize)); const nums:number[]=[]; const start=Math.max(1, page-2); const end=Math.min(last, page+2); for(let i=start;i<=end;i++) nums.push(i); return (
-                <>
-                  {start>1 && <a className="px-2 py-1 border rounded" href={`/community?${new URLSearchParams({ ...(type?{type}:{}), page: '1' }).toString()}`}>1</a>}
-                  {start>2 && <span className="px-1">…</span>}
-                  {nums.map(n => n===page ? (
-                    <span key={n} className="px-2 py-1 border rounded bg-gray-100">{n}</span>
-                  ) : (
-                    <a key={n} className="px-2 py-1 border rounded" href={`/community?${new URLSearchParams({ ...(type?{type}:{}), page: String(n) }).toString()}`}>{n}</a>
-                  ))}
-                  {end<last-1 && <span className="px-1">…</span>}
-                  {end<last && <a className="px-2 py-1 border rounded" href={`/community?${new URLSearchParams({ ...(type?{type}:{}), page: String(last) }).toString()}`}>{last}</a>}
-                </>
-              ); })()}
-            </div>
-            <a className={`px-2 py-1 border rounded ${page>=Math.ceil(total/pageSize)?'pointer-events-none opacity-50':''}`} href={`/community?${new URLSearchParams({ ...(type?{type}:{}), page: String(Math.min(Math.ceil(total/pageSize), page+1)) }).toString()}`}>Next</a>
+          <div className="col-span-full pt-2 text-xs">
+            <PaginationNumeric page={page} total={total} pageSize={pageSize} makeHref={(p)=> `/community?${new URLSearchParams({ ...(type?{type}:{}), ...(p>1?{page:String(p)}:{}) }).toString()}`} />
           </div>
         )}
       </div>

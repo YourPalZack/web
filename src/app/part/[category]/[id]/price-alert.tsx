@@ -23,9 +23,9 @@ export default function PriceAlert({ productType, productId }:{ productType: str
       <span className="text-gray-600">Alert me if price ≤</span>
       <div className="flex items-center gap-1">
         <span>$</span>
-        <Input value={price} onChange={(e)=>setPrice(e.target.value)} placeholder="39.99" inputMode="decimal" className="w-24" />
+        <Input aria-label="Target price" value={price} onChange={(e)=>setPrice(e.target.value)} placeholder="39.99" inputMode="decimal" className="w-24" />
       </div>
-      <Button size="sm" onClick={create} disabled={loading}>Create Alert</Button>
+      <Button size="sm" onClick={create} disabled={loading} aria-label="Create price alert">Create Alert</Button>
     </div>
   );
 }

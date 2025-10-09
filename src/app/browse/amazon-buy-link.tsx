@@ -19,7 +19,7 @@ export default function AmazonBuyLink({ productType, productId }:{ productType: 
   if (!url) return null;
   return (
     <Tooltip content="External link (affiliate)">
-      <a href={url} target="_blank" rel="nofollow sponsored noopener noreferrer" onClick={() => {
+      <a href={url} target="_blank" rel="nofollow sponsored noopener noreferrer" aria-label={`Buy on Amazon: ${productType} ${productId}`} onClick={() => {
         try { logEvent('amazon_buy_click', { productType, productId, url }); } catch {}
       }}>
         <Button variant="secondary" size="sm">

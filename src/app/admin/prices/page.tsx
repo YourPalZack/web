@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent, Input, Button, Modal } from '@aquabuilder/ui';
+import { Card, CardHeader, CardTitle, CardContent, Input, Button, Modal, HostBadge, HostFilter, Combobox, Spinner } from '@aquabuilder/ui';
 import { showToast } from '@aquabuilder/ui';
 import { signOut } from 'next-auth/react';
 import AdminPageView from '../page-view';
@@ -27,12 +27,26 @@ export default function AdminPricesPage() {
   const [normTimer, setNormTimer] = useState<any>(null);
   const [sortBy, setSortBy] = useState<'retailer'|'price'|'timestamp'>('timestamp');
   const [sortDir, setSortDir] = useState<'asc'|'desc'>('desc');
+  const [loadingAmazon, setLoadingAmazon] = useState(false);
   function setSort(col: 'retailer'|'price'|'timestamp'){
     setSortBy(prev => prev===col ? prev : col);
     setSortDir(prev => (sortBy===col ? (prev==='asc'?'desc':'asc') : 'asc'));
   }
+  const [filterRetailer, setFilterRetailer] = useState('');
+  const [hostFilter, setHostFilter] = useState('');
+  const hostOptions = useMemo(()=>{
+    const s = new Set<string>();
+    for (const r of rows) {
+      try { const u = new URL((r as any).url ?? ''); if (u.hostname) s.add(u.hostname); } catch {}
+    }
+    return Array.from(s).sort();
+  }, [rows]);
   const sortedRows = useMemo(()=>{
-    const arr = rows.filter(r => r.retailer.toLowerCase().includes(filterRetailer.toLowerCase()));
+    const arr = rows.filter(r => {
+      if (!r.retailer.toLowerCase().includes(filterRetailer.toLowerCase())) return false;
+      if (!hostFilter) return true;
+      try { const u = new URL((r as any).url ?? ''); return u.hostname === hostFilter; } catch { return false; }
+    });
     arr.sort((a,b)=>{
       let va: any, vb: any;
       if (sortBy==='retailer'){ va=a.retailer?.toLowerCase()||''; vb=b.retailer?.toLowerCase()||''; }
@@ -42,7 +56,7 @@ export default function AdminPricesPage() {
       return sortDir==='asc' ? cmp : -cmp;
     });
     return arr;
-  }, [rows, sortBy, sortDir]);
+  }, [rows, sortBy, sortDir, filterRetailer, hostFilter]);
   const [deleteRow, setDeleteRow] = useState<{ retailer: string; timestamp: string } | null>(null);
   const [editUrlRow, setEditUrlRow] = useState<{ retailer: string; timestamp: string } | null>(null);
   const [editUrlValue, setEditUrlValue] = useState<string>('');
@@ -158,10 +172,12 @@ export default function AdminPricesPage() {
           </div>
           <div>
             <div className="text-gray-600">Product</div>
-            <select className="border rounded-md px-2 py-2 w-full" value={productId} onChange={(e)=>setProductId(e.target.value)}>
-              <option value="">Select…</option>
-              {options.filter((o)=>o.productType===productType).map((o)=>(<option key={o.id} value={o.id}>{o.label} ({o.id})</option>))}
-            </select>
+            <Combobox
+              value={productId}
+              onChange={setProductId}
+              options={options.filter((o)=>o.productType===productType).map((o)=>({ value: o.id, label: `${o.label} (${o.id})` }))}
+              placeholder="Select product…"
+            />
           </div>
           <div>
             <div className="text-gray-600">Retailer</div>
@@ -203,9 +219,10 @@ export default function AdminPricesPage() {
                 if (r.ok) showToast('Amazon link saved'); else showToast('Failed to save ASIN');
               } catch { showToast('Failed to save ASIN'); }
             }}>Save Amazon Link</Button>
-            <Button variant="secondary" onClick={async()=>{
+            <Button variant="secondary" disabled={loadingAmazon} onClick={async()=>{
               try {
                 if (!productId || !url) return;
+                setLoadingAmazon(true);
                 const res = await fetch('/api/admin/amazon/fetch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ productType, productId, url }) });
                 const txt = await res.text();
                 const data = txt ? JSON.parse(txt) : {};
@@ -230,7 +247,8 @@ export default function AdminPricesPage() {
                   showToast('Amazon fetch failed');
                 }
               } catch { showToast('Amazon fetch failed'); }
-            }}>Fetch Latest from Amazon</Button>
+              finally { setLoadingAmazon(false); }
+            }}>{loadingAmazon ? (<span className="inline-flex items-center gap-2"><Spinner size="sm" /> Fetching…</span>) : 'Fetch Latest from Amazon'}</Button>
             <Button onClick={save} disabled={!productId || !price}>Save Price</Button>
           </div>
         </CardContent>
@@ -245,13 +263,18 @@ export default function AdminPricesPage() {
               <div className="flex justify-end">
                 <Input value={filterRetailer} onChange={(e)=> setFilterRetailer(e.target.value)} placeholder="Filter by retailer…" className="w-56" />
               </div>
+            <div className="space-y-2">
+              <div className="flex justify-end gap-2 items-center">
+                <Input value={filterRetailer} onChange={(e)=> setFilterRetailer(e.target.value)} placeholder="Filter by retailer…" className="w-56" />
+                <HostFilter options={hostOptions} value={hostFilter} onChange={setHostFilter} />
+              </div>
               <div className="overflow-auto max-h-96">
               <table className="w-full text-sm">
                 <thead className="bg-white">
                   <tr className="text-left text-gray-600">
-                    <th className="py-2 pr-4 sticky top-0 bg-white cursor-pointer select-none" onClick={()=>setSort('retailer')}>Retailer {sortBy==='retailer' ? (sortDir==='asc'?'▲':'▼') : ''}</th>
-                    <th className="py-2 pr-4 sticky top-0 bg-white cursor-pointer select-none" onClick={()=>setSort('price')}>Price {sortBy==='price' ? (sortDir==='asc'?'▲':'▼') : ''}</th>
-                    <th className="py-2 sticky top-0 bg-white cursor-pointer select-none" onClick={()=>setSort('timestamp')}>Timestamp {sortBy==='timestamp' ? (sortDir==='asc'?'▲':'▼') : ''}</th>
+                    <SortableHeader id="retailer" activeId={sortBy} dir={sortDir} onSort={(id)=> setSort(id as any)} className="pr-4">Retailer</SortableHeader>
+                    <SortableHeader id="price" activeId={sortBy} dir={sortDir} onSort={(id)=> setSort(id as any)} className="pr-4">Price</SortableHeader>
+                    <SortableHeader id="timestamp" activeId={sortBy} dir={sortDir} onSort={(id)=> setSort(id as any)}>Timestamp</SortableHeader>
                     <th className="py-2 sticky top-0 bg-white">Link</th>
                     <th className="py-2 sticky top-0 bg-white">Actions</th>
                   </tr>
@@ -326,7 +349,12 @@ export default function AdminPricesPage() {
                               <span className="text-[11px] text-red-600">{urlErrors[`${row.retailer}|${row.timestamp}`]}</span>
                             )}
                           </div>
-                          {(row as any).url ? (<a href={(row as any).url} target="_blank" rel="nofollow sponsored noopener noreferrer" className="text-blue-600 underline">Open</a>) : null}
+                          {(row as any).url ? (
+                            <div className="flex items-center gap-2">
+                              <HostBadge url={(row as any).url} />
+                              <a href={(row as any).url} target="_blank" rel="nofollow sponsored noopener noreferrer" className="text-blue-600 underline" aria-label={`Open ${row.retailer} link from ${new Date(row.timestamp).toLocaleString()}`}>Open</a>
+                            </div>
+                          ) : null}
                         </div>
                       </td>
                       <td className="py-2">

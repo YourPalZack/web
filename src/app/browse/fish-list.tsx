@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from 'react';
-import { Button, Card, CardHeader, CardTitle, CardContent, Input, QuantityStepper, Chip, Skeleton } from '@aquabuilder/ui';
+import { Button, Card, CardHeader, CardTitle, CardContent, Input, QuantityStepper, Chip, Skeleton, ListTile, Thumbnail } from '@aquabuilder/ui';
 import Pagination from './pagination';
 import { calcBioloadPct } from '@aquabuilder/core';
 import { useBuildStore, type WarningItem } from '../../lib/store';
@@ -124,26 +124,15 @@ export function FishList() {
         {paged.map((f) => {
           const inBuild = livestock.find((l) => l.type === 'FISH' && l.id === f.id);
           return (
-            <div key={f.id} className="border rounded-md p-3 flex items-center justify-between">
-              <div>
-                <a
-                  href={`/species/fish/${f.id}`}
-                  className="font-medium underline-offset-2 hover:underline"
-                  onClick={() => { try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'species_detail_nav_click', props: { from: 'fish_list', id: f.id } })); } catch {} }}
-                >
-                  {f.commonName}
-                </a>
-                <div className="text-xs text-gray-600">
-                  Size {f.adultSizeCm} cm • Min {f.minTankGal} gal • {f.temperament}
-                </div>
-                <div className="text-xs text-gray-500">{f.tempMinC}–{f.tempMaxC} °C • pH {f.phMin}–{f.phMax}</div>
-              </div>
-              {inBuild ? (
-                <QuantityStepper value={inBuild.qty} onChange={(v) => setQty(f.id, v)} min={0} />
-              ) : (
-                <Button onClick={() => add(f)}>Add</Button>
-              )}
-            </div>
+            <ListTile
+              key={f.id}
+              leading={<Thumbnail src={null} alt={f.commonName} size={48} />}
+              title={<span onClick={() => { try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'species_detail_nav_click', props: { from: 'fish_list', id: f.id } })); } catch {} }}>{f.commonName}</span>}
+              href={`/species/fish/${f.id}`}
+              subtitle={<span>Size {f.adultSizeCm} cm • Min {f.minTankGal} gal • {f.temperament}</span>}
+              meta={<span className="text-xs text-gray-500">{f.tempMinC}–{f.tempMaxC} °C • pH {f.phMin}–{f.phMax}</span>}
+              actions={inBuild ? (<QuantityStepper value={inBuild.qty} onChange={(v) => setQty(f.id, v)} min={0} />) : (<Button onClick={() => add(f)}>Add</Button>)}
+            />
           );
         })}
         {!loading && total > pageSize && (

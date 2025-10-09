@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip, Skeleton } from '@aquabuilder/ui';
+import { Button, Card, CardHeader, CardTitle, CardContent, Input, Chip, Skeleton, ListTile, Thumbnail } from '@aquabuilder/ui';
 import Pagination from './pagination';
 import AmazonBuyLink from './amazon-buy-link';
 import RetailerBadge from './retailer-badge';
@@ -89,22 +89,21 @@ export default function HeatersList() {
         )}
         {error && <div className="text-sm text-red-600">{error}</div>}
         {paged.map((h) => (
-          <div key={h.id} className={`border rounded-2xl p-3 shadow-sm ${equipment.heater === h.id ? 'ring-2 ring-blue-400' : ''}`}>
-            <div className="flex items-start gap-3">
-              <div className="w-12 h-12 rounded bg-sky-100" aria-hidden />
-              <div className="flex-1 min-w-0">
-                <a href={`/part/heaters/${h.id}`} className="font-medium hover:underline" onClick={() => {
-                  try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'heaters_list', productType: 'HEATER', productId: h.id } })); } catch {}
-                }}>{h.brand ?? '—'} {h.model ?? ''}</a>
-                <div className="text-xs text-gray-600">{h.wattage} W • {h.minTankGal}–{h.maxTankGal} gal</div>
-                <RetailerBadge productType="HEATER" productId={h.id} />
-                <div className="mt-2 flex justify-between items-center">
-                  <AmazonBuyLink productType="HEATER" productId={h.id} />
-                  <Button onClick={() => choose(h)}>{equipment.heater === h.id ? 'Selected' : 'Select'}</Button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ListTile
+            key={h.id}
+            active={equipment.heater === h.id}
+            title={<span onClick={() => { try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_nav_click', props: { from: 'heaters_list', productType: 'HEATER', productId: h.id } })); } catch {} }}>{h.brand ?? '—'} {h.model ?? ''}</span>}
+            href={`/part/heaters/${h.id}`}
+            leading={<Thumbnail src={null} alt={`${h.brand ?? ''} ${h.model ?? h.id}`} size={48} />}
+            subtitle={<span>{h.wattage} W • {h.minTankGal}–{h.maxTankGal} gal</span>}
+            meta={<RetailerBadge productType="HEATER" productId={h.id} />}
+            actions={
+              <>
+                <AmazonBuyLink productType="HEATER" productId={h.id} />
+                <Button onClick={() => choose(h)}>{equipment.heater === h.id ? 'Selected' : 'Select'}</Button>
+              </>
+            }
+          />
         ))}
         {!loading && total > pageSize && (
           <Pagination page={page} total={total} pageSize={pageSize} onPage={setPage} />

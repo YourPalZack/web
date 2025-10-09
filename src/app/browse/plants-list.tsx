@@ -74,14 +74,30 @@ export default function PlantsList() {
         <div className="flex items-center gap-2">
           <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search plants..." className="w-48" />
           <div className="hidden sm:flex items-center gap-2">
-            {(['LOW','MEDIUM','HIGH'] as const).map((t) => (
-              <Chip key={t} active={light===t} onClick={() => { setLight(light===t?null:t); setPage(1); }}>{t}</Chip>
-            ))}
-            {(['BEGINNER','INTERMEDIATE','ADVANCED'] as const).map((t) => (
-              <Chip key={t} active={difficulty===t} onClick={() => { setDifficulty(difficulty===t?null:t); setPage(1); }}>{t}</Chip>
-            ))}
-            <Chip active={needCo2===true} onClick={() => { setNeedCo2(needCo2===true?null:true); setPage(1); }}>CO2</Chip>
-            <Chip active={needCo2===false} onClick={() => { setNeedCo2(needCo2===false?null:false); setPage(1); }}>No CO2</Chip>
+            {(['LOW','MEDIUM','HIGH'] as const).map((t) => {
+              const next = light===t ? null : t;
+              const sp = new URLSearchParams(); sp.set('tab','plants'); sp.set('page','1'); if(dq) sp.set('q', dq); if(next) sp.set('light', next); if(difficulty) sp.set('difficulty', difficulty); if(needCo2!=null) sp.set('co2', needCo2 ? '1' : '0');
+              return (
+                <a key={t} href={`/browse?${sp.toString()}`}><Chip active={light===t}>{t}</Chip></a>
+              );
+            })}
+            {(['BEGINNER','INTERMEDIATE','ADVANCED'] as const).map((t) => {
+              const next = difficulty===t ? null : t;
+              const sp = new URLSearchParams(); sp.set('tab','plants'); sp.set('page','1'); if(dq) sp.set('q', dq); if(light) sp.set('light', light); if(next) sp.set('difficulty', next); if(needCo2!=null) sp.set('co2', needCo2 ? '1' : '0');
+              return (
+                <a key={t} href={`/browse?${sp.toString()}`}><Chip active={difficulty===t}>{t}</Chip></a>
+              );
+            })}
+            {(() => {
+              const next = needCo2===true ? null : true;
+              const sp = new URLSearchParams(); sp.set('tab','plants'); sp.set('page','1'); if(dq) sp.set('q', dq); if(light) sp.set('light', light); if(difficulty) sp.set('difficulty', difficulty); if(next!=null) sp.set('co2', next ? '1' : '0');
+              return <a href={`/browse?${sp.toString()}`}><Chip active={needCo2===true}>CO2</Chip></a>;
+            })()}
+            {(() => {
+              const next = needCo2===false ? null : false;
+              const sp = new URLSearchParams(); sp.set('tab','plants'); sp.set('page','1'); if(dq) sp.set('q', dq); if(light) sp.set('light', light); if(difficulty) sp.set('difficulty', difficulty); if(next!=null) sp.set('co2', next ? '1' : '0');
+              return <a href={`/browse?${sp.toString()}`}><Chip active={needCo2===false}>No CO2</Chip></a>;
+            })()}
           </div>
           {(dq || light || difficulty || needCo2!=null || page>1) && (
             <Button variant="secondary" onClick={()=>{ setQ(''); setLight(null); setDifficulty(null); setNeedCo2(null); setPage(1); }}>Clear</Button>

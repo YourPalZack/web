@@ -58,9 +58,15 @@ export default function ExtrasList() {
         <div className="flex items-center gap-2">
           <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search extras..." className="w-48" />
           <div className="hidden sm:flex items-center gap-2">
-            {categories.map((c) => (
-              <Chip key={c} active={category===c} onClick={() => { setCategory(category===c?null:c); setPage(1); }}>{c}</Chip>
-            ))}
+            {categories.map((c) => {
+              const next = category===c ? null : c;
+              const sp = new URLSearchParams(); sp.set('tab','extras'); sp.set('page','1'); if(dq) sp.set('q', dq); if(next) sp.set('category', next);
+              return (
+                <a key={c} href={`/browse?${sp.toString()}`}>
+                  <Chip active={category===c}>{c}</Chip>
+                </a>
+              );
+            })}
           </div>
           {(dq || category || page>1) && (
             <Button variant="secondary" onClick={()=>{ setQ(''); setCategory(null); setPage(1); }}>Clear</Button>

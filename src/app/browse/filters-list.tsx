@@ -85,9 +85,16 @@ export default function FiltersList() {
         <div className="flex items-center gap-2">
           <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search filters..." className="w-48" />
           <div className="hidden sm:flex items-center gap-2">
-            {['HOB','CANISTER','SPONGE'].map((t) => (
-              <Chip key={t} active={type===t} onClick={() => { setType(type===t?null:t); setPage(1); }}>{t}</Chip>
-            ))}
+            {['HOB','CANISTER','SPONGE'].map((t) => {
+              const next = type===t ? null : t;
+              const sp = new URLSearchParams();
+              sp.set('tab','filters'); sp.set('page','1'); if (dq) sp.set('q', dq); if (next) sp.set('type', next);
+              return (
+                <a key={t} href={`/browse?${sp.toString()}`}>
+                  <Chip active={type===t}>{t}</Chip>
+                </a>
+              );
+            })}
           </div>
           {(dq || type || page>1) && (
             <Button variant="secondary" onClick={()=>{ setQ(''); setType(null); setPage(1); }}>Clear</Button>

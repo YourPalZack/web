@@ -81,9 +81,15 @@ export default function LightsList() {
         <div className="flex items-center gap-2">
           <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search lights..." className="w-48" />
           <div className="hidden sm:flex items-center gap-2">
-            {(['LOW','MEDIUM','HIGH'] as const).map((t) => (
-              <Chip key={t} active={intensity===t} onClick={() => { setIntensity(intensity===t?null:t); setPage(1); }}>{t}</Chip>
-            ))}
+            {(['LOW','MEDIUM','HIGH'] as const).map((t) => {
+              const next = intensity===t ? null : t;
+              const sp = new URLSearchParams(); sp.set('tab','lights'); sp.set('page','1'); if (dq) sp.set('q', dq); if (next) sp.set('intensity', next);
+              return (
+                <a key={t} href={`/browse?${sp.toString()}`}>
+                  <Chip active={intensity===t}>{t}</Chip>
+                </a>
+              );
+            })}
           </div>
           {(dq || intensity || page>1) && (
             <Button variant="secondary" onClick={()=>{ setQ(''); setIntensity(null); setPage(1); }}>Clear</Button>

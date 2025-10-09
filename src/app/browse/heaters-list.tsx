@@ -86,9 +86,15 @@ export default function HeatersList() {
         <div className="flex items-center gap-2">
           <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search heaters..." className="w-48" />
           <div className="hidden sm:flex items-center gap-2">
-            {(['<=100','101-200','201-300','>300'] as const).map((t) => (
-              <Chip key={t} active={bucket===t} onClick={() => { setBucket(bucket===t?null:t); setPage(1); }}>{t} W</Chip>
-            ))}
+            {(['<=100','101-200','201-300','>300'] as const).map((t) => {
+              const next = bucket===t ? null : t;
+              const sp = new URLSearchParams(); sp.set('tab','heaters'); sp.set('page','1'); if (dq) sp.set('q', dq); if (next) sp.set('bucket', next);
+              return (
+                <a key={t} href={`/browse?${sp.toString()}`}>
+                  <Chip active={bucket===t}>{t} W</Chip>
+                </a>
+              );
+            })}
           </div>
           {(dq || bucket || page>1) && (
             <Button variant="secondary" onClick={()=>{ setQ(''); setBucket(null); setPage(1); }}>Clear</Button>

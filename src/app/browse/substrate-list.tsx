@@ -74,9 +74,15 @@ export default function SubstrateList() {
         <div className="flex items-center gap-2">
           <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search substrate..." className="w-48" />
           <div className="hidden sm:flex items-center gap-2">
-            {(['SAND','GRAVEL','SOIL','BARE_BOTTOM'] as const).map((t) => (
-              <Chip key={t} active={type===t} onClick={() => setType(type===t?null:t)}>{t}</Chip>
-            ))}
+            {(['SAND','GRAVEL','SOIL','BARE_BOTTOM'] as const).map((t) => {
+              const next = type===t ? null : t;
+              const sp = new URLSearchParams(); sp.set('tab','substrate'); sp.set('page','1'); if(dq) sp.set('q', dq); if(next) sp.set('substrateType', next);
+              return (
+                <a key={t} href={`/browse?${sp.toString()}`}>
+                  <Chip active={type===t}>{t}</Chip>
+                </a>
+              );
+            })}
           </div>
           {buildType && (
             <span className="text-xs text-gray-500">

@@ -102,10 +102,11 @@ export function FishList() {
         <div className="flex gap-2 items-center">
           <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search fish..." className="w-48" />
           <div className="hidden sm:flex items-center gap-2">
-            <Chip active={minTank===10} onClick={() => { setMinTank(minTank===10?null:10); setPage(1); }}>10g+</Chip>
-            <Chip active={minTank===20} onClick={() => { setMinTank(minTank===20?null:20); setPage(1); }}>20g+</Chip>
-            <Chip active={minTank===40} onClick={() => { setMinTank(minTank===40?null:40); setPage(1); }}>40g+</Chip>
-            <Chip active={minTank===75} onClick={() => { setMinTank(minTank===75?null:75); setPage(1); }}>75g+</Chip>
+            {[10,20,40,75].map((n)=> {
+              const next = minTank===n ? null : n;
+              const sp = new URLSearchParams(); sp.set('tab','fish'); sp.set('page','1'); if(dq) sp.set('q', dq); if(next!=null) sp.set('minTank', String(next));
+              return <a key={n} href={`/browse?${sp.toString()}`}><Chip active={minTank===n}>{n}g+</Chip></a>;
+            })}
           </div>
           {(dq || minTank!=null || page>1) && (
             <Button variant="secondary" onClick={()=>{ setQ(''); setMinTank(null); setPage(1); }}>Clear</Button>

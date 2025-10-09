@@ -1,18 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  /* Base colors */
-  --background: #f8fafc; /* slate-50 */
-  --foreground: #0f172a; /* slate-900 */
-  --muted: #475569; /* slate-600 */
-  --border: #e2e8f0; /* slate-200 */
-  --card: #ffffff;
-  --accent: #0ea5e9; /* sky-500 */
-  --accent-foreground: #06202d;
-  --ring: #38bdf8; /* sky-400 */
-  --success: #16a34a; /* green-600 */
-  --warning: #ca8a04; /* yellow-600 */
-  --danger: #dc2626; /* red-600 */
+  /* Material Design 3 — Light theme */
+  --background: #fafafa; /* md grey 50 */
+  --foreground: #1f2937; /* slate-800 for good contrast */
+  --muted: #616161;      /* md grey 700 */
+  --border: #e0e0e0;     /* md grey 300 */
+  --card: #ffffff;       /* surface */
+
+  /* Primary/Accent — Material Green */
+  --accent: #4caf50;           /* md green 500 */
+  --accent-foreground: #ffffff;/* on-primary */
+  --ring: #66bb6a;             /* md green 400 */
+
+  /* Status colors (Material-inspired) */
+  --success: #2e7d32; /* green 800 */
+  --warning: #f9a825; /* yellow 800 */
+  --danger: #d32f2f;  /* red 700 */
 
   /* Radii & shadows */
   --radius: 12px;
@@ -34,12 +38,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Force light theme (disable auto-dark) */
 
 body {
   background: var(--background);

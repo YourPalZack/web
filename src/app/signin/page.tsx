@@ -23,7 +23,7 @@ export default function SignInPage() {
 
   return (
     <div className="max-w-md mx-auto p-6">
-      <Card className="bg-white/80 backdrop-blur shadow-lg shadow-blue-100">
+      <Card className="bg-white/80 backdrop-blur shadow-lg shadow-green-100">
         <CardHeader><CardTitle>Sign In</CardTitle></CardHeader>
         <CardContent>
           <form onSubmit={submit} className="grid gap-3">

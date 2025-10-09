@@ -2,431 +2,905 @@
 > web@0.1.0 dev /Users/zackhayes/webdev/aqua-builder-codex/apps/web
 > next dev --turbopack
 
- [33m[1m⚠[22m[39m Port 3000 is in use by process 18488, using available port 3001 instead.
-   [1m[38;2;173;127;168m▲ Next.js 15.5.4[39m[22m (Turbopack)
-   - Local:        http://localhost:3001
-   - Network:      http://192.168.68.53:3001
-
- [32m[1m✓[22m[39m Starting...
- [32m[1m✓[22m[39m Ready in 743ms
- [37m[1m○[22m[39m Compiling / ...
- [32m[1m✓[22m[39m Compiled / in 1330ms
- GET / [32m200[39m in 1575ms
- [32m[1m✓[22m[39m Compiled /favicon.ico in 93ms
- GET /favicon.ico?favicon.0b3bf435.ico [32m200[39m in 341ms
- [32m[1m✓[22m[39m Compiled /build/new in 144ms
- GET /build/new [32m200[39m in 172ms
- [32m[1m✓[22m[39m Compiled /api/parts/[category] in 65ms
-TypeError: Cannot read properties of null (reading 'fish')
-    at GET (src/app/api/parts/[category]/route.ts:87:30)
-[0m [90m 85 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
- [90m 86 |[39m     [36mif[39m (category [33m===[39m [32m'fish'[39m) {
-[31m[1m>[22m[39m[90m 87 |[39m       items [33m=[39m [36mawait[39m fallback[33m.[39mfish[33m.[39mfindMany({})[33m;[39m
- [90m    |[39m                              [31m[1m^[22m[39m
- [90m 88 |[39m     } [36melse[39m {
- [90m 89 |[39m       items [33m=[39m [][33m;[39m
- [90m 90 |[39m     }[0m
-TypeError: Cannot read properties of null (reading 'fish')
-    at GET (src/app/api/parts/[category]/route.ts:87:30)
-[0m [90m 85 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
- [90m 86 |[39m     [36mif[39m (category [33m===[39m [32m'fish'[39m) {
-[31m[1m>[22m[39m[90m 87 |[39m       items [33m=[39m [36mawait[39m fallback[33m.[39mfish[33m.[39mfindMany({})[33m;[39m
- [90m    |[39m                              [31m[1m^[22m[39m
- [90m 88 |[39m     } [36melse[39m {
- [90m 89 |[39m       items [33m=[39m [][33m;[39m
- [90m 90 |[39m     }[0m
- GET /api/parts/tanks [32m200[39m in 838ms
- GET /api/parts/tanks [32m200[39m in 838ms
- GET /api/parts/fish [31m500[39m in 838ms
- GET /api/parts/fish [31m500[39m in 836ms
- GET /api/parts/filters [32m200[39m in 262ms
- GET /api/parts/heaters [32m200[39m in 262ms
- GET /api/parts/filters [32m200[39m in 262ms
- GET /api/parts/heaters [32m200[39m in 261ms
- GET /api/parts/lights [32m200[39m in 261ms
- GET /api/parts/lights [32m200[39m in 262ms
- [32m[1m✓[22m[39m Compiled /browse in 126ms
- GET /browse [32m200[39m in 150ms
-TypeError: Cannot read properties of null (reading 'fish')
-    at GET (src/app/api/parts/[category]/route.ts:87:30)
-[0m [90m 85 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
- [90m 86 |[39m     [36mif[39m (category [33m===[39m [32m'fish'[39m) {
-[31m[1m>[22m[39m[90m 87 |[39m       items [33m=[39m [36mawait[39m fallback[33m.[39mfish[33m.[39mfindMany({})[33m;[39m
- [90m    |[39m                              [31m[1m^[22m[39m
- [90m 88 |[39m     } [36melse[39m {
- [90m 89 |[39m       items [33m=[39m [][33m;[39m
- [90m 90 |[39m     }[0m
-TypeError: Cannot read properties of null (reading 'fish')
-    at GET (src/app/api/parts/[category]/route.ts:87:30)
-[0m [90m 85 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
- [90m 86 |[39m     [36mif[39m (category [33m===[39m [32m'fish'[39m) {
-[31m[1m>[22m[39m[90m 87 |[39m       items [33m=[39m [36mawait[39m fallback[33m.[39mfish[33m.[39mfindMany({})[33m;[39m
- [90m    |[39m                              [31m[1m^[22m[39m
- [90m 88 |[39m     } [36melse[39m {
- [90m 89 |[39m       items [33m=[39m [][33m;[39m
- [90m 90 |[39m     }[0m
- GET /api/parts/fish [31m500[39m in 292ms
- GET /api/parts/fish [31m500[39m in 293ms
- [32m[1m✓[22m[39m Compiled /community in 114ms
- GET /community [32m200[39m in 136ms
- GET /browse [32m200[39m in 45ms
-TypeError: Cannot read properties of null (reading 'fish')
-    at GET (src/app/api/parts/[category]/route.ts:87:30)
-[0m [90m 85 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
- [90m 86 |[39m     [36mif[39m (category [33m===[39m [32m'fish'[39m) {
-[31m[1m>[22m[39m[90m 87 |[39m       items [33m=[39m [36mawait[39m fallback[33m.[39mfish[33m.[39mfindMany({})[33m;[39m
- [90m    |[39m                              [31m[1m^[22m[39m
- [90m 88 |[39m     } [36melse[39m {
- [90m 89 |[39m       items [33m=[39m [][33m;[39m
- [90m 90 |[39m     }[0m
-TypeError: Cannot read properties of null (reading 'fish')
-    at GET (src/app/api/parts/[category]/route.ts:87:30)
-[0m [90m 85 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
- [90m 86 |[39m     [36mif[39m (category [33m===[39m [32m'fish'[39m) {
-[31m[1m>[22m[39m[90m 87 |[39m       items [33m=[39m [36mawait[39m fallback[33m.[39mfish[33m.[39mfindMany({})[33m;[39m
- [90m    |[39m                              [31m[1m^[22m[39m
- [90m 88 |[39m     } [36melse[39m {
- [90m 89 |[39m       items [33m=[39m [][33m;[39m
- [90m 90 |[39m     }[0m
- GET /api/parts/fish [31m500[39m in 344ms
- GET /api/parts/fish [31m500[39m in 343ms
- GET /api/parts/plants [32m200[39m in 254ms
- GET /api/parts/plants [32m200[39m in 253ms
- GET /api/parts/filters [32m200[39m in 227ms
- GET /api/parts/filters [32m200[39m in 227ms
- GET /api/parts/heaters [32m200[39m in 225ms
- GET /api/parts/heaters [32m200[39m in 224ms
- GET /api/parts/lights [32m200[39m in 229ms
- GET /api/parts/lights [32m200[39m in 229ms
- [32m[1m✓[22m[39m Compiled /api/builds in 116ms
-TypeError: Cannot read properties of null (reading 'userBuild')
-    at POST (src/app/api/builds/route.ts:20:28)
-[0m [90m 18 |[39m   } [36mcatch[39m (_e) {
- [90m 19 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
-[31m[1m>[22m[39m[90m 20 |[39m     build [33m=[39m [36mawait[39m fallback[33m.[39muserBuild[33m.[39mcreate({ data[33m:[39m { name[33m:[39m parsed[33m.[39mdata[33m.[39mname[33m,[39m buildType[33m:[39m parsed[33m.[39mdata[33m.[39mbuildType[33m,[39m components[33m:[39m parsed[33m.[39mdata[33m.[39mcomponents[33m,[39m userId[33m:[39m [32m'anon'[39m } })[33m;[39m
- [90m    |[39m                            [31m[1m^[22m[39m
- [90m 21 |[39m   }
- [90m 22 |[39m   [36mreturn[39m [33mNextResponse[39m[33m.[39mjson(build[33m,[39m { status[33m:[39m [35m201[39m })[33m;[39m
- [90m 23 |[39m }[0m
- POST /api/builds [31m500[39m in 408ms
-TypeError: Cannot read properties of null (reading 'userBuild')
-    at POST (src/app/api/builds/route.ts:20:28)
-[0m [90m 18 |[39m   } [36mcatch[39m (_e) {
- [90m 19 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
-[31m[1m>[22m[39m[90m 20 |[39m     build [33m=[39m [36mawait[39m fallback[33m.[39muserBuild[33m.[39mcreate({ data[33m:[39m { name[33m:[39m parsed[33m.[39mdata[33m.[39mname[33m,[39m buildType[33m:[39m parsed[33m.[39mdata[33m.[39mbuildType[33m,[39m components[33m:[39m parsed[33m.[39mdata[33m.[39mcomponents[33m,[39m userId[33m:[39m [32m'anon'[39m } })[33m;[39m
- [90m    |[39m                            [31m[1m^[22m[39m
- [90m 21 |[39m   }
- [90m 22 |[39m   [36mreturn[39m [33mNextResponse[39m[33m.[39mjson(build[33m,[39m { status[33m:[39m [35m201[39m })[33m;[39m
- [90m 23 |[39m }[0m
- POST /api/builds [31m500[39m in 268ms
- [32m[1m✓[22m[39m Compiled in 90ms
- [32m[1m✓[22m[39m Compiled /browse in 33ms
- GET /browse [32m200[39m in 240ms
- GET /browse [32m200[39m in 227ms
- GET /favicon.ico?favicon.0b3bf435.ico [32m200[39m in 250ms
-TypeError: Cannot read properties of null (reading 'fish')
-    at GET (src/app/api/parts/[category]/route.ts:87:30)
-[0m [90m 85 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
- [90m 86 |[39m     [36mif[39m (category [33m===[39m [32m'fish'[39m) {
-[31m[1m>[22m[39m[90m 87 |[39m       items [33m=[39m [36mawait[39m fallback[33m.[39mfish[33m.[39mfindMany({})[33m;[39m
- [90m    |[39m                              [31m[1m^[22m[39m
- [90m 88 |[39m     } [36melse[39m {
- [90m 89 |[39m       items [33m=[39m [][33m;[39m
- [90m 90 |[39m     }[0m
- GET /api/parts/fish [31m500[39m in 316ms
- [32m[1m✓[22m[39m Compiled in 70ms
-TypeError: Cannot read properties of null (reading 'fish')
-    at GET (src/app/api/parts/[category]/route.ts:87:30)
-[0m [90m 85 |[39m     [36mconst[39m { fallback } [33m=[39m getPrismaSafe()[33m;[39m
- [90m 86 |[39m     [36mif[39m (category [33m===[39m [32m'fish'[39m) {
-[31m[1m>[22m[39m[90m 87 |[39m       items [33m=[39m [36mawait[39m fallback[33m.[39mfish[33m.[39mfindMany({})[33m;[39m
- [90m    |[39m                              [31m[1m^[22m[39m
- [90m 88 |[39m     } [36melse[39m {
- [90m 89 |[39m       items [33m=[39m [][33m;[39m
- [90m 90 |[39m     }[0m
- GET /api/parts/fish [31m500[39m in 285ms
- [32m[1m✓[22m[39m Compiled in 26ms
- [32m[1m✓[22m[39m Compiled in 101ms
- [32m[1m✓[22m[39m Compiled in 36ms
- [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.v38fu0wwsh9'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.v38fu0wwsh9'[39m
-}
- [37m[1m○[22m[39m Compiling /_error ...
- [32m[1m✓[22m[39m Compiled /_error in 517ms
- [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.0hp0qu5kb2'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.0hp0qu5kb2'[39m
-}
-[Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.v38fu0wwsh9'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.v38fu0wwsh9'[39m
-}
- [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.y6f6blsfju8'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.y6f6blsfju8'[39m
-}
-[Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.qvy0rfczis'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.qvy0rfczis'[39m
-}
- [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.ez6n7q6235w'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.ez6n7q6235w'[39m
-}
- [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/we [32m[1m✓[22m[39m Compiled in 364ms
- [32m[1m✓[22m[39m Compiled / in 28ms
- [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.gp19zoae0x'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.gp19zoae0x'[39m
-}
- [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.m5ikl6cpuyf'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.m5ikl6cpuyf'[39m
-}
-[Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.gp19zoae0x'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.gp19zoae0x'[39m
-}
- [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.filh2plhacb'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.filh2plhacb'[39m
-}
-[Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.262padn4bdw'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.262padn4bdw'[39m
-}
- [32m[1m✓[22m[39m Compiled in 7ms
- [32m[1m✓[22m[39m Compiled middleware in 106ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled /build/new in 77ms
- [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.xc4m07ajy8'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.xc4m07ajy8'[39m
-}
- [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.tszp47swbk'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.tszp47swbk'[39m
-}
-[Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.xc4m07ajy8'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.xc4m07ajy8'[39m
-}
- [31m[1m⨯[22m[39m [Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.lc9eeez6tcs'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.lc9eeez6tcs'[39m
-}
-[Error: ENOENT: no such file or directory, open '/Users/zackhayes/webdev/aqua-builder-codex/apps/web/.next/static/development/_buildManifest.js.tmp.h3t4792do8'] {
-  errno: [33m-2[39m,
-  code: [32m'ENOENT'[39m,
-  syscall: [32m'open'[39m,
-  path: [32m'/Users/zackhayes/webdev/aqua-builder-co [32m[1m✓[22m[39m Compiled middleware in 2ms
- [32m[1m✓[22m[39m Compiled middleware in 10ms
- [32m[1m✓[22m[39m Compiled in 14ms
- [32m[1m✓[22m[39m Compiled middleware in 2ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled middleware in 2ms
- [32m[1m✓[22m[39m Compiled in 612ms
- [32m[1m✓[22m[39m Compiled middleware in 4ms
- [32m[1m✓[22m[39m Compiled in 27ms
- [32m[1m✓[22m[39m Compiled in 568ms
- [32m[1m✓[22m[39m Compiled middleware in 5ms
- [32m[1m✓[22m[39m Compiled middleware in 13ms
- [32m[1m✓[22m[39m Compiled in 62ms
- [32m[1m✓[22m[39m Compiled middleware in 6ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled middleware in 3ms
- [32m[1m✓[22m[39m Compiled in 24ms
- [32m[1m✓[22m[39m Compiled middleware in 0ms
- [32m[1m✓[22m[39m Compiled middleware in 3ms
- [32m[1m✓[22m[39m Compiled in 241ms
- [32m[1m✓[22m[39m Compiled middleware in 5ms
- [32m[1m✓[22m[39m Compiled in 32ms
- [32m[1m✓[22m[39m Compiled in 199ms
- [32m[1m✓[22m[39m Compiled in 19ms
- [32m[1m✓[22m[39m Compiled in 19ms
- [32m[1m✓[22m[39m Compiled middleware in 2ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled in 20ms
- [32m[1m✓[22m[39m Compiled in 162ms
- [32m[1m✓[22m[39m Compiled in 19ms
- [32m[1m✓[22m[39m Compiled in 24ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled in 19ms
- [32m[1m✓[22m[39m Compiled in 20ms
- [32m[1m✓[22m[39m Compiled middleware in 3ms
- [33m[1m⚠[22m[39m Found a change in next.config.ts. Restarting the server to apply the changes...
-   [1m[38;2;173;127;168m▲ Next.js 15.5.4[39m[22m (Turbopack)
-   - Local:        http://localhost:3001
-   - Network:      http://192.168.68.53:3001
-
- [32m[1m✓[22m[39m Starting...
- [32m[1m✓[22m[39m Compiled middleware in 176ms
- [32m[1m✓[22m[39m Ready in 1771ms
-static/development/_buildManifest.js.tmp.t8wf3tzdq0m'[39m
-}
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled middleware in 2ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled in 617ms
- [32m[1m✓[22m[39m Compiled middleware in 6ms
- [32m[1m✓[22m[39m Compiled in 25ms
- [32m[1m✓[22m[39m Compiled in 594ms
- [32m[1m✓[22m[39m Compiled middleware in 2ms
- [32m[1m✓[22m[39m Compiled middleware in 14ms
- [32m[1m✓[22m[39m Compiled in 62ms
- [32m[1m✓[22m[39m Compiled middleware in 6ms
- [32m[1m✓[22m[39m Compiled middleware in 2ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled middleware in 4ms
- [32m[1m✓[22m[39m Compiled in 20ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled middleware in 10ms
- [32m[1m✓[22m[39m Compiled in 231ms
- [32m[1m✓[22m[39m Compiled middleware in 5ms
- [32m[1m✓[22m[39m Compiled in 35ms
- [32m[1m✓[22m[39m Compiled in 204ms
- [32m[1m✓[22m[39m Compiled in 18ms
- [32m[1m✓[22m[39m Compiled in 19ms
- [32m[1m✓[22m[39m Compiled middleware in 2ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled in 22ms
- [32m[1m✓[22m[39m Compiled in 160ms
- [32m[1m✓[22m[39m Compiled in 19ms
- [32m[1m✓[22m[39m Compiled in 25ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled middleware in 1ms
- [32m[1m✓[22m[39m Compiled in 19ms
- [32m[1m✓[22m[39m Compiled in 20ms
- [32m[1m✓[22m[39m Compiled middleware in 3ms
- [33m[1m⚠[22m[39m Found a change in next.config.ts. Restarting the server to apply the changes...
    [1m[38;2;173;127;168m▲ Next.js 15.5.4[39m[22m (Turbopack)
    - Local:        http://localhost:3000
    - Network:      http://192.168.68.53:3000
+   - Environments: .env.local
 
  [32m[1m✓[22m[39m Starting...
- [32m[1m✓[22m[39m Compiled middleware in 176ms
- [32m[1m✓[22m[39m Ready in 1771ms
+ [32m[1m✓[22m[39m Compiled middleware in 106ms
+ [32m[1m✓[22m[39m Ready in 798ms
  [37m[1m○[22m[39m Compiling / ...
- [32m[1m✓[22m[39m Compiled / in 1688ms
- [31m[1m⨯[22m[39m ./apps/web/src/app/page-view.tsx:3:1
-Export [32mlogEvent[39m doesn't exist in target module
-[0m [90m 1 |[39m [32m"use client"[39m[33m;[39m
- [90m 2 |[39m [36mimport[39m { useEffect } [36mfrom[39m [32m'react'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { logEvent } [36mfrom[39m [32m'../lib/analytics-client'[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 4 |[39m
- [90m 5 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mHomePageView[39m(){
- [90m 6 |[39m   useEffect(()[33m=>[39m{ [36mtry[39m { logEvent([32m'page_view'[39m[33m,[39m { page[33m:[39m [32m'home'[39m })[33m;[39m } [36mcatch[39m {} }[33m,[39m [])[33m;[39m[0m
+ [32m[1m✓[22m[39m Compiled / in 1352ms
+ GET / [32m200[39m in 1559ms
+ [32m[1m✓[22m[39m Compiled /api/auth/status in 231ms
+[analytics:server] page_view { page: [32m'home'[39m }
+ POST /api/analytics [32m200[39m in 434ms
+ GET /api/auth/status [32m200[39m in 486ms
+ GET /api/auth/status [32m200[39m in 486ms
+ GET /api/auth/status [32m200[39m in 250ms
+ GET /api/auth/status [32m200[39m in 246ms
+ GET /api/auth/status [32m200[39m in 244ms
+ GET /api/auth/status [32m200[39m in 248ms
+ GET /api/auth/status [32m200[39m in 249ms
+ GET /api/auth/status [32m200[39m in 247ms
+ [32m[1m✓[22m[39m Compiled /build/new in 196ms
+ GET /build/new [32m200[39m in 228ms
+ GET /api/auth/status [32m200[39m in 246ms
+ [32m[1m✓[22m[39m Compiled /browse in 173ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ [32m[1m✓[22m[39m Compiled /api/parts/[category] in 111ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /api/parts/fish?page=1&pageSize=6 [32m200[39m in 876ms
+ GET /browse [32m200[39m in 1133ms
+ GET /api/parts/fish?page=1&pageSize=6 [32m200[39m in 226ms
+ GET /browse [32m200[39m in 272ms
+[analytics:server] page_view { page: [32m'browse'[39m, tab: [32m'fish'[39m }
+ POST /api/analytics [32m200[39m in 258ms
+[analytics:server] page_view { page: [32m'browse'[39m, tab: [32m'fish'[39m }
+ POST /api/analytics [32m200[39m in 254ms
+ GET /api/parts/fish?page=1&pageSize=6&count=1 [32m200[39m in 260ms
+ GET /api/parts/fish?page=1&pageSize=6&count=1 [32m200[39m in 257ms
+ GET /api/auth/status [32m200[39m in 247ms
+ GET /api/auth/status [32m200[39m in 255ms
+ GET /api/auth/status [32m200[39m in 255ms
+ GET /api/auth/status [32m200[39m in 250ms
+ GET /api/auth/status [32m200[39m in 245ms
+ GET /api/auth/status [32m200[39m in 247ms
+ GET /api/auth/status [32m200[39m in 254ms
+ GET /api/auth/status [32m200[39m in 254ms
+ [32m[1m✓[22m[39m Compiled in 47ms
+ [32m[1m✓[22m[39m Compiled /browse in 18ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /browse?tab=fish&page=1 [32m200[39m in 154ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /browse?tab=fish&page=1 [32m200[39m in 62ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /browse?tab=fish&page=1 [32m200[39m in 53ms
+ GET /api/auth/status [32m200[39m in 243ms
+ [32m[1m✓[22m[39m Compiled /browse in 12ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /browse?tab=fish&page=1 [32m200[39m in 94ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /browse?tab=fish&page=1 [32m200[39m in 52ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /browse?tab=fish&page=1 [32m200[39m in 41ms
+ GET /api/auth/status [32m200[39m in 235ms
+ [32m[1m✓[22m[39m Compiled /browse in 14ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /browse?tab=fish&page=1 [32m200[39m in 89ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /browse?tab=fish&page=1 [32m200[39m in 51ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /browse?tab=fish&page=1 [32m200[39m in 44ms
+ GET /api/auth/status [32m200[39m in 242ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /browse?tab=fish&page=1 [32m200[39m in 42ms
+ [32m[1m✓[22m[39m Compiled in 29ms
+ [32m[1m✓[22m[39m Compiled in 27ms
+ [32m[1m✓[22m[39m Compiled in 24ms
+ GET /api/auth/status [32m200[39m in 234ms
+ GET /api/auth/status [32m200[39m in 234ms
+ GET /api/auth/status [32m200[39m in 244ms
+ GET /api/auth/status [32m200[39m in 246ms
+ [32m[1m✓[22m[39m Compiled /browse in 13ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /browse?tab=fish&page=1 [32m200[39m in 157ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /browse?tab=fish&page=1 [32m200[39m in 38ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /browse?tab=fish&page=1 [32m200[39m in 43ms
+ [32m[1m✓[22m[39m Compiled /browse in 18ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /browse?tab=fish&page=1 [32m200[39m in 107ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /browse?tab=fish&page=1 [32m200[39m in 60ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /api/auth/status [32m200[39m in 295ms
+ GET /browse?tab=fish&page=1 [32m200[39m in 45ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+[analytics:server] browse_tab_click { tab: [32m'plants'[39m }
+ POST /api/analytics [32m200[39m in 232ms
+ GET /api/parts/plants?page=1&pageSize=6 [32m200[39m in 229ms
+ GET /browse?tab=plants&page=1 [32m200[39m in 339ms
+[analytics:server] page_view { page: [32m'browse'[39m, tab: [32m'plants'[39m }
+ POST /api/analytics [32m200[39m in 272ms
+ GET /api/parts/plants?page=1&pageSize=6&count=1 [32m200[39m in 272ms
+ GET /api/parts/plants?page=1&pageSize=6&count=1 [32m200[39m in 270ms
+ [32m[1m✓[22m[39m Compiled in 21ms
+ GET /api/auth/status [32m200[39m in 254ms
+ GET /api/auth/status [32m200[39m in 253ms
+ [32m[1m✓[22m[39m Compiled / in 25ms
+ GET / [32m200[39m in 97ms
+[analytics:server] page_view { page: [32m'home'[39m }
+ POST /api/analytics [32m200[39m in 248ms
+[analytics:server] page_view { page: [32m'home'[39m }
+ POST /api/analytics [32m200[39m in 250ms
+ [32m[1m✓[22m[39m Compiled / in 11ms
+ GET / [32m200[39m in 72ms
+ GET / [32m200[39m in 28ms
+ GET / [32m200[39m in 24ms
+ [32m[1m✓[22m[39m Compiled in 21ms
+ GET /api/auth/status [32m200[39m in 245ms
+ [32m[1m✓[22m[39m Compiled in 22ms
+ GET /api/auth/status [32m200[39m in 244ms
+ [32m[1m✓[22m[39m Compiled in 25ms
+ GET /api/auth/status [32m200[39m in 243ms
+ [32m[1m✓[22m[39m Compiled in 17ms
+ [32m[1m✓[22m[39m Compiled / in 14ms
+ GET / [32m200[39m in 98ms
+ GET / [32m200[39m in 77ms
+ GET / [32m200[39m in 33ms
+ [32m[1m✓[22m[39m Compiled /build/new in 12ms
+ GET /build/new [32m200[39m in 76ms
+ [32m[1m✓[22m[39m Compiled in 29ms
+ GET /api/auth/status [32m200[39m in 231ms
+ GET /api/auth/status [32m200[39m in 234ms
+ [32m[1m✓[22m[39m Compiled in 54ms
+ [32m[1m✓[22m[39m Compiled in 21ms
+ [32m[1m✓[22m[39m Compiled in 22ms
+ GET /api/auth/status [32m200[39m in 248ms
+ GET / [32m200[39m in 52ms
+[analytics:server] page_view { page: [32m'home'[39m }
+ POST /api/analytics [32m200[39m in 236ms
+[analytics:server] page_view { page: [32m'home'[39m }
+ POST /api/analytics [32m200[39m in 237ms
+ [32m[1m✓[22m[39m Compiled /browse in 30ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /api/auth/status [32m200[39m in 248ms
+ GET /api/parts/fish?page=1&pageSize=6 [32m200[39m in 246ms
+ GET /browse [32m200[39m in 397ms
+[analytics:server] page_view { page: [32m'browse'[39m, tab: [32m'fish'[39m }
+ POST /api/analytics [32m200[39m in 272ms
+[analytics:server] page_view { page: [32m'browse'[39m, tab: [32m'fish'[39m }
+ POST /api/analytics [32m200[39m in 271ms
+ GET /api/parts/fish?page=1&pageSize=6&count=1 [32m200[39m in 276ms
+ GET /api/parts/fish?page=1&pageSize=6&count=1 [32m200[39m in 277ms
+ [32m[1m✓[22m[39m Compiled /faq in 139ms
+ GET /faq [32m200[39m in 171ms
+ GET /api/auth/status [32m200[39m in 246ms
+ [32m[1m✓[22m[39m Compiled /community in 131ms
+Error: Route "/community" used `searchParams.type`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CommunityPage (src/app/community/page.tsx:10:16)
+[0m [90m  8 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mCommunityPage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { type[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } }) {
+ [90m  9 |[39m   [90m// SEO metadata via headers set in layout; this server component renders canonical content[39m
+[31m[1m>[22m[39m[90m 10 |[39m   [36mconst[39m type [33m=[39m searchParams[33m?[39m[33m.[39mtype[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 11 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 12 |[39m   [36mconst[39m pageSize [33m=[39m [35m12[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m url [33m=[39m [36mnew[39m [33mURL[39m([32m`${process.env.NEXTAUTH_URL ?? ''}/api/builds/list`[39m[33m,[39m [32m'http://localhost'[39m)[33m;[39m[0m
+Error: Route "/community" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at CommunityPage (src/app/community/page.tsx:11:23)
+[0m [90m  9 |[39m   [90m// SEO metadata via headers set in layout; this server component renders canonical content[39m
+ [90m 10 |[39m   [36mconst[39m type [33m=[39m searchParams[33m?[39m[33m.[39mtype[33m;[39m
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m pageSize [33m=[39m [35m12[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m url [33m=[39m [36mnew[39m [33mURL[39m([32m`${process.env.NEXTAUTH_URL ?? ''}/api/builds/list`[39m[33m,[39m [32m'http://localhost'[39m)[33m;[39m
+ [90m 14 |[39m   url[33m.[39msearchParams[33m.[39m[36mset[39m([32m'count'[39m[33m,[39m [32m'1'[39m)[33m;[39m[0m
+ [31m[1m⨯[22m[39m [TypeError: Failed to parse URL from :3000/api/builds/list?count=1&page=1&pageSize=12] {
+  digest: [32m'3526852115'[39m,
+  [cause]: [TypeError: Invalid URL] {
+    code: [32m'ERR_INVALID_URL'[39m,
+    input: [32m':3000/api/builds/list?count=1&page=1&pageSize=12'[39m
+  }
+}
+Error: Route "/community" used `searchParams.type`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/community/page.tsx:76:16)
+[0m [90m 74 |[39m
+ [90m 75 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { type[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 76 |[39m   [36mconst[39m type [33m=[39m searchParams[33m?[39m[33m.[39mtype[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 77 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 78 |[39m   [36mconst[39m baseTitle [33m=[39m [32m'Community Builds'[39m[33m;[39m
+ [90m 79 |[39m   [36mconst[39m title [33m=[39m type [33m?[39m [32m`${baseTitle} — ${type.replace('_',' ')}`[39m [33m:[39m baseTitle[33m;[39m[0m
+Error: Route "/community" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/community/page.tsx:77:23)
+[0m [90m 75 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { type[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } }) {
+ [90m 76 |[39m   [36mconst[39m type [33m=[39m searchParams[33m?[39m[33m.[39mtype[33m;[39m
+[31m[1m>[22m[39m[90m 77 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 78 |[39m   [36mconst[39m baseTitle [33m=[39m [32m'Community Builds'[39m[33m;[39m
+ [90m 79 |[39m   [36mconst[39m title [33m=[39m type [33m?[39m [32m`${baseTitle} — ${type.replace('_',' ')}`[39m [33m:[39m baseTitle[33m;[39m
+ [90m 80 |[39m   [36mconst[39m og [33m=[39m [32m`/api/og?title=${encodeURIComponent(baseTitle)}&subtitle=${encodeURIComponent(type ? type.replace('_',' ') : `Page ${page}`)}`[39m[33m;[39m[0m
+ GET /community [32m200[39m in 188ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /api/parts/fish?page=1&pageSize=6 [32m200[39m in 227ms
+ GET /browse [32m200[39m in 290ms
+[analytics:server] page_view { page: [32m'browse'[39m, tab: [32m'fish'[39m }
+ POST /api/analytics [32m200[39m in 264ms
+ GET /api/parts/fish?page=1&pageSize=6&count=1 [32m200[39m in 272ms
+[analytics:server] page_view { page: [32m'browse'[39m, tab: [32m'fish'[39m }
+ POST /api/analytics [32m200[39m in 288ms
+ GET /api/parts/fish?page=1&pageSize=6&count=1 [32m200[39m in 291ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+ GET /api/parts/fish?page=1&pageSize=6 [32m200[39m in 240ms
+ GET /browse?tab=fish&page=1&minTank=75 [32m200[39m in 418ms
+[analytics:server] page_view { page: [32m'browse'[39m, tab: [32m'fish'[39m }
+ POST /api/analytics [32m200[39m in 280ms
+ GET /api/parts/fish?page=1&pageSize=6&count=1 [32m200[39m in 285ms
+ GET /api/parts/fish?page=1&pageSize=6&count=1&minTankGal=75 [32m200[39m in 272ms
+ GET /api/auth/status [32m200[39m in 291ms
+ GET /api/auth/status [32m200[39m in 302ms
+ GET /api/parts/fish?page=1&pageSize=6&count=1 [32m200[39m in 234ms
+ GET /api/parts/fish?page=1&pageSize=6&count=1&minTankGal=75 [32m200[39m in 233ms
+ GET /api/parts/fish?page=1&pageSize=6&count=1 [32m200[39m in 261ms
+ GET /api/parts/fish?page=1&pageSize=6&count=1&minTankGal=75 [32m200[39m in 251ms
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at BrowsePage (src/app/browse/page.tsx:47:16)
+[0m [90m 45 |[39m
+ [90m 46 |[39m [36mexport[39m [36mdefault[39m [36masync[39m [36mfunction[39m [33mBrowsePage[39m({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string } }) {
+[31m[1m>[22m[39m[90m 47 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 48 |[39m   [36mconst[39m popularCategory [33m=[39m ([[32m'filters'[39m[33m,[39m[32m'heaters'[39m[33m,[39m[32m'lights'[39m[33m,[39m[32m'substrate'[39m[33m,[39m[32m'equipment'[39m] [36mas[39m [36mconst[39m)[33m.[39mincludes(tab [36mas[39m any) [33m?[39m (tab [36mas[39m any) [33m:[39m [36mnull[39m[33m;[39m
+ [90m 49 |[39m   [90m// Generate ItemList JSON-LD (SSR) for the active tab's first page[39m
+ [90m 50 |[39m   [36mlet[39m itemListJson[33m:[39m any [33m|[39m [36mnull[39m [33m=[39m [36mnull[39m[33m;[39m[0m
+Error: Route "/browse" used `searchParams.tab`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:11:16)
+[0m [90m  9 |[39m
+ [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+[31m[1m>[22m[39m[90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+ [90m    |[39m                [31m[1m^[22m[39m
+ [90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m[0m
+Error: Route "/browse" used `searchParams.page`. `searchParams` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/browse/page.tsx:12:23)
+[0m [90m 10 |[39m [36mexport[39m [36mfunction[39m generateMetadata({ searchParams }[33m:[39m { searchParams[33m?[39m[33m:[39m { tab[33m?[39m[33m:[39m string[33m;[39m page[33m?[39m[33m:[39m string } })[33m:[39m [33mMetadata[39m {
+ [90m 11 |[39m   [36mconst[39m tab [33m=[39m (searchParams[33m?[39m[33m.[39mtab [33m?[39m[33m?[39m [32m'fish'[39m)[33m.[39mtoLowerCase()[33m;[39m
+[31m[1m>[22m[39m[90m 12 |[39m   [36mconst[39m page [33m=[39m [33mNumber[39m(searchParams[33m?[39m[33m.[39mpage [33m?[39m[33m?[39m [32m'1'[39m) [33m||[39m [35m1[39m[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m
+ [90m 13 |[39m   [36mconst[39m titles[33m:[39m [33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>[39m [33m=[39m {
+ [90m 14 |[39m     fish[33m:[39m [32m'Browse Fish'[39m[33m,[39m
+ [90m 15 |[39m     plants[33m:[39m [32m'Browse Plants'[39m[33m,[39m[0m
+[analytics:server] browse_tab_click { tab: [32m'lights'[39m }
+ POST /api/analytics [32m200[39m in 234ms
+ GET /api/parts/lights?page=1&pageSize=6 [32m200[39m in 226ms
+ GET /browse?tab=lights&page=1&minTank=75 [32m200[39m in 285ms
+[analytics:server] page_view { page: [32m'browse'[39m, tab: [32m'lights'[39m }
+ POST /api/analytics [32m200[39m in 252ms
+ GET /api/parts/lights?page=1&pageSize=6&count=1 [32m200[39m in 247ms
+ GET /api/parts/lights?page=1&pageSize=6&count=1 [32m200[39m in 248ms
+ [32m[1m✓[22m[39m Compiled /api/prices/[productType]/[productId] in 81ms
+ GET /api/prices/LIGHT/light-led-med [32m200[39m in 754ms
+ GET /api/prices/LIGHT/light-led-high [32m200[39m in 754ms
+ GET /api/prices/LIGHT/light-led-high [32m200[39m in 754ms
+ GET /api/prices/LIGHT/light-led-med [32m200[39m in 754ms
+ GET /api/prices/LIGHT/light-led-low [32m200[39m in 754ms
+ GET /api/prices/LIGHT/light-led-low [32m200[39m in 754ms
+ GET /api/prices/LIGHT/light-led-low [32m200[39m in 264ms
+ GET /api/prices/LIGHT/light-led-med [32m200[39m in 264ms
+ GET /api/prices/LIGHT/light-led-low [32m200[39m in 264ms
+ GET /api/prices/LIGHT/light-t5 [32m200[39m in 264ms
+ GET /api/prices/LIGHT/light-t5 [32m200[39m in 265ms
+ GET /api/prices/LIGHT/light-led-med [32m200[39m in 270ms
+ GET /api/prices/LIGHT/light-led-high [32m200[39m in 245ms
+ GET /api/prices/LIGHT/light-led-high [32m200[39m in 246ms
+ GET /api/prices/LIGHT/light-t5 [32m200[39m in 245ms
+ GET /api/prices/LIGHT/light-t5 [32m200[39m in 249ms
+ GET /api/auth/status [32m200[39m in 245ms
+ [32m[1m✓[22m[39m Compiled /part/[category]/[id] in 178ms
+ [31m[1m⨯[22m[39m ./apps/web/src/app/part/[category]/[id]/page.tsx:5:24
+Ecmascript file had an error
+[0m [90m 3 |[39m [36mimport[39m { [33mTooltip[39m[33m,[39m [33mBreadcrumb[39m } [36mfrom[39m [32m'@aquabuilder/ui'[39m[33m;[39m
+ [90m 4 |[39m [36mimport[39m dynamic [36mfrom[39m [32m'next/dynamic'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 5 |[39m [36mconst[39m [33mSparklinePanel[39m [33m=[39m dynamic(()[33m=>[39m [36mimport[39m([32m'./sparkline-panel'[39m)[33m,[39m { ssr[33m:[39m [36mfalse[39m })[33m;[39m
+ [90m   |[39m                        [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 6 |[39m [36mimport[39m { [33mSpecPills[39m[33m,[39m [33mThumbnail[39m } [36mfrom[39m [32m'@aquabuilder/ui'[39m[33m;[39m
+ [90m 7 |[39m [36mimport[39m dynamic [36mfrom[39m [32m'next/dynamic'[39m[33m;[39m
+ [90m 8 |[39m [36mconst[39m [33mAmazonBuyLink[39m [33m=[39m dynamic(() [33m=>[39m [36mimport[39m([32m'../../../browse/amazon-buy-link'[39m)[33m,[39m { ssr[33m:[39m [36mfalse[39m })[33m;[39m[0m
 
-The export [32mlogEvent[39m was not found in module [1m[31m[project]/apps/web/src/lib/analytics-client.ts [app-client] (ecmascript)[39m[22m.
-Did you mean to import [32mlogEventClient[39m?
-All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
-
-Import trace:
-  Server Component:
-    ./apps/web/src/app/page-view.tsx
-    ./apps/web/src/app/page.tsx
+`ssr: false` is not allowed with `next/dynamic` in Server Components. Please move it into a Client Component.
 
 
 
-./apps/web/src/app/page-view.tsx:3:1
-Export [32mlogEvent[39m doesn't exist in target module
-[0m [90m 1 |[39m [32m"use client"[39m[33m;[39m
- [90m 2 |[39m [36mimport[39m { useEffect } [36mfrom[39m [32m'react'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { logEvent } [36mfrom[39m [32m'../lib/analytics-client'[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 4 |[39m
- [90m 5 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mHomePageView[39m(){
- [90m 6 |[39m   useEffect(()[33m=>[39m{ [36mtry[39m { logEvent([32m'page_view'[39m[33m,[39m { page[33m:[39m [32m'home'[39m })[33m;[39m } [36mcatch[39m {} }[33m,[39m [])[33m;[39m[0m
+./apps/web/src/app/part/[category]/[id]/page.tsx:8:23
+Ecmascript file had an error
+[0m [90m  6 |[39m [36mimport[39m { [33mSpecPills[39m[33m,[39m [33mThumbnail[39m } [36mfrom[39m [32m'@aquabuilder/ui'[39m[33m;[39m
+ [90m  7 |[39m [36mimport[39m dynamic [36mfrom[39m [32m'next/dynamic'[39m[33m;[39m
+[31m[1m>[22m[39m[90m  8 |[39m [36mconst[39m [33mAmazonBuyLink[39m [33m=[39m dynamic(() [33m=>[39m [36mimport[39m([32m'../../../browse/amazon-buy-link'[39m)[33m,[39m { ssr[33m:[39m [36mfalse[39m })[33m;[39m
+ [90m    |[39m                       [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  9 |[39m [36mimport[39m { prisma } [36mfrom[39m [32m'@aquabuilder/db'[39m[33m;[39m
+ [90m 10 |[39m [36mimport[39m { [33mJsonLd[39m[33m,[39m breadcrumbJsonLd } [36mfrom[39m [32m'../../../../lib/structured'[39m[33m;[39m
+ [90m 11 |[39m [36mimport[39m { getSiteUrl } [36mfrom[39m [32m'../../../../lib/site'[39m[33m;[39m[0m
 
-The export [32mlogEvent[39m was not found in module [1m[31m[project]/apps/web/src/lib/analytics-client.ts [app-ssr] (ecmascript)[39m[22m.
-Did you mean to import [32mlogEventClient[39m?
-All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
-
-Import trace:
-  Server Component:
-    ./apps/web/src/app/page-view.tsx
-    ./apps/web/src/app/page.tsx
-
-
- [31m[1m⨯[22m[39m ./apps/web/src/app/page-view.tsx:3:1
-Export [32mlogEvent[39m doesn't exist in target module
-[0m [90m 1 |[39m [32m"use client"[39m[33m;[39m
- [90m 2 |[39m [36mimport[39m { useEffect } [36mfrom[39m [32m'react'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { logEvent } [36mfrom[39m [32m'../lib/analytics-client'[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 4 |[39m
- [90m 5 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mHomePageView[39m(){
- [90m 6 |[39m   useEffect(()[33m=>[39m{ [36mtry[39m { logEvent([32m'page_view'[39m[33m,[39m { page[33m:[39m [32m'home'[39m })[33m;[39m } [36mcatch[39m {} }[33m,[39m [])[33m;[39m[0m
-
-The export [32mlogEvent[39m was not found in module [1m[31m[project]/apps/web/src/lib/analytics-client.ts [app-client] (ecmascript)[39m[22m.
-Did you mean to import [32mlogEventClient[39m?
-All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
-
-Import trace:
-  Server Component:
-    ./apps/web/src/app/page-view.tsx
-    ./apps/web/src/app/page.tsx
+`ssr: false` is not allowed with `next/dynamic` in Server Components. Please move it into a Client Component.
 
 
 
-./apps/web/src/app/page-view.tsx:3:1
-Export [32mlogEvent[39m doesn't exist in target module
-[0m [90m 1 |[39m [32m"use client"[39m[33m;[39m
- [90m 2 |[39m [36mimport[39m { useEffect } [36mfrom[39m [32m'react'[39m[33m;[39m
-[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { logEvent } [36mfrom[39m [32m'../lib/analytics-client'[39m[33m;[39m
- [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
- [90m 4 |[39m
- [90m 5 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mHomePageView[39m(){
- [90m 6 |[39m   useEffect(()[33m=>[39m{ [36mtry[39m { logEvent([32m'page_view'[39m[33m,[39m { page[33m:[39m [32m'home'[39m })[33m;[39m } [36mcatch[39m {} }[33m,[39m [])[33m;[39m[0m
+./apps/web/src/app/part/[category]/[id]/page.tsx:7:8
+Ecmascript file had an error
+[0m [90m  5 |[39m [36mconst[39m [33mSparklinePanel[39m [33m=[39m dynamic(()[33m=>[39m [36mimport[39m([32m'./sparkline-panel'[39m)[33m,[39m { ssr[33m:[39m [36mfalse[39m })[33m;[39m
+ [90m  6 |[39m [36mimport[39m { [33mSpecPills[39m[33m,[39m [33mThumbnail[39m } [36mfrom[39m [32m'@aquabuilder/ui'[39m[33m;[39m
+[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m dynamic [36mfrom[39m [32m'next/dynamic'[39m[33m;[39m
+ [90m    |[39m        [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  8 |[39m [36mconst[39m [33mAmazonBuyLink[39m [33m=[39m dynamic(() [33m=>[39m [36mimport[39m([32m'../../../browse/amazon-buy-link'[39m)[33m,[39m { ssr[33m:[39m [36mfalse[39m })[33m;[39m
+ [90m  9 |[39m [36mimport[39m { prisma } [36mfrom[39m [32m'@aquabuilder/db'[39m[33m;[39m
+ [90m 10 |[39m [36mimport[39m { [33mJsonLd[39m[33m,[39m breadcrumbJsonLd } [36mfrom[39m [32m'../../../../lib/structured'[39m[33m;[39m[0m
 
-The export [32mlogEvent[39m was not found in module [1m[31m[project]/apps/web/src/lib/analytics-client.ts [app-ssr] (ecmascript)[39m[22m.
-Did you mean to import [32mlogEventClient[39m?
-All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
-
-Import trace:
-  Server Component:
-    ./apps/web/src/app/page-view.tsx
-    ./apps/web/src/app/page.tsx
+the name `dynamic` is defined multiple times
 
 
+[analytics:server] detail_nav_click {
+  from: [32m'lights_list'[39m,
+  productType: [32m'LIGHT'[39m,
+  productId: [32m'light-led-low'[39m
+}
+ POST /api/analytics [32m200[39m in 254ms
  [37m[1m○[22m[39m Compiling /_error ...
- [32m[1m✓[22m[39m Compiled /_error in 509ms
- GET / [31m500[39m in 334ms
- [32m[1m✓[22m[39m Compiled /favicon.ico in 121ms
+ [32m[1m✓[22m[39m Compiled /_error in 546ms
+ GET /part/lights/light-led-low [31m500[39m in 826ms
+ [32m[1m✓[22m[39m Compiled /favicon.ico in 49ms
+ GET /favicon.ico [31m500[39m in 64ms

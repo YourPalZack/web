@@ -36,7 +36,7 @@ export default function TankPicker() {
       </div>
       <div className="grid sm:grid-cols-2 gap-3">
         {filtered.map((t) => (
-          <Card key={t.id} className={`border rounded-2xl ${tank?.id === t.id ? 'ring-2 ring-blue-400' : ''}`}>
+          <Card key={t.id} className={`border rounded-2xl ${tank?.id === t.id ? 'ring-2 ring-green-400' : ''}`}>
             <CardContent className="p-3 flex items-center justify-between">
               <div>
                 <div className="font-medium">{t.model ?? t.id}</div>

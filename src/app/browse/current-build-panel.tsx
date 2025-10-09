@@ -35,7 +35,7 @@ export default function CurrentBuildPanel() {
   }
 
   return (
-    <Card className="bg-white/80 backdrop-blur shadow-lg shadow-blue-100">
+    <Card className="bg-white/80 backdrop-blur shadow-lg shadow-green-100">
       <CardHeader>
         <CardTitle>Current Build</CardTitle>
       </CardHeader>
@@ -77,7 +77,7 @@ export default function CurrentBuildPanel() {
         <div className="pt-2 border-t" />
         <div className="space-y-2">
           <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Build name" />
-          <Button onClick={save} className="w-full bg-gradient-to-r from-blue-600 to-cyan-500">Save & Share</Button>
+          <Button onClick={save} className="w-full bg-gradient-to-r from-green-600 to-emerald-500">Save & Share</Button>
         </div>
       </CardContent>
     </Card>

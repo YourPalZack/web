@@ -11,7 +11,7 @@ export default function BuildAdminControls({ id, initialName, initialPublic }:{ 
   useEffect(()=>{ (async()=>{ try{ const r = await fetch('/api/auth/status',{cache:'no-store'}); const j = await r.json(); setAdmin(!!j?.admin); }catch{} })(); },[]);
   if (!admin) return null;
   return (
-    <Card className="bg-white/80 backdrop-blur shadow-lg shadow-blue-100">
+    <Card className="bg-white/80 backdrop-blur shadow-lg shadow-green-100">
       <CardHeader><CardTitle>Admin • Build</CardTitle></CardHeader>
       <CardContent className="text-sm space-y-2">
         <div>
@@ -35,4 +35,3 @@ export default function BuildAdminControls({ id, initialName, initialPublic }:{ 
     </Card>
   );
 }
-

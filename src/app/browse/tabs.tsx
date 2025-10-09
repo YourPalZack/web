@@ -53,7 +53,7 @@ export default function BrowseTabs() {
             onClick={() => go(t.key)}
             className={`px-4 py-2 rounded-full text-sm transition-all ${
               active === t.key
-                ? 'bg-gradient-to-r from-blue-500 to-cyan-400 text-white shadow-lg shadow-blue-200'
+                ? 'bg-gradient-to-r from-green-600 to-emerald-500 text-white shadow-lg shadow-green-200'
                 : 'bg-white text-gray-700 border hover:shadow'
             }`}
           >

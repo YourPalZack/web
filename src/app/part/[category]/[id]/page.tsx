@@ -305,7 +305,7 @@ function TrackedRetailerBuyLink({ href, retailer, meta }: { href: string; retail
       onClick={() => {
         try { (window as any).navigator?.sendBeacon?.('/api/analytics', JSON.stringify({ name: 'detail_buy_click', props: { href, retailer, ...(meta ?? {}) } })); } catch {}
       }}
-      className="text-blue-600 underline"
+      className="text-green-700 underline"
     >
       Buy
     </a>

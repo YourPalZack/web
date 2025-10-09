@@ -6,12 +6,12 @@ export default function Home() {
     <div>
       <HomePageView />
       {/* Hero */}
-      <section className="bg-gradient-to-br from-sky-400/20 to-cyan-300/20">
+      <section className="bg-gradient-to-br from-green-400/20 to-emerald-300/20">
         <div className="mx-auto max-w-6xl px-6 py-16">
           <h1 className="text-4xl font-semibold tracking-tight">Plan, price, and share your aquarium build</h1>
           <p className="text-lg text-gray-600 mt-2 max-w-2xl">Get compatible recommendations, track prices with affiliate links, and explore community builds.</p>
           <div className="mt-6 flex gap-3">
-            <Link className="rounded-md bg-blue-600 text-white px-4 py-2" href="/build/new">Start a Build</Link>
+            <Link className="rounded-md bg-green-600 text-white px-4 py-2" href="/build/new">Start a Build</Link>
             <Link className="rounded-md border px-4 py-2" href="/browse">Browse Parts</Link>
           </div>
         </div>

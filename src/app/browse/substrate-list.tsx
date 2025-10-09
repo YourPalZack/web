@@ -68,7 +68,7 @@ export default function SubstrateList() {
   }
 
   return (
-    <Card className="bg-white/80 backdrop-blur shadow-lg shadow-blue-100">
+    <Card className="bg-white/80 backdrop-blur shadow-lg shadow-green-100">
       <CardHeader className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <CardTitle>Substrate</CardTitle>
         <div className="flex items-center gap-2">

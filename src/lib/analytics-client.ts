@@ -13,3 +13,6 @@ export async function logEventClient(name: string, props: Record<string, any> = 
     void fetch('/api/analytics', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true });
   } catch {}
 }
+
+// Back-compat alias used across client components
+export const logEvent = logEventClient;

@@ -130,7 +130,7 @@ export default async function BuildPage({ params }: { params: { id: string } }) 
       </div>
       <div className="grid lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-4">
-          <Card className="bg-white/80 backdrop-blur shadow-lg shadow-blue-100">
+          <Card className="bg-white/80 backdrop-blur shadow-lg shadow-green-100">
             <CardHeader><CardTitle>Parts</CardTitle></CardHeader>
             <CardContent className="grid sm:grid-cols-2 gap-3 text-sm">
               <div>
@@ -151,7 +151,7 @@ export default async function BuildPage({ params }: { params: { id: string } }) 
               </div>
             </CardContent>
           </Card>
-          <Card className="bg-white/80 backdrop-blur shadow-lg shadow-blue-100">
+          <Card className="bg-white/80 backdrop-blur shadow-lg shadow-green-100">
             <CardHeader><CardTitle>Livestock</CardTitle></CardHeader>
             <CardContent>
               {(!items.livestock || items.livestock.length === 0) ? (
@@ -167,11 +167,11 @@ export default async function BuildPage({ params }: { params: { id: string } }) 
           </Card>
         </div>
         <div className="space-y-4">
-          <Card className="bg-white/80 backdrop-blur shadow-lg shadow-blue-100">
+          <Card className="bg-white/80 backdrop-blur shadow-lg shadow-green-100">
             <CardHeader><CardTitle>Price Trend</CardTitle></CardHeader>
             <CardContent>{spark.length ? <PriceSparkline data={spark} /> : <div className="text-sm text-gray-600">No price data.</div>}</CardContent>
           </Card>
-          <Card className="bg-white/80 backdrop-blur shadow-lg shadow-blue-100">
+          <Card className="bg-white/80 backdrop-blur shadow-lg shadow-green-100">
             <CardHeader><CardTitle>Cost Estimates</CardTitle></CardHeader>
             <CardContent>
               {items.tank?.volumeGal ? (
@@ -184,7 +184,7 @@ export default async function BuildPage({ params }: { params: { id: string } }) 
               <div className="text-sm mt-2">Initial equipment cost (latest prices): ${ (initialCostCents/100).toFixed(2) }</div>
             </CardContent>
           </Card>
-          <Card className="bg-white/80 backdrop-blur shadow-lg shadow-blue-100">
+          <Card className="bg-white/80 backdrop-blur shadow-lg shadow-green-100">
             <CardHeader><CardTitle>Compatibility</CardTitle></CardHeader>
             <CardContent>
               <CompatibilityPanel items={warnings} />

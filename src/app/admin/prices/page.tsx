@@ -60,9 +60,10 @@ export default function AdminPricesPage() {
   const [deleteRow, setDeleteRow] = useState<{ retailer: string; timestamp: string } | null>(null);
   const [busyKey, setBusyKey] = useState<string | null>(null);
   const [savingUrl, setSavingUrl] = useState(false);
-  const [busyKey, setBusyKey] = useState<string | null>(null);
   const [editUrlRow, setEditUrlRow] = useState<{ retailer: string; timestamp: string } | null>(null);
   const [editUrlValue, setEditUrlValue] = useState<string>('');
+  const [priceErrors, setPriceErrors] = useState<Record<string, string | null>>({});
+  const [urlErrors, setUrlErrors] = useState<Record<string, string | null>>({});
 
   useEffect(() => {
     (async () => {
@@ -164,7 +165,7 @@ export default function AdminPricesPage() {
           <Button variant="secondary" onClick={async()=>{ try{ await signOut({ callbackUrl: '/' }); setAdmin(false); showToast('Signed out'); }catch{} }}>Sign Out</Button>
         </div>
       </div>
-      <Card className="bg-white/80 backdrop-blur shadow-lg shadow-blue-100">
+      <Card className="bg-white/80 backdrop-blur shadow-lg shadow-green-100">
         <CardHeader><CardTitle>Add/Update Price</CardTitle></CardHeader>
         <CardContent className="grid sm:grid-cols-2 gap-3 text-sm">
           <div>
@@ -256,7 +257,7 @@ export default function AdminPricesPage() {
           </div>
         </CardContent>
       </Card>
-      <Card className="bg-white/80 backdrop-blur shadow-lg shadow-blue-100">
+      <Card className="bg-white/80 backdrop-blur shadow-lg shadow-green-100">
         <CardHeader><CardTitle>Current Prices</CardTitle></CardHeader>
         <CardContent>
           {!productId ? (
@@ -352,7 +353,7 @@ export default function AdminPricesPage() {
                           {(row as any).url ? (
                             <div className="flex items-center gap-2">
                               <HostBadge url={(row as any).url} />
-                              <a href={(row as any).url} target="_blank" rel="nofollow sponsored noopener noreferrer" className="text-blue-600 underline" aria-label={`Open ${row.retailer} link from ${new Date(row.timestamp).toLocaleString()}`}>Open</a>
+                              <a href={(row as any).url} target="_blank" rel="nofollow sponsored noopener noreferrer" className="text-green-700 underline" aria-label={`Open ${row.retailer} link from ${new Date(row.timestamp).toLocaleString()}`}>Open</a>
                             </div>
                           ) : null}
                         </div>
